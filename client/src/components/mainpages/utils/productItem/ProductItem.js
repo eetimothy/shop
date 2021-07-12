@@ -1,12 +1,17 @@
+
 import BtnRender from './BtnRender'
 
-const ProductItem = ({ product, isAdmin, deleteProduct, handleCheck }) => {
-    
+const ProductItem = ({ product, isSuperAdmin, isAdmin, deleteProduct, handleCheck }) => {
+    // console.log(product)
     return ( 
         <div className="product_card">
-
             {
                 isAdmin && <input type="checkbox" checked={product.checked} 
+                onChange={() => handleCheck(product._id)}/>
+            }
+
+            {
+                isSuperAdmin && <input type="checkbox" checked={product.checked} 
                 onChange={() => handleCheck(product._id)}/>
             }
 

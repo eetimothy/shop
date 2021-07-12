@@ -21,7 +21,7 @@ const ProductDetails = () => {
         }
     },[params.id, products])
 
-    //console.log(productDetails)
+    // console.log(productDetails)
     if(productDetails.length === 0) return null;
 
     return ( 
@@ -31,6 +31,7 @@ const ProductDetails = () => {
             <div className="box-detail">
                 <div className="row">
                     <h2>{productDetails.title}</h2>
+                    
                     <h6>#id: {productDetails.product_id}</h6>
                 </div>
                 <span>$ {productDetails.price}</span>
@@ -46,7 +47,7 @@ const ProductDetails = () => {
             <div className="products">
                 {
                     products.map(product => {
-                        return product.category === productDetails.category
+                        return product.productType === productDetails.productType
                         ? <ProductItem key={product._id} product={product} /> : null
                     })
                 }

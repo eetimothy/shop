@@ -20,9 +20,12 @@ app.use('/api', require('./routes/categoryRouter'))
 app.use('/api', require('./routes/upload'))
 app.use('/api', require('./routes/productRouter'))
 app.use('/api', require('./routes/paymentRouter'))
+app.use('/api', require('./routes/brandRouter'))
+app.use('/api', require('./routes/productTypeRouter'))
+app.use('/api', require('./routes/vendorRouter'))
 
 //connect to mongodb
-const URI = process.env.MONGODB_URL
+const URI = process.env.MONGODB_URI
 mongoose.connect(URI, {
     useCreateIndex: true,
     useFindAndModify: false,

@@ -29,6 +29,14 @@ const productSchema = new mongoose.Schema({
         type: Object,
         required: true
     },
+    productType: {
+        type: String,
+        required: true
+    },
+    brand: {
+        type: String,
+        required: true
+    },
     category: {
         type: String,
         required: true
@@ -41,6 +49,10 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
 }, {
     timestamps: true
 })

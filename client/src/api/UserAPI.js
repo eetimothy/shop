@@ -4,8 +4,14 @@ import axios from 'axios'
 const UserAPI = (token) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
+    const [isSuperAdmin, setIsSuperAdmin] = useState(false)
     const [cart, setCart] = useState([])
     const [history, setHistory] = useState([])
+    const [user, setUser] = useState([])
+    // const [userId, setUserId] = useState('')
+    const [vendorBrand, setVendorBrand] = useState([])
+    // const [isSuperAdmin, setIsSuperAdmin] = useState('')
+    const [allUsers, setAllUsers] = useState([])
 
     useEffect(() => {
         if(token) {
@@ -15,17 +21,35 @@ const UserAPI = (token) => {
                         headers: { Authorization: token }
                     })
                     setIsLoggedIn(true)
-                    res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
-                    //console.log(res)
+                    res.data.role === 1 ? setIsAdmin(true)
+                    : res.data.role === 3 ? setIsSuperAdmin(true) 
+                    : setIsSuperAdmin(false)
+                    //  console.log(res.data)
+                    // console.log(res.data._id)
                     setCart(res.data.cart)
+                    setUser(res.data)
                 }
                 catch (err) {
                     alert(err.response.data.msg)
                 }
             }
-            getUser()
-        }
+            getUser() 
+        }  
     },[token])
+
+    useEffect(() => {
+        if(isSuperAdmin) {
+            const getAllUser = async () => {
+                    const res = await axios.get('/user/all_users_info', {
+                        headers: { Authorization: token }
+                    })
+                    //  console.log(res.data)
+                     setAllUsers(res.data) 
+                 }
+                 getAllUser()
+        }
+    },[isSuperAdmin])
+    
 
     const addCart = async (product) => {
         if(!isLoggedIn) return alert("Please login to continue.")
@@ -49,9 +73,13 @@ const UserAPI = (token) => {
     return {
         isLoggedIn: [isLoggedIn, setIsLoggedIn], 
         isAdmin: [isAdmin, setIsAdmin],
+        isSuperAdmin: [isSuperAdmin, setIsSuperAdmin],
         cart: [cart, setCart],
         addCart: addCart,
-        history: [history, setHistory]
+        history: [history, setHistory],
+        user: [user, setUser],
+        vendorBrand: [vendorBrand, setVendorBrand],
+        allUsers: [allUsers, setAllUsers]
     }
 }
  

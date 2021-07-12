@@ -46,10 +46,21 @@ button{
 
 @import url('./components/mainpages/history/History.css');
 
-@import url('./components/mainpages//categories/Categories.css');
+/* @import url('./components//mainpages/brands/Brands.css'); */
 
-@import url('./components//mainpages//createProduct/CreateProduct.css');
+@import url('./components/mainpages/categories/Categories.css');
 
+@import url('./components//mainpages/createProduct/CreateProduct.css');
+
+@import url('./components//mainpages/productTypes/ProductTypes.css');
+
+@import url('./components/mainpages/vendor/vendorBrands/vendorBrands.css');
+
+@import url('./components/mainpages/vendor/vendorProducts/vendorProducts.css');
+
+@import url('./components/mainpages/userProfiles/userProfiles.css');
+
+@import url('./components//mainpages/superAdmin/manage_users/ManageUsers.css');
 
 /* ------------------- Responsive -------------------- */
 @media (max-width: 820px){

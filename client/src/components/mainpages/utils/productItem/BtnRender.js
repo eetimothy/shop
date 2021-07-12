@@ -5,13 +5,14 @@ import { GlobalState } from '../../../../GlobalState'
 const BtnRender = ({ product, deleteProduct }) => {
 
     const state = useContext(GlobalState)
+    const [isSuperAdmin] = state.userAPI.isSuperAdmin
     const [isAdmin] = state.userAPI.isAdmin
     const addCart = state.userAPI.addCart
 
     return (
         <div className="row_btn">
             {
-                isAdmin ?
+                isSuperAdmin || isAdmin ?
                     <>
                         <Link id="btn_buy" to="#!" 
                         onClick={() => deleteProduct(product._id, product.images.public_id)} >Delete</Link>

@@ -5,24 +5,33 @@ import Loading from '../utils/loading/Loading'
 import { useHistory, useParams } from 'react-router-dom'
 
 const initialState = {
+    user: '',
     product_id: '',
     title: '',
     price: 0,
     description: 'This is the demo description',
     content: 'This is the demo content',
+    brand: '',
     category: '',
+    productType: '',
     _id: ''
 }
 
 const CreateProduct = () => {
     const state = useContext(GlobalState)
+    const [user] = state.userAPI.user
+    const [token] = state.token
+    
     const [product, setProduct] = useState(initialState)
     const [categories] = state.categoriesAPI.categories
+    const [brands] = state.brandsAPI.brands
+    const [productTypes] = state.productTypesAPI.productTypes
     const [images, setImages] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const [isAdmin] = state.userAPI.isAdmin
-    const [token] = state.token
+    const [isSuperAdmin] = state.userAPI.isSuperAdmin
+    
 
     const history = useHistory()
     const param = useParams()
@@ -30,8 +39,10 @@ const CreateProduct = () => {
     const [products] = state.productsAPI.products
     const [onEdit, setOnEdit] = useState(false)
     const [callback, setCallback] = state.productsAPI.callback
+    
 
     useEffect(() => {
+
         if(param.id) {
             setOnEdit(true)
             products.forEach(product => {
@@ -45,13 +56,16 @@ const CreateProduct = () => {
             setProduct(initialState)
             setImages(false)
         }
+        
+       
+
     },[param.id, products])
 
 
     const handleUpload = async (e) => {
         e.preventDefault();
         try {
-            if (!isAdmin) return alert("Admin access only..")
+            if (!isAdmin && !isSuperAdmin) return alert("Admin access only..")
             const file = e.target.files[0]
 
             if (!file) return alert("File does not exist..")
@@ -83,7 +97,7 @@ const CreateProduct = () => {
 
     const handleDestroy = async () => {
         try {
-            if (!isAdmin) return alert("Admin access only..")
+            if (!isAdmin && !isSuperAdmin) return alert("Admin access only..")
             setLoading(true)
             await axios.post('/api/destroy', { public_id: images.public_id }, {
                 headers: { Authorization: token }
@@ -96,8 +110,6 @@ const CreateProduct = () => {
         }
     }
 
-
-
     const handChangeInput = async (e) => {
         const { name, value } = e.target
         setProduct({ ...product, [name]: value })
@@ -107,7 +119,7 @@ const CreateProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            if(!isAdmin) return alert('Admin access only..')
+            if(!isAdmin && !isSuperAdmin) return alert('Admin access only..')
             if(!images) return alert('Please add an image for this product..')
 
             if(onEdit) {
@@ -115,14 +127,14 @@ const CreateProduct = () => {
                     headers: { Authorization: token }
                 })
             } else {
-                await axios.post('/api/products', { ...product, images}, {
+                await axios.post('/api/products', { ...product, images, user: user._id}, {
                     headers: { Authorization: token }
                 })
             }
             setCallback(!callback)
             // setImages(false)
             // setProduct(initialState)
-            history.push("/")
+            isAdmin ? history.push(`/vendorproducts/${user._id}`) : history.push('/products')
         }
         catch (err) {
             alert(err.response.data.msg)
@@ -191,6 +203,34 @@ const CreateProduct = () => {
                     </select>
                 </div>
 
+                <div className="row">
+                    <label htmlFor="brands">Brands</label>
+                    <select name="brand" id="brand" value={product.brand} onChange={handChangeInput}>
+                        <option value="">Please select a brand</option>
+                        {
+                            brands.map(brand => (
+                                <option value={brand._id} key={brand._id}>
+                                    {brand.name}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
+
+                <div className="row">
+                    <label htmlFor="productTypes">Product Type</label>
+                    <select name="productType" id="productType" value={product.productType} onChange={handChangeInput}>
+                        <option value="">Please select a product type</option>
+                        {
+                            productTypes.map(productType => (
+                                <option value={productType._id} key={productType._id}>
+                                    {productType.name}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </div>
+                
                 <button type="submit">{onEdit ? "Update" : "Create"}</button>
             </form>
         </div>

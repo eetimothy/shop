@@ -10,6 +10,7 @@ const Products = () => {
     const state = useContext(GlobalState)
     const [products, setProducts] = state.productsAPI.products
     const [isAdmin] = state.userAPI.isAdmin
+    const [isSuperAdmin] = state.userAPI.isSuperAdmin
     const [token] = state.token
     const [callback, setCallback] = state.productsAPI.callback
     const [loading, setLoading] = useState(false)
@@ -22,7 +23,7 @@ const Products = () => {
         })
         setProducts([...products])
     }
-
+// console.log(products)
     const deleteProduct = async (id, public_id) => {
         //console.info({id, public_id})
         try {
@@ -63,7 +64,7 @@ const Products = () => {
         <>
         <Filters />
         {
-            isAdmin && 
+            isSuperAdmin && 
             <div className="delete-all">
                 <span>Select All</span>
                 <input type="checkbox" checked={isCheck} onChange={checkAll} />
@@ -75,7 +76,7 @@ const Products = () => {
             {
                 products.map(product => {
                     return <ProductItem key={product._id} product={product} 
-                    isAdmin={isAdmin} deleteProduct={deleteProduct} handleCheck={handleCheck} />
+                    isSuperAdmin={isSuperAdmin} isAdmin={isAdmin} deleteProduct={deleteProduct} handleCheck={handleCheck} />
                 })
             }
         </div>

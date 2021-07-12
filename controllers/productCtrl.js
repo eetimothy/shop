@@ -49,7 +49,10 @@ class APIfeatures {
 const productCtrl = {
     getProducts: async (req, res) => {
         try {
-            // console.log(req.query)
+            console.log(req.query._id)
+            console.log(req.headers)
+            console.log(req.body)
+            console.log(req.params.id)
             const features = new APIfeatures(Products.find(), req.query)
             .filtering().sorting().paginating()
 
@@ -67,7 +70,7 @@ const productCtrl = {
     },
     createProduct: async (req, res) => {
         try {
-            const { product_id, title, price, description, content, images, category } = req.body;
+            const { product_id, title, price, description, content, images, brand, category, productType, user } = req.body;
             if(!images) return res.status(400).json({ msg: 'Please add an image.. ' })
 
             const product = await Products.findOne({ product_id })
@@ -75,7 +78,7 @@ const productCtrl = {
             return res.status(400).json({ msg: 'This product already exists.. ' })
 
             const newProduct = new Products({
-                product_id, title: title.toLowerCase(), price, description, content, images, category
+                product_id, title: title.toLowerCase(), price, description, content, images, brand, productType, category, user
             })
             await newProduct.save()
             res.json({ msg: "New product created.. " })
@@ -95,11 +98,11 @@ const productCtrl = {
     },
     updateProduct: async (req, res) => {
         try {
-            const { title, price, description, content, images, category } = req.body;
+            const { title, price, description, content, images, brand, productType, category } = req.body;
             if(!images) return res.status(400).json({ msg: 'no image uploaded' })
 
             await Products.findByIdAndUpdate({ _id: req.params.id }, {
-                title: title.toLowerCase(), price, description, content, images, category 
+                title: title.toLowerCase(), price, description, content, images, brand, productType, category 
             })
 
             res.json({ msg: "Product updated.. " })
@@ -107,7 +110,7 @@ const productCtrl = {
         catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-    },
+    }
 }
 
 module.exports = productCtrl

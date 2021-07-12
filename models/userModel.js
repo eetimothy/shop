@@ -23,6 +23,22 @@ const userSchema = new mongoose.Schema({
     cart: {
         type: Array,
         default: []
+    },
+    company: {
+        type: String
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    mobile: {
+        type: String,
+        required: true,
+        minlength: 8
+    },
+    account_type: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
