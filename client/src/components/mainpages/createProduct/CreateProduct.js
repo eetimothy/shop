@@ -56,9 +56,6 @@ const CreateProduct = () => {
             setProduct(initialState)
             setImages(false)
         }
-        
-       
-
     },[param.id, products])
 
 
