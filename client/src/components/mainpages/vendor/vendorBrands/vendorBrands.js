@@ -8,7 +8,6 @@ const VendorBrands = () => {
     const [token] = state.token
     const [user] = state.userAPI.user
     const [vendorBrands, setVendorBrands] = useState([])
-    // const [brands] = state.brandsAPI.brands
     const [brand, setBrand] = useState('')
     const [callback, setCallback] = state.brandsAPI.callback
     const [onEdit, setOnEdit] = useState(false)
@@ -41,7 +40,7 @@ const VendorBrands = () => {
                 const res = await axios.post('/api/brand', { name: brand, user: user._id }, {
                     headers: { Authorization: token }
                 })
-                console.info(res)
+                // console.info(res)
                 alert(res.data.msg)
             }
             setOnEdit(false)

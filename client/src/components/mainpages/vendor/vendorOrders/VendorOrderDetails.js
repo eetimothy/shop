@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { GlobalState } from '../../../GlobalState'
+import { GlobalState } from '../../../../GlobalState'
+import { Link } from 'react-router-dom'
 
-const OrderDetails = () => {
+const VendorOrderDetails = () => {
     const state = useContext(GlobalState)
-    const [history] = state.userAPI.history
+    const [vendorOrders] = state.userAPI.vendorOrders
     const [orderDetails, setOrderDetails] = useState([])
     // const [user] = state.userAPI.user
 
@@ -12,21 +13,23 @@ const OrderDetails = () => {
 
     useEffect(() => {
         if (params.id) {
-            history.forEach(item => {
+            vendorOrders.forEach(item => {
                 if (item._id === params.id) setOrderDetails(item)
             })
         }
-    }, [params.id, history])
+    }, [params.id, vendorOrders])
 
     // console.info(orderDetails)
     // console.log(user._id)
 
-    
+
 
     if (orderDetails.length === 0) return null;
 
     return (
         <div className="order-history">
+
+            <h3> <Link to={`/vendor_orders`}>back</Link></h3>
             <table>
                 <thead>
                     <tr>
@@ -43,8 +46,6 @@ const OrderDetails = () => {
                         <td>{orderDetails.address.country_code}</td>
                         <td>{orderDetails.address.postal_code}</td>
                         {/* <td>{orderDetails.cart[0].user}</td> */}
-
-                        
                     </tr>
                 </tbody>
             </table>
@@ -61,36 +62,36 @@ const OrderDetails = () => {
                     </tr>
                 </thead>
                 <tbody>
-                        {
-                            orderDetails.groupBuyCart.map(item => (
-                                <tr key={item._id}>
-                                    <td><img src={item.images.url} alt="" /></td>
-                                    <td>{item.title}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>${item.price}</td>
-                                    <td>$ {item.groupBuyPrice * item.quantity}</td>
-                                    <td>{item.user}</td>
-                                   
-                                </tr>
-                            ))
-                        }
-                        {
-                            orderDetails.cart.map(item => (
-                                <tr key={item._id}>
-                                    <td><img src={item.images.url} alt="" /></td>
-                                    <td>{item.title}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>${item.price}</td>
-                                    <td>$ {item.groupBuyPrice * item.quantity}</td>
-                                    <td>{item.user}</td>
-                                   
-                                </tr>
-                            ))
-                        }
+                    {
+                        orderDetails.cart.map(item => (
+                            <tr key={item._id}>
+                                <td><img src={item.images.url} alt="" /></td>
+                                <td>{item.title}</td>
+                                <td>{item.quantity}</td>
+                                <td>${item.groupBuyPrice}</td>
+                                <td>$ {item.groupBuyPrice * item.quantity}</td>
+                                <td>{item.user}</td>
+
+                            </tr>
+                        ))
+                    }
+                    {
+                        orderDetails.groupBuyCart.map(item => (
+                            <tr key={item._id}>
+                                <td><img src={item.images.url} alt="" /></td>
+                                <td>{item.title}</td>
+                                <td>{item.quantity}</td>
+                                <td>${item.groupBuyPrice}</td>
+                                <td>$ {item.groupBuyPrice * item.quantity}</td>
+                                <td>{item.user}</td>
+
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </table>
         </div>
     );
 }
 
-export default OrderDetails;
+export default VendorOrderDetails;

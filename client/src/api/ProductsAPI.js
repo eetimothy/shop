@@ -19,18 +19,11 @@ function ProductsAPI() {
             const res = await axios.get(`/api/products?limit=${page*9}&${category}&${brand}&${sort}&${productType}&title[regex]=${search}`)
             setProducts(res.data.products)
             setResult(res.data.result)
-            //console.info(res)
+            // console.info(res)
         }
         getProducts()
     },[callback, category, brand, productType, sort, search, page])
 
-    // useEffect(() => {
-    //     const getVendorProducts = async () => {
-    //         const res = await axios.get(`api/vendorproducts?user=${id}`)
-    //         setVendorProducts(res.data)
-    //     }
-    //     getVendorProducts()
-    // }, [callback, id])
 
     return {
         products: [products, setProducts],

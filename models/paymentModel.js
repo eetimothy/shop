@@ -21,6 +21,10 @@ const paymentSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    groupBuyCart: {
+        type: Array,
+        default: []
+    },
     address: {
         type: Object,
         required: true
@@ -28,6 +32,10 @@ const paymentSchema = new mongoose.Schema({
     status: {
         type: Boolean,
         default: false
+    },
+    vendorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }
 }, {
     timestamps: true

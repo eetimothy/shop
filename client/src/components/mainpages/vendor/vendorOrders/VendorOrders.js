@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react'
-import { GlobalState } from '../../../GlobalState'
+import { GlobalState } from '../../../../GlobalState'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const OrderHistory = () => {
+const VendorOrders = () => {
     const state = useContext(GlobalState)
-    const [history, setHistory] = state.userAPI.history
+    const [vendorOrders, setVendorOrders] = state.userAPI.vendorOrders
     const [isAdmin] = state.userAPI.isAdmin
     const [token] = state.token
     // const [user] = state.userAPI.user
@@ -18,29 +18,31 @@ const OrderHistory = () => {
                         headers: { Authorization: token }
                     })
                     // console.log(res)
-                    setHistory(res.data)
+                    setVendorOrders(res.data)
                 } else {
                     const res = await axios.get('/user/orderhistory', {
                         headers: { Authorization: token }
                         
                     })
                     //console.log(res)
-                    setHistory(res.data)
+                    setVendorOrders(res.data)
                 }
             }
             getHistory()
         }
-    }, [token, isAdmin, setHistory])
+    }, [token, isAdmin, setVendorOrders])
 
-    // console.log(history)
+    // console.log(vendorOrders)
 
   
    
     return (
         <div className="history-page">
+
+            
             <h2>Order History</h2>
 
-            <h4>{history.length} Past Invoices</h4>
+            <h4>{vendorOrders.length} Past Invoices</h4>
 
             <div>
                 <table>
@@ -53,19 +55,16 @@ const OrderHistory = () => {
                     </thead>
                     <tbody>
                         {
-                            history.map(items => (
+                            vendorOrders.map(items => (
                                 <tr key={items._id}>
                                     <td>{items.paymentID}</td>
                                     <td>{new Date(items.createdAt).toLocaleDateString()}</td>
-                                    <td><Link to={`/history/${items._id}`}>view</Link></td>
+                                    <td><Link to={`/vendor_orders/${items._id}`}>view</Link></td>
                                     
                                 </tr>
 
                             ))
                         }
-                        
-                        
-
                     </tbody>
                 </table>
             </div>
@@ -73,4 +72,4 @@ const OrderHistory = () => {
     );
 }
 
-export default OrderHistory;
+export default VendorOrders;

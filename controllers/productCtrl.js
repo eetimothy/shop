@@ -1,6 +1,6 @@
 const Products = require('../models/productModel')
 
-//Filter, sort and pagination
+//Filter, sort and pagination, search
 class APIfeatures {
     constructor(query, queryString) {
         this.query = query;
@@ -49,10 +49,10 @@ class APIfeatures {
 const productCtrl = {
     getProducts: async (req, res) => {
         try {
-            console.log(req.query._id)
-            console.log(req.headers)
-            console.log(req.body)
-            console.log(req.params.id)
+            // console.log(req.query._id)
+            // console.log(req.headers)
+            // console.log(req.body)
+            // console.log(req.params.id)
             const features = new APIfeatures(Products.find(), req.query)
             .filtering().sorting().paginating()
 
@@ -70,7 +70,7 @@ const productCtrl = {
     },
     createProduct: async (req, res) => {
         try {
-            const { product_id, title, price, description, content, images, brand, category, productType, user } = req.body;
+            const { product_id, title, groupBuyPrice, buyNowPrice, description, content, images, brand, category, productType, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys } = req.body;
             if(!images) return res.status(400).json({ msg: 'Please add an image.. ' })
 
             const product = await Products.findOne({ product_id })
@@ -78,7 +78,7 @@ const productCtrl = {
             return res.status(400).json({ msg: 'This product already exists.. ' })
 
             const newProduct = new Products({
-                product_id, title: title.toLowerCase(), price, description, content, images, brand, productType, category, user
+                product_id, title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys
             })
             await newProduct.save()
             res.json({ msg: "New product created.. " })
@@ -98,11 +98,11 @@ const productCtrl = {
     },
     updateProduct: async (req, res) => {
         try {
-            const { title, price, description, content, images, brand, productType, category } = req.body;
+            const { title, groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, groupBuyQty, totalQty, isActive, maxGroupBuys  } = req.body;
             if(!images) return res.status(400).json({ msg: 'no image uploaded' })
 
             await Products.findByIdAndUpdate({ _id: req.params.id }, {
-                title: title.toLowerCase(), price, description, content, images, brand, productType, category 
+                title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, groupBuyQty, totalQty, isActive, maxGroupBuys  
             })
 
             res.json({ msg: "Product updated.. " })

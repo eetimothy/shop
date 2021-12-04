@@ -77,7 +77,7 @@ const vendorCtrl = {
     // }
     getVendorProducts: async (req, res) => {
         try {
-            const { user } = req.query
+            // const { vendorId } = req.query
             const features = new APIfeatures(Products.find(), req.query)
             .filtering().sorting().paginating()
 

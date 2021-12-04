@@ -1,18 +1,18 @@
 import { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
-import { GlobalState } from '../../../GlobalState'
-import Loading from '../utils/loading/Loading'
+import { GlobalState } from '../../../../GlobalState'
+import Loading from '../../utils/loading/Loading'
 import { useHistory, useParams } from 'react-router-dom'
 
 
 // Create Products is for Admins/ vendors to create Group Buys
 
 const initialState = {
-    user: '',
+    vendorId: '',
     product_id: '',
     title: '',
-    buyNowPrice: 0,
     groupBuyPrice: 0,
+    buyNowPrice: 0,
     description: 'This is the demo description',
     content: 'This is the demo content',
     brand: '',
@@ -25,9 +25,8 @@ const initialState = {
     maxGroupBuys: 0
 }
 
-const CreateProduct = () => {
+const SuperAdminCreateProduct = () => {
     const state = useContext(GlobalState)
-    const [user] = state.userAPI.user
     const [token] = state.token
     
     const [product, setProduct] = useState(initialState)
@@ -46,6 +45,7 @@ const CreateProduct = () => {
     const [products] = state.productsAPI.products
     const [onEdit, setOnEdit] = useState(false)
     const [callback, setCallback] = state.productsAPI.callback
+    const [vendorId, setVendorId] = useState('')
     
 
     useEffect(() => {
@@ -131,14 +131,14 @@ const CreateProduct = () => {
                     headers: { Authorization: token }
                 })
             } else {
-                await axios.post('/api/products', { ...product, images, user: user._id}, {
+                await axios.post('/api/products', { ...product, images, vendorId}, {
                     headers: { Authorization: token }
                 })
             }
             setCallback(!callback)
             // setImages(false)
             // setProduct(initialState)
-            isAdmin ? history.push(`/vendorproducts/${user._id}`) : history.push('/products')
+            isAdmin ? history.push(`/vendorproducts/${vendorId}`) : history.push('/products')
         }
         catch (err) {
             alert(err.response.data.msg)
@@ -170,6 +170,13 @@ const CreateProduct = () => {
                 </div>
 
                 <div className="row">
+                    <label htmlFor="user_id">Vendor ID</label>
+                    <input type="text" name="vendorId" id="vendorId" required
+                        value={vendorId} onChange={e => setVendorId(e.target.value)} disabled={onEdit} />
+                </div>
+
+
+                <div className="row">
                     <label htmlFor="title">Title</label>
                     <input type="text" name="title" id="title" required
                         value={product.title} onChange={handChangeInput} />
@@ -177,16 +184,16 @@ const CreateProduct = () => {
 
                 <div className="row">
                     <label htmlFor="groupBuyPrice">Group Buy Price</label>
-                    <input type="number" name="groupBuyPrice" id="groupBuyPrice" required
+                    <input type="number" name="groupBuyPrice" id="groupBuyPrice" min="0" required
                         value={product.groupBuyPrice} onChange={handChangeInput} />
                 </div>
 
                 <div className="row">
                     <label htmlFor="buyNowPrice">Buy Now Price</label>
-                    <input type="number" name="buyNowPrice" id="buyNowPrice" required
+                    <input type="number" name="buyNowPrice" id="buyNowPrice" min="0" required
                         value={product.buyNowPrice} onChange={handChangeInput} />
                 </div>
-
+                
                 <div className="row">
                     <label htmlFor="totalQty">Products Instock</label>
                     <input type="number" name="totalQty" id="totalQty" min="0" required
@@ -201,8 +208,16 @@ const CreateProduct = () => {
 
                 <div className="row">
                     <label htmlFor="groupBuyQty">Group Buy Quantity</label>
-                    <input type="number" name="groupBuyQty" id="groupBuyQty" required
+                    <input type="number" name="groupBuyQty" id="groupBuyQty" min="0" required
                         value={product.groupBuyQty} onChange={handChangeInput} />
+                </div>
+
+                <div className="row">
+                    <label htmlFor="isActive">Product Status</label>
+                    <select name="isActive" id="isActive" value={product.isActive} onChange={handChangeInput}>
+                        <option value="true" type="boolean">true</option>
+                        <option value="false" type="boolean">false</option>
+                    </select>
                 </div>
 
                 <div className="row">
@@ -244,6 +259,7 @@ const CreateProduct = () => {
                         }
                     </select>
                 </div>
+                
 
                 <div className="row">
                     <label htmlFor="productTypes">Product Type</label>
@@ -265,4 +281,4 @@ const CreateProduct = () => {
     );
 }
 
-export default CreateProduct;
+export default SuperAdminCreateProduct;

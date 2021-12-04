@@ -35,7 +35,7 @@ const userCtrl = {
             const url = `${CLIENT_URL}/user/account/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
-            console.log({activation_token})
+            // console.log({activation_token})
 
             res.json({ msg: "Registration success! An activation email has been sent to your email." })
         }
@@ -79,7 +79,7 @@ const userCtrl = {
             const { activation_token } = req.body;
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            console.info(user)
+            // console.info(user)
             const { company, address, mobile, account_type, username, email, password } = user
             
             const check = await Users.findOne({ email })
@@ -172,7 +172,7 @@ const userCtrl = {
             // console.log(req.header)
             const passwordHash = await bcrypt.hash(password, 10)
 
-            console.log(req.user)
+            // console.log(req.user)
             await Users.findOneAndUpdate({  _id: req.user.id }, {
                 password: passwordHash
             })
@@ -187,7 +187,7 @@ const userCtrl = {
       try {
           const user = await Users.findById(req.user.id).select('-password')
           if(!user) return res.status(400).json({ msg: "User does not exist." })
-            console.log(user)
+            // console.log(user)
           res.json(user) //id of user
       }  
       catch (err) {
@@ -249,6 +249,21 @@ const userCtrl = {
             })
 
             return res.json({ msg: "Added to Cart" })
+        }
+        catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+    addToGroupBuyCart: async (req, res) => {
+        try {
+            const user = await Users.findById(req.user.id)
+            if(!user) return res.status(500).json({ msg: "User does not exist.." })
+
+            await Users.findOneAndUpdate({ _id: req.user.id }, {
+                groupBuyCart: req.body.groupBuyCart
+            })
+
+            return res.json({ msg: "Added to Group Buy Cart..." })
         }
         catch (err) {
             return res.status(500).json({ msg: err.message })

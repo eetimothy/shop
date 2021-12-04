@@ -34,9 +34,9 @@ function Header() {
     const adminRouter = () => {
         return (
             <>
-                <li><Link to={`/vendorbrands/${user._id}`}>Manage Brands</Link></li>
-                <li><Link to={`/vendorproducts/${user._id}`}>Manage Products</Link></li>
-                <li><Link to="/create_product">Create Product</Link></li>
+                {/* <li><Link to={`/vendorbrands/${user._id}`}>Manage Brands</Link></li> */}
+                <li><Link to={`/vendorproducts/${user._id}`}>My Products</Link></li>
+                {/* <li><Link to="/create_product">Create Group Buy</Link></li> */}
             </>
         )
     }
@@ -44,10 +44,11 @@ function Header() {
     const superAdminRouter = () => {
         return (
             <>
-                <li><Link to={`/products`}>Products</Link></li>
+                {/* <li><Link to={`/products`}>Products</Link></li> */}
                 <li><Link to="/brand">Brands</Link></li>
                 <li><Link to="/category">Categories</Link></li>
-                <li><Link to="/product_type">Product Types</Link></li>
+                <li><Link to="/product_type">Product Type</Link></li>
+                <li><Link to="/superadmin_create_product">Create Product</Link></li>
             </>
         )
     }
@@ -63,12 +64,15 @@ function Header() {
 
     const loggedRouter = () => {
         return <li className="drop-nav">
+            {!isAdmin && !isSuperAdmin && <Link to={`/groupbuys_user/${user._id}`}>My Group Buys</Link>}
             <Link to='#' className="avatar">
                 <img src={user.avatar} alt="" />{user.username}<i className="fas fa-angle-down"></i>
             </Link>
             <ul className="dropdown">
                 <li><Link to={`/user_profile/${user._id}`}>Profile</Link></li>
-                <li><Link to="/history">Orders</Link></li>
+                {/* <li><Link to="/vendor_orders">Orders</Link></li> */}
+                { isAdmin ? <li><Link to="/vendor_orders">Orders</Link></li> : <li><Link to="/history">Orders</Link></li> }
+
                 {isSuperAdmin ? <li><Link to="/manage_users">Manage Users</Link></li> : '' }
                 <li><Link to="/" onClick={logoutUser}>Logout</Link></li>
             </ul>
@@ -96,9 +100,9 @@ function Header() {
                 <h1>
                     <Link to="/">
                         {
-                            isAdmin ? 'Vendor'
-                                : isSuperAdmin ? 'Super Admin'
-                                    : 'Shop'
+                            isAdmin ? 'Group-Buy.io'
+                                : isSuperAdmin ? 'Group-Buy.io'
+                                    : 'Group-Buy.io'
                         }
                     </Link>
                 </h1>
@@ -109,7 +113,7 @@ function Header() {
                     {
                         isAdmin ? ''
                             : isSuperAdmin ? ''
-                                : 'Shop'
+                                : ''
                     }
                 </Link></li>
 

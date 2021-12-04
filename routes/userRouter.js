@@ -30,6 +30,8 @@ router.delete('/account/delete/:id', auth, authSuperAdmin, userCtrl.deleteUser)
 
 router.patch('/addcart', auth, userCtrl.addCart)
 
+router.patch('/addcart_groupbuy_join', auth, userCtrl.addToGroupBuyCart)
+
 router.get('/orderhistory', auth, userCtrl.history)
 
 module.exports = router;

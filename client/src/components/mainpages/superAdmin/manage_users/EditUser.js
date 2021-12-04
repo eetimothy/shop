@@ -20,7 +20,7 @@ const EditUser = () => {
     const [success, setSuccess] = useState(false)
     const [num, setNum] = useState(0)
  
-    console.log(allUsers)
+  
 
     useEffect(() => {
         if(allUsers.length !== 0){

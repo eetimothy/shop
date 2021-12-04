@@ -12,13 +12,22 @@ const BtnRender = ({ product, deleteProduct }) => {
     return (
         <div className="row_btn">
             {
-                isSuperAdmin || isAdmin ?
+                isSuperAdmin ?
+                // isSuperAdmin || isAdmin ?
                     <>
                         <Link id="btn_buy" to="#!" 
-                        onClick={() => deleteProduct(product._id, product.images.public_id)} >Delete</Link>
+                        onClick={() => deleteProduct(product._id, product.images.public_id)}>Delete</Link>
                         <Link id="btn_view" to={`/edit_product/${product._id}`}>Edit</Link>
                     </>
-                    : <>
+                    : 
+                    isAdmin  ?
+                    <>
+                        {/* <Link id="btn_buy" to="#!" 
+                        onClick={() => deleteProduct(product._id, product.images.public_id)}>Delete</Link>
+                        <Link id="btn_view" to={`/edit_product/${product._id}`}>Edit</Link> */}
+                    </>
+                    :
+                    <>
                         <Link id="btn_buy" to="#!" onClick={() => addCart(product)}>Add Item</Link>
                         <Link id="btn_view" to={`/detail/${product._id}`}>View</Link>
                     </>

@@ -23,6 +23,7 @@ app.use('/api', require('./routes/paymentRouter'))
 app.use('/api', require('./routes/brandRouter'))
 app.use('/api', require('./routes/productTypeRouter'))
 app.use('/api', require('./routes/vendorRouter'))
+app.use('/api', require('./routes/groupBuyRouter'))
 
 //connect to mongodb
 const URI = process.env.MONGODB_URI

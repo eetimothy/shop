@@ -29,7 +29,7 @@ const Brands = () => {
                 const res = await axios.post('/api/brand', { name: brand, user: vendorId }, {
                     headers: { Authorization: token }
                 })
-                console.info(res)
+                // console.info(res)
                 alert(res.data.msg)
             }
             setOnEdit(false)

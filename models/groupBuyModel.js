@@ -1,11 +1,24 @@
 const mongoose = require('mongoose')
 
-const productSchema = new mongoose.Schema({
+const groupBuySchema = new mongoose.Schema({
+    
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product"
+    },
     product_id: {
         type: String,
         unique: true,
         trim: true,
         required: true
+    },
+    users: {
+        type: Array,
+        default: []
+    },
+    startedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
     title: {
         type: String,
@@ -13,11 +26,6 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     groupBuyPrice: {
-        type: Number,
-        trim: true,
-        required: true
-    },
-    buyNowPrice: {
         type: Number,
         trim: true,
         required: true
@@ -46,41 +54,28 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    checked: {
-        type: Boolean,
-        default: false
-    },
-    sold: {
-        type: Number,
-        default: 0
-    },
-    maxGroupBuys: {
-        type: Number,
-        default: 0
-    },
-    groupBuyQty: {
-        type: Number,
-        default: 0,
-        required: true
-    },
-    totalQty: {
-        type: Number,
-        default: 0
+    vendorId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
     isActive: {
         type: Boolean,
         default: true
     },
-    vendorId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    },
-    currentGroupBuys: {
+    // maxGroupBuysAllowed: {
+    //     type: mongoose.Schema.Types.Number,
+    //     ref: "Product"
+    // },
+    buyers: {
         type: Number,
         default: 0
     },
+    groupBuyQty: {
+        type: mongoose.Schema.Types.Number,
+        ref: "Product"
+    }
 }, {
     timestamps: true
 })
 
-module.exports = mongoose.model('Products', productSchema)
+module.exports = mongoose.model('GroupBuys', groupBuySchema)

@@ -12,7 +12,7 @@ const VendorProducts = () => {
     const [vendorProducts, setVendorProducts] = useState([])
     const [isAdmin] = state.userAPI.isAdmin
     const [loading, setLoading] = useState(false)
-    const [isCheck, setIsCheck] = useState(false)
+    // const [isCheck, setIsCheck] = useState(false)
     const [callback, setCallback] = state.productsAPI.callback
     const [products, setProducts] = state.productsAPI.products
 
@@ -34,7 +34,7 @@ const VendorProducts = () => {
 
     useEffect(() => {
         const getVendorProducts = async () => {
-            const res = await axios.get(`/api/vendorproducts?user=${uid}&limit=${page * 9}&${category}&${brand}&${sort}&${productType}&title[regex]=${search}`, {
+            const res = await axios.get(`/api/vendorproducts?vendorId=${uid}&limit=${page * 9}&${category}&${brand}&${sort}&${productType}&title[regex]=${search}`, {
                 // params: { user: uid },
                 headers: { Authorization: token }
             })
@@ -82,19 +82,19 @@ const VendorProducts = () => {
         }
     }
 
-    const checkAll = () => {
-        vendorProducts.forEach(p => {
-            p.checked = !isCheck
-        })
-        setProducts([...products])
-        setIsCheck(!isCheck)
-    }
+    // const checkAll = () => {
+    //     vendorProducts.forEach(p => {
+    //         p.checked = !isCheck
+    //     })
+    //     setProducts([...products])
+    //     setIsCheck(!isCheck)
+    // }
 
-    const deleteAll = () => {
-        vendorProducts.forEach(product => {
-            if (product.checked) deleteProduct(product._id, product.images.public_id)
-        })
-    }
+    // const deleteAll = () => {
+    //     vendorProducts.forEach(product => {
+    //         if (product.checked) deleteProduct(product._id, product.images.public_id)
+    //     })
+    // }
 
     const handleCategory = (e) => {
         setCategory(e.target.value)
@@ -171,14 +171,14 @@ const VendorProducts = () => {
             </div>
 
 
-            {
+            {/* {
                 isAdmin &&
                 <div className="delete-all">
                     <span>Select All</span>
                     <input type="checkbox" checked={isCheck} onChange={checkAll} />
                     <button onClick={deleteAll}>Delete Selected</button>
                 </div>
-            }
+            } */}
 
             <div className="products">
 

@@ -4,6 +4,7 @@ import UserAPI from './api/UserAPI'
 import CategoriesAPI from './api/CategoriesAPI'
 import BrandsAPI from './api/BrandsAPI'
 import ProductTypesAPI from './api/ProductTypesAPI'
+import GroupBuysAPI from './api/GroupBuysAPI';
 import axios from 'axios'
 
 
@@ -17,7 +18,6 @@ export const DataProvider = ({ children }) => {
         if(firstLogin){
             const refreshToken = async () =>{
                 const res = await axios.get('/user/refresh_token')
-        
                 setToken(res.data.accesstoken)
     
                 setTimeout(() => {
@@ -37,6 +37,7 @@ export const DataProvider = ({ children }) => {
         categoriesAPI: CategoriesAPI(),
         brandsAPI: BrandsAPI(),
         productTypesAPI: ProductTypesAPI(),
+        groupBuysAPI: GroupBuysAPI()
     }
 
     return (

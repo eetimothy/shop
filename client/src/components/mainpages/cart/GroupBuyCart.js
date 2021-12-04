@@ -4,114 +4,115 @@ import axios from 'axios'
 import PaypalButton from './PaypalButton'
 // import { useParams } from 'react-router-dom'
 
-
-const Cart = () => {
+const GroupBuyCart = ({ groupBuy }) => {
     const state = useContext(GlobalState)
-    const [cart, setCart] = state.userAPI.cart
+    const [groupBuyCart, setGroupBuyCart] = state.userAPI.groupBuyCart
     const [token] = state.token
     const [total, setTotal] = useState(0)
-    const [user] = state.userAPI.user
+    // const [user] = state.userAPI.user
+    // const [allGroupBuys] = state.groupBuysAPI.allGroupBuys
 
-
-    
     // const { uid } = useParams()
 
     useEffect(() => {
         const getTotal = () => {
-            const total = cart.reduce((prev, item) => {
+            const total = groupBuyCart.reduce((prev, item) => {
                 return prev + (item.groupBuyPrice * item.quantity)
             },0)
             setTotal(total)
         }
         getTotal()
-    },[cart])
+    },[groupBuyCart])
 
-    console.log(cart)
-   
-    //create group buy cart
-    const addToCart = async (cart) => {
-        await axios.patch('/user/addcart', {cart}, {
+    // console.log(groupBuyCart)
+
+    // join group buy cart
+    const addToJoinGroupBuyCart = async (groupBuyCart) => {
+        await axios.patch('/user/addcart_groupbuy_join', {groupBuyCart}, {
             headers: { Authorization: token }
         })
-       
     }
 
-    const increment = (id) => {
-        cart.forEach(item => {
+    let availableGroupBuys = groupBuyCart.map(items => {
+        return items.groupBuy
+    })
+
+    // console.log(availableGroupBuys)
+    
+
+    const increment_joinGbCart = (id) => {
+        
+        groupBuyCart.forEach(item => {
             if(item._id === id) {
                 // item.quantity += 1
-                item.quantity < item.groupBuyQty ? item.quantity += 1 : item.quantity = item.groupBuyQty
+                // eslint-disable-next-line array-callback-return
+                availableGroupBuys.map(p => {
+                    if(p.product === id) 
+                        return item.quantity < p.groupBuyQty ? item.quantity += 1 : item.quantity = p.groupBuyQty
+                })
             }
         })
-        setCart([...cart])
-        addToCart(cart)
+        setGroupBuyCart([...groupBuyCart])
+        addToJoinGroupBuyCart(groupBuyCart)
     }
 
-    const decrement = (id) => {
-        cart.forEach(item => {
+    const decrement_joinGbCart = (id) => {
+        groupBuyCart.forEach(item => {
             if(item._id === id) {
                 item.quantity === 1 ? item.quantity = 1 : item.quantity -= 1
             }
         })
-        setCart([...cart])
-        addToCart(cart)
+        setGroupBuyCart([...groupBuyCart])
+        addToJoinGroupBuyCart(groupBuyCart)
     }
 
-    const removeProduct = (id) => {
+    const removeProduct_joinGbCart = (id) => {
         if(window.confirm("Do you want to remove this item permanently?")){
-            cart.forEach((item, index) => {
+            groupBuyCart.forEach((item, index) => {
                 if(item._id === id) {
-                    cart.splice(index, 1)
+                    groupBuyCart.splice(index, 1)
                 }
             })
-            setCart([...cart])
-            addToCart(cart)
+            setGroupBuyCart([...groupBuyCart])
+            addToJoinGroupBuyCart(groupBuyCart)
         }
     }
 
-    const createGroupBuy = async (cart) => {
+    const joinGroupBuy = async (groupBuyCart) => {
         // const { product_id } = cart;
-        //when user completes payment, he auto creates a group buy
-        //when user completes payment of eg 2 products, he will auto create 2 group buys
-        await cart.map(item => {
-            return axios.post('/api/groupbuys', { 
-                product: item._id, title: item.title, description: item.description, content: item.content, 
-                brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
-                groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
-                users: [user._id], startedBy: user._id, groupBuyQty: item.groupBuyQty - 1, buyers: 1
-            
-            }, {
-                headers: { Authorization: token }
-            })
+        //when user completes payment, he auto joins a group buy..
+       await groupBuyCart.map(item => {
+            return axios.patch('/api/add_user_group_buy', { _id: item.groupBuy._id }, {
+            headers: { Authorization: token }
         })
-        
+       })
+            
     }
 
     const tranSuccess = async (payment) => {
         console.log(payment)
         const { paymentID, address } = payment;
 
-        await axios.post('/api/payment', { cart, paymentID, address }, {
+        await axios.post('/api/payment_join_groupbuy', { groupBuyCart, paymentID, address }, {
             headers: { Authorization: token }
         })
-        setCart([])
-        addToCart([])
-        alert("You have successfully placed an order and started a Group Buy!")
-        createGroupBuy(cart)
+        setGroupBuyCart([])
+        addToJoinGroupBuyCart([])
+        alert("You have successfully placed an order and Joined the Group Buy!")
+        joinGroupBuy(groupBuyCart)
         // window.location.href = `/groupbuys_user/${uid}`;
     }
 
-
-    if (cart.length === 0)
+    if (groupBuyCart.length === 0)
         return <h2 style={{ textAlign: "center", fontSize: "5rem" }}>Cart Empty</h2>
 
     return (
         <div>
-            <h2>Create Group Buy</h2>
+            
             {
-                cart.map(product => (
+                groupBuyCart.map(product => (
                     <div className="details cart" key={product._id}>
-                        
+                        <h2>Join Group Buys</h2>
                         <img src={product.images.url} alt="" className="img_container" />
 
                         <div className="box-detail">
@@ -125,13 +126,13 @@ const Cart = () => {
                             <p>{product.user}</p>
                             
                             <div className="amount">
-                                <button onClick={() => decrement(product._id)}> - </button>
+                                <button onClick={() => decrement_joinGbCart(product._id)}> - </button>
                                 <span>{product.quantity}</span>
-                                <button onClick={() => increment(product._id)}> + </button>
+                                <button onClick={() => increment_joinGbCart(product._id)}> + </button>
                             </div>
 
                             <div className="delete" 
-                            onClick={() => removeProduct(product._id)}>
+                            onClick={() => removeProduct_joinGbCart(product._id)}>
                                 X
                             </div>
                         </div>
@@ -150,4 +151,4 @@ const Cart = () => {
     );
 }
 
-export default Cart;
+export default GroupBuyCart;

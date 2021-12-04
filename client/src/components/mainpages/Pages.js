@@ -16,12 +16,18 @@ import { GlobalState } from '../../GlobalState'
 import UserProfiles from '../mainpages/userProfiles/userProfiles'
 import VendorBrands from '../mainpages/vendor/vendorBrands/vendorBrands'
 import VendorProducts from '../mainpages/vendor/vendorProducts/vendorProducts';
-import DashboardLanding from './Landing/DashboardLanding';
+// import DashboardLanding from './Landing/DashboardLanding';
 import ActivationEmail from './auth/ActivationEmail';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
 import ManageUsers from './superAdmin/manage_users/ManageUsers';
 import EditUser from './superAdmin/manage_users/EditUser';
+import SuperAdminCreateProduct from './superAdmin/superAdminCreateProduct/SuperAdminCreateProduct';
+import VendorOrders from '../mainpages/vendor/vendorOrders/VendorOrders';
+import VendorOrderDetails from '../mainpages/vendor/vendorOrders/VendorOrderDetails';
+import UserGroupBuys from './groupBuy/UserGroupBuys';
+import GroupBuyDetails from './groupBuy/GroupBuyDetails';
+import GroupBuyCart from './cart/GroupBuyCart';
 
 function Pages() {
 
@@ -33,7 +39,7 @@ function Pages() {
 
     return (
         <Switch>
-            <Route path="/" exact component={DashboardLanding} />
+            <Route path="/" exact component={Products} />
             <Route path="/detail/:id" exact component={ProductDetails} />
 
             <Route path="/account/login" exact component={ isLoggedIn ? NotFound : Login } />
@@ -53,15 +59,26 @@ function Pages() {
             <Route path="/product_type" exact component={ isSuperAdmin ? ProductTypes : NotFound } />
             <Route path="/user_profile/:id" exact component={ isLoggedIn ? UserProfiles : NotFound } />
             <Route path="/vendorbrands/:uid" exact component={ isAdmin ? VendorBrands : NotFound } />
-            <Route path="/vendorproducts/:uid" exact component={ isAdmin ? VendorProducts : NotFound } />
+
+            
+            <Route path="/vendorproducts/:uid" exact component={ VendorProducts } />
+
+            <Route path="/groupbuys_user/:uid" exact component={ isAdmin ? NotFound : UserGroupBuys } />
+            <Route path="/groupbuy_details/:group_buy_id/:product_id" exact component={GroupBuyDetails} />
 
             <Route path="/create_product" exact component={ isAdmin ? CreateProduct : NotFound } />
             <Route path="/edit_product/:id" exact component={ isAdmin || isSuperAdmin ? CreateProduct : NotFound } />
 
+            <Route path="/superadmin_create_product" exact component={ isSuperAdmin ? SuperAdminCreateProduct : NotFound } />
+
             <Route path="/history" exact component={ isLoggedIn ? OrderHistory : NotFound } />
             <Route path="/history/:id" exact component={ isLoggedIn ? OrderDetails : NotFound } />
 
+            <Route path="/vendor_orders" exact component={ isLoggedIn ? VendorOrders : NotFound } />
+            <Route path="/vendor_orders/:id" exact component={ isLoggedIn ? VendorOrderDetails : NotFound } />
+
             <Route path="/cart" exact component={Cart} />
+            <Route path="/groupbuy_cart" exact component={GroupBuyCart} />
             
             <Route path="*" exact component={NotFound} />
         </Switch>

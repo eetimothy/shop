@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
+    groupBuyCart: {
+        type: Array,
+        default: []
+    },
     company: {
         type: String
     },

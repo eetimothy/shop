@@ -6,12 +6,13 @@ const UserAPI = (token) => {
     const [isAdmin, setIsAdmin] = useState(false)
     const [isSuperAdmin, setIsSuperAdmin] = useState(false)
     const [cart, setCart] = useState([])
+    const [groupBuyCart, setGroupBuyCart] = useState([])
     const [history, setHistory] = useState([])
     const [user, setUser] = useState([])
-    // const [userId, setUserId] = useState('')
     const [vendorBrand, setVendorBrand] = useState([])
-    // const [isSuperAdmin, setIsSuperAdmin] = useState('')
     const [allUsers, setAllUsers] = useState([])
+    const [vendorOrders, setVendorOrders] = useState([])
+    const [allgroupBuys, setAllGroupBuys] = useState([])
 
     useEffect(() => {
         if(token) {
@@ -27,6 +28,9 @@ const UserAPI = (token) => {
                     //  console.log(res.data)
                     // console.log(res.data._id)
                     setCart(res.data.cart)
+                    setGroupBuyCart(res.data.groupBuyCart)
+                    // console.log(res.data.cart)
+                    // console.log(res.data.groupBuyCart)
                     setUser(res.data)
                 }
                 catch (err) {
@@ -48,8 +52,21 @@ const UserAPI = (token) => {
                  }
                  getAllUser()
         }
-    },[isSuperAdmin])
+    },[isSuperAdmin, token])
     
+    useEffect(() => {
+        if(token) {
+            const getAllGroupBuys = async () => {
+                const res = await axios.get('/api/groupbuys', {
+                    headers: { Authorization: token }
+                })
+                // console.log(res.data)
+                setAllGroupBuys(res.data)
+            }
+            getAllGroupBuys()
+        }
+    }, [token])
+
 
     const addCart = async (product) => {
         if(!isLoggedIn) return alert("Please login to continue.")
@@ -57,18 +74,39 @@ const UserAPI = (token) => {
         const check = cart.every(item => {
             return item._id !== product._id
         })
-
+        
         if(check){
             setCart([...cart, {...product, quantity: 1}])
 
             await axios.patch('/user/addcart', { cart: [...cart, {...product, quantity: 1}] }, {
                 headers: { Authorization: token }
             })
-
+            
         } else {
             alert('Item Added to Cart.')
         }
     }
+
+    const addGroupBuyCart = async (product, groupBuy) => {
+        if(!isLoggedIn) return alert("Please login to continue.")
+
+        const check = groupBuyCart.every(item => {
+            return item._id !== product._id
+        })
+
+        if(check){
+            setGroupBuyCart([...groupBuyCart, {...product, groupBuy, quantity: 1}])
+
+            await axios.patch('/user/addcart_groupbuy_join', { groupBuyCart: [...groupBuyCart, {...product, groupBuy, quantity: 1}] }, {
+                headers: { Authorization: token }
+            })
+            
+        } else {
+            alert('Item Added to Group Buy Cart, Checkout to join Group Buy..')
+        }
+    }
+
+   
 
     return {
         isLoggedIn: [isLoggedIn, setIsLoggedIn], 
@@ -79,7 +117,11 @@ const UserAPI = (token) => {
         history: [history, setHistory],
         user: [user, setUser],
         vendorBrand: [vendorBrand, setVendorBrand],
-        allUsers: [allUsers, setAllUsers]
+        allUsers: [allUsers, setAllUsers],
+        vendorOrders: [vendorOrders, setVendorOrders],
+        allGroupBuys: [allgroupBuys, setAllGroupBuys],
+        addGroupBuyCart: addGroupBuyCart,
+        groupBuyCart: [groupBuyCart, setGroupBuyCart]
     }
 }
  
