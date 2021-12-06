@@ -119,26 +119,26 @@ const groupBuyCtrl = {
             if(!user) return res.status(400).json({ msg: "user does not exist.. "})
             // console.log(user)
 
-            const { _id } = req.body
-            // console.log(req.body)
+            const { _id, quantity } = req.body
+            // console.log(req.body.quantity)
             // console.log(req.user.id)
             const groupBuy = GroupBuys.findById(req.body._id)
             if(!groupBuy) return res.status(400).json({ msg: "group buy does not exist.. "})
             
-            await GroupBuys.findOneAndUpdate({ _id: req.body._id}, {
-                $inc: { groupBuyQty: -1 }
+            await GroupBuys.findOneAndUpdate({ _id: req.body._id }, {
+                $inc: { groupBuyQty: - req.body.quantity }
             })
 
-            await GroupBuys.findOneAndUpdate({ _id: req.body._id}, {
-                $inc: { buyers: 1 }
+            await GroupBuys.findOneAndUpdate({ _id: req.body._id }, {
+                $inc: { buyers: req.body.quantity }
             })
             
             // await GroupBuys.findOneAndUpdate({ _id: req.body._id}, {
             //     groupBuyQty: groupBuyQty - 1
             // })
 
-            await GroupBuys.findOneAndUpdate({ _id: req.body._id}, { 
-                $push: {users: [req.user.id]}
+            await GroupBuys.findOneAndUpdate({ _id: req.body._id }, { 
+                $push: { users: [{ id: req.user.id, quantity: req.body.quantity }] }
                 })
                 return res.json({ msg: "user added to groupbuy" })
             }

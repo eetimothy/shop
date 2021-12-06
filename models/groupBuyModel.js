@@ -62,10 +62,6 @@ const groupBuySchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    // maxGroupBuysAllowed: {
-    //     type: mongoose.Schema.Types.Number,
-    //     ref: "Product"
-    // },
     buyers: {
         type: Number,
         default: 0

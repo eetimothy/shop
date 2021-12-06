@@ -26,7 +26,7 @@ const Cart = () => {
         getTotal()
     },[cart])
 
-    console.log(cart)
+    // console.log(cart)
    
     //create group buy cart
     const addToCart = async (cart) => {
@@ -36,11 +36,14 @@ const Cart = () => {
        
     }
 
+    
+
     const increment = (id) => {
         cart.forEach(item => {
             if(item._id === id) {
                 // item.quantity += 1
                 item.quantity < item.groupBuyQty ? item.quantity += 1 : item.quantity = item.groupBuyQty
+                
             }
         })
         setCart([...cart])
@@ -78,7 +81,7 @@ const Cart = () => {
                 product: item._id, title: item.title, description: item.description, content: item.content, 
                 brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
                 groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
-                users: [user._id], startedBy: user._id, groupBuyQty: item.groupBuyQty - 1, buyers: 1
+                users: [{ id: user._id, quantity: item.quantity }], startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity, buyers: item.quantity
             
             }, {
                 headers: { Authorization: token }
@@ -127,7 +130,8 @@ const Cart = () => {
                             <div className="amount">
                                 <button onClick={() => decrement(product._id)}> - </button>
                                 <span>{product.quantity}</span>
-                                <button onClick={() => increment(product._id)}> + </button>
+                                <button onClick={() => increment(product._id)}> + </button> 
+                                
                             </div>
 
                             <div className="delete" 

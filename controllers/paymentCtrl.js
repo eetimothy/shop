@@ -61,7 +61,6 @@ const paymentCtrl = {
             const { groupBuyCart, paymentID, address } = req.body;
             const { _id, username, email, vendorId } = user;
 
-          
             
             const newPayment = new Payments({
                 user_id: _id, username, email, groupBuyCart, paymentID, address, vendorId

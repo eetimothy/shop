@@ -82,7 +82,7 @@ const GroupBuyCart = ({ groupBuy }) => {
         // const { product_id } = cart;
         //when user completes payment, he auto joins a group buy..
        await groupBuyCart.map(item => {
-            return axios.patch('/api/add_user_group_buy', { _id: item.groupBuy._id }, {
+            return axios.patch('/api/add_user_group_buy', { _id: item.groupBuy._id, quantity: item.quantity }, {
             headers: { Authorization: token }
         })
        })
@@ -108,11 +108,11 @@ const GroupBuyCart = ({ groupBuy }) => {
 
     return (
         <div>
-            
+            <h2>Join Group Buys</h2>
             {
                 groupBuyCart.map(product => (
                     <div className="details cart" key={product._id}>
-                        <h2>Join Group Buys</h2>
+                        
                         <img src={product.images.url} alt="" className="img_container" />
 
                         <div className="box-detail">
@@ -129,6 +129,9 @@ const GroupBuyCart = ({ groupBuy }) => {
                                 <button onClick={() => decrement_joinGbCart(product._id)}> - </button>
                                 <span>{product.quantity}</span>
                                 <button onClick={() => increment_joinGbCart(product._id)}> + </button>
+                                {/* <p>Available group buy quantity: {availableGroupBuys.map(p => {
+                                    return p.groupBuyQty
+                                })}</p> */}
                             </div>
 
                             <div className="delete" 
