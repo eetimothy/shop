@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Products from './products/Products'
 import ProductDetails from './productDetails/ProductDetails'
-import Cart from './cart/Cart'
+// import Cart from './cart/Cart'
 import Login from './auth/Login'
 import Register from './auth/Register'
 import OrderHistory from './history/OrderHistory'
@@ -25,9 +25,14 @@ import EditUser from './superAdmin/manage_users/EditUser';
 import SuperAdminCreateProduct from './superAdmin/superAdminCreateProduct/SuperAdminCreateProduct';
 import VendorOrders from '../mainpages/vendor/vendorOrders/VendorOrders';
 import VendorOrderDetails from '../mainpages/vendor/vendorOrders/VendorOrderDetails';
-import UserGroupBuys from './groupBuy/UserGroupBuys';
+// import UserCreatedGroupBuys from './groupBuy/UserCreatedGroupBuys';
 import GroupBuyDetails from './groupBuy/GroupBuyDetails';
-import GroupBuyCart from './cart/GroupBuyCart';
+// import GroupBuyCart from './cart/GroupBuyCart';
+import AllCarts from './cart/AllCarts';
+// import JoinedGroupBuys from './groupBuy/JoinedGroupBuys';
+import UserGroupBuys from './groupBuy/UserGroupBuys'
+import ProductGroupBuys from './groupBuy/ProductGroupBuys';
+import VendorGroupBuys from '../mainpages/vendor/vendorGroupBuys/VendorGroupBuys';
 
 function Pages() {
 
@@ -39,6 +44,9 @@ function Pages() {
 
     return (
         <Switch>
+
+
+
             <Route path="/" exact component={Products} />
             <Route path="/detail/:id" exact component={ProductDetails} />
 
@@ -62,9 +70,16 @@ function Pages() {
 
             
             <Route path="/vendorproducts/:uid" exact component={ VendorProducts } />
+            <Route path="/vendor_groupbuys/:uid" exact component={ VendorGroupBuys } />
+            {/* <Route path="/groupbuys_user_created/:uid" exact component={ isAdmin ? NotFound : UserCreatedGroupBuys } /> */}
 
             <Route path="/groupbuys_user/:uid" exact component={ isAdmin ? NotFound : UserGroupBuys } />
+
+            {/* <Route path="/groupbuys_user_joined/:uid" exact component={ isAdmin ? NotFound : JoinedGroupBuys } /> */}
+
             <Route path="/groupbuy_details/:group_buy_id/:product_id" exact component={GroupBuyDetails} />
+
+            <Route path="/groupbuys_product" exact component={ProductGroupBuys} />
 
             <Route path="/create_product" exact component={ isAdmin ? CreateProduct : NotFound } />
             <Route path="/edit_product/:id" exact component={ isAdmin || isSuperAdmin ? CreateProduct : NotFound } />
@@ -77,8 +92,9 @@ function Pages() {
             <Route path="/vendor_orders" exact component={ isLoggedIn ? VendorOrders : NotFound } />
             <Route path="/vendor_orders/:id" exact component={ isLoggedIn ? VendorOrderDetails : NotFound } />
 
-            <Route path="/cart" exact component={Cart} />
-            <Route path="/groupbuy_cart" exact component={GroupBuyCart} />
+            <Route path="/allcarts" exact component={AllCarts} />
+            {/* <Route path="/cart" exact component={Cart} />
+            <Route path="/groupbuy_cart" exact component={GroupBuyCart} /> */}
             
             <Route path="*" exact component={NotFound} />
         </Switch>

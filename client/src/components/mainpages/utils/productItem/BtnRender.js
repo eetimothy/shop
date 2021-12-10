@@ -9,6 +9,8 @@ const BtnRender = ({ product, deleteProduct }) => {
     const [isAdmin] = state.userAPI.isAdmin
     const addCart = state.userAPI.addCart
 
+    
+
     return (
         <div className="row_btn">
             {
@@ -28,8 +30,8 @@ const BtnRender = ({ product, deleteProduct }) => {
                     </>
                     :
                     <>
-                        <Link id="btn_buy" to="#!" onClick={() => addCart(product)}>Add Item</Link>
-                        <Link id="btn_view" to={`/detail/${product._id}`}>View</Link>
+                        <Link id="btn_buy" to="#!" onClick={() => addCart(product)}>+ Create Group Buy</Link>
+                        <Link id="btn_view" to={`/detail/${product._id}`}>Join Group Buy</Link>
                     </>
             }
         </div>

@@ -53,6 +53,7 @@ const GroupBuyCart = ({ groupBuy }) => {
             }
         })
         setGroupBuyCart([...groupBuyCart])
+        // console.log(groupBuyCart)
         addToJoinGroupBuyCart(groupBuyCart)
     }
 
@@ -67,7 +68,7 @@ const GroupBuyCart = ({ groupBuy }) => {
     }
 
     const removeProduct_joinGbCart = (id) => {
-        if(window.confirm("Do you want to remove this item permanently?")){
+        // if(window.confirm("Do you want to remove this item permanently?")){
             groupBuyCart.forEach((item, index) => {
                 if(item._id === id) {
                     groupBuyCart.splice(index, 1)
@@ -75,16 +76,28 @@ const GroupBuyCart = ({ groupBuy }) => {
             })
             setGroupBuyCart([...groupBuyCart])
             addToJoinGroupBuyCart(groupBuyCart)
-        }
+        // }
     }
 
     const joinGroupBuy = async (groupBuyCart) => {
         // const { product_id } = cart;
         //when user completes payment, he auto joins a group buy..
+        
        await groupBuyCart.map(item => {
-            return axios.patch('/api/add_user_group_buy', { _id: item.groupBuy._id, quantity: item.quantity }, {
-            headers: { Authorization: token }
-        })
+        if(item.quantity === item.groupBuy.groupBuyQty){
+            return axios.patch('/api/add_user_group_buy', { _id: item.groupBuy._id, quantity: item.quantity, isActive: false, success: true }, {
+                headers: { Authorization: token }
+            })
+        } else if (item.quantity > item.groupBuy.successTarget || item.quantity === item.groupBuy.successTarget) {
+            return axios.patch('/api/add_user_group_buy', { _id: item.groupBuy._id, quantity: item.quantity, isActive: true, success: true }, {
+                headers: { Authorization: token }
+            })
+        } else {
+            return axios.patch('/api/add_user_group_buy', { _id: item.groupBuy._id, quantity: item.quantity, isActive: true, success: false }, {
+                headers: { Authorization: token }
+            })
+        }
+            
        })
             
     }
@@ -103,8 +116,9 @@ const GroupBuyCart = ({ groupBuy }) => {
         // window.location.href = `/groupbuys_user/${uid}`;
     }
 
+
     if (groupBuyCart.length === 0)
-        return <h2 style={{ textAlign: "center", fontSize: "5rem" }}>Cart Empty</h2>
+        return <h2 style={{ textAlign: "center", fontSize: "2rem" }}>No Group Buys joined yet.. </h2>
 
     return (
         <div>
@@ -121,6 +135,7 @@ const GroupBuyCart = ({ groupBuy }) => {
                                
                             
                             <h3>$ {product.groupBuyPrice * product.quantity}</h3>
+                            <p>{product._id}</p>
                             <p>{product.description}</p>
                             <p>{product.content}</p>
                             <p>{product.user}</p>
@@ -151,6 +166,9 @@ const GroupBuyCart = ({ groupBuy }) => {
             </div>
 
         </div>
+
+
+        
     );
 }
 

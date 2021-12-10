@@ -69,6 +69,14 @@ const groupBuySchema = new mongoose.Schema({
     groupBuyQty: {
         type: mongoose.Schema.Types.Number,
         ref: "Product"
+    },
+    success: {
+        type: Boolean,
+        default: false
+    },
+    successTarget: {
+        type: mongoose.Schema.Types.Number,
+        ref: "Product"
     }
 }, {
     timestamps: true

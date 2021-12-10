@@ -5,6 +5,7 @@ import Menu from './icon/menu.svg'
 import Cart from './icon/cart.svg'
 import Close from './icon/close.svg'
 import axios from 'axios'
+import g_logo from './images/g_logo.png'
 
 
 function Header() {
@@ -15,6 +16,7 @@ function Header() {
     const [isSuperAdmin] = state.userAPI.isSuperAdmin
     const [cart] = state.userAPI.cart
     const [menu, setMenu] = useState(false)
+    const [groupBuyCart] = state.userAPI.groupBuyCart
 
     const [user] = state.userAPI.user
     // console.log(user._id)
@@ -36,6 +38,7 @@ function Header() {
             <>
                 {/* <li><Link to={`/vendorbrands/${user._id}`}>Manage Brands</Link></li> */}
                 <li><Link to={`/vendorproducts/${user._id}`}>My Products</Link></li>
+                <li><Link to={`/vendor_groupbuys/${user._id}`}>My Group Buys</Link></li>
                 {/* <li><Link to="/create_product">Create Group Buy</Link></li> */}
             </>
         )
@@ -71,7 +74,7 @@ function Header() {
             <ul className="dropdown">
                 <li><Link to={`/user_profile/${user._id}`}>Profile</Link></li>
                 {/* <li><Link to="/vendor_orders">Orders</Link></li> */}
-                { isAdmin ? <li><Link to="/vendor_orders">Orders</Link></li> : <li><Link to="/history">Orders</Link></li> }
+                { isAdmin ? <li><Link to="/vendor_orders">Orders</Link></li> : <li><Link to="/history">Invoices</Link></li> }
 
                 {isSuperAdmin ? <li><Link to="/manage_users">Manage Users</Link></li> : '' }
                 <li><Link to="/" onClick={logoutUser}>Logout</Link></li>
@@ -99,11 +102,8 @@ function Header() {
             <div className="logo">
                 <h1>
                     <Link to="/">
-                        {
-                            isAdmin ? 'Group-Buy.io'
-                                : isSuperAdmin ? 'Group-Buy.io'
-                                    : 'Group-Buy.io'
-                        }
+                         <img src={g_logo} width={70} alt="group-buy.io"/>
+                             
                     </Link>
                 </h1>
             </div>
@@ -133,10 +133,20 @@ function Header() {
                 isAdmin ? ''
                 : isSuperAdmin ? ''
                     : <div className="cart-icon">
-                        <span>{cart.length}</span>
-                        <Link to="/cart">
+                        <span>{cart.length + groupBuyCart.length}</span>
+                        
+                        {
+                            cart.length === 0 && groupBuyCart.length === 0 ? 
+
+                            <Link to="#"> <img src={Cart} alt="cart" width="30"/></Link>
+
+                            : <Link to="/allcarts">
                             <img src={Cart} alt="" width="30" />
                         </Link>
+                        }
+                        
+
+
                     </div>
             }
 

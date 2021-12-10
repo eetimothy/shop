@@ -22,7 +22,6 @@ const VendorOrders = () => {
                 } else {
                     const res = await axios.get('/user/orderhistory', {
                         headers: { Authorization: token }
-                        
                     })
                     //console.log(res)
                     setVendorOrders(res.data)

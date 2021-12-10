@@ -61,7 +61,7 @@ const Cart = () => {
     }
 
     const removeProduct = (id) => {
-        if(window.confirm("Do you want to remove this item permanently?")){
+        // if(window.confirm("Do you want to remove this item permanently?")){
             cart.forEach((item, index) => {
                 if(item._id === id) {
                     cart.splice(index, 1)
@@ -69,7 +69,7 @@ const Cart = () => {
             })
             setCart([...cart])
             addToCart(cart)
-        }
+        // }
     }
 
     const createGroupBuy = async (cart) => {
@@ -77,17 +77,42 @@ const Cart = () => {
         //when user completes payment, he auto creates a group buy
         //when user completes payment of eg 2 products, he will auto create 2 group buys
         await cart.map(item => {
-            return axios.post('/api/groupbuys', { 
-                product: item._id, title: item.title, description: item.description, content: item.content, 
-                brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
-                groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
-                users: [{ id: user._id, quantity: item.quantity }], startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity, buyers: item.quantity
-            
-            }, {
-                headers: { Authorization: token }
-            })
-        })
-        
+            //order = total available quantity per group buy
+            if(item.quantity === item.groupBuyQty) {
+                return axios.post('/api/groupbuys', { 
+                    product: item._id, title: item.title, description: item.description, content: item.content, 
+                    brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
+                    groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
+                    users: [{ id: user._id, quantity: item.quantity }], startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity, 
+                    buyers: item.quantity, successTarget: item.successTarget - item.quantity,
+                    isActive: false, success: true
+                }, {
+                    headers: { Authorization: token }
+                })
+            } else if (item.quantity === item.successTarget || item.quantity > item.successTarget) {
+                return axios.post('/api/groupbuys', { 
+                    product: item._id, title: item.title, description: item.description, content: item.content, 
+                    brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
+                    groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
+                    users: [{ id: user._id, quantity: item.quantity }], startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity, 
+                    buyers: item.quantity, successTarget: item.successTarget - item.quantity,
+                    isActive: true, success: true
+                }, {
+                    headers: { Authorization: token }
+                })
+            } else {
+                return axios.post('/api/groupbuys', { 
+                    product: item._id, title: item.title, description: item.description, content: item.content, 
+                    brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
+                    groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
+                    users: [{ id: user._id, quantity: item.quantity }], startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity, 
+                    buyers: item.quantity, successTarget: item.successTarget - item.quantity,
+                    isActive: true, success: false
+                }, {
+                    headers: { Authorization: token }
+                })
+            }
+        })   
     }
 
     const tranSuccess = async (payment) => {
@@ -106,7 +131,7 @@ const Cart = () => {
 
 
     if (cart.length === 0)
-        return <h2 style={{ textAlign: "center", fontSize: "5rem" }}>Cart Empty</h2>
+        return <h2 style={{ textAlign: "center", fontSize: "2rem" }}>No Group Buys created yet..</h2>
 
     return (
         <div>

@@ -86,4 +86,8 @@ header ul li img{
     .drop-nav .dropdown{
         margin-left: 80px;
     }
+    header .logo{
+        flex: 1;
+        margin-left: 50px;
+    }
 }

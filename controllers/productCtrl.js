@@ -70,7 +70,7 @@ const productCtrl = {
     },
     createProduct: async (req, res) => {
         try {
-            const { product_id, title, groupBuyPrice, buyNowPrice, description, content, images, brand, category, productType, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys } = req.body;
+            const { product_id, title, groupBuyPrice, buyNowPrice, description, content, images, brand, category, productType, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget } = req.body;
             if(!images) return res.status(400).json({ msg: 'Please add an image.. ' })
 
             const product = await Products.findOne({ product_id })
@@ -78,7 +78,7 @@ const productCtrl = {
             return res.status(400).json({ msg: 'This product already exists.. ' })
 
             const newProduct = new Products({
-                product_id, title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys
+                product_id, title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget
             })
             await newProduct.save()
             res.json({ msg: "New product created.. " })
@@ -98,11 +98,11 @@ const productCtrl = {
     },
     updateProduct: async (req, res) => {
         try {
-            const { title, groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, groupBuyQty, totalQty, isActive, maxGroupBuys  } = req.body;
+            const { title, groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget  } = req.body;
             if(!images) return res.status(400).json({ msg: 'no image uploaded' })
 
             await Products.findByIdAndUpdate({ _id: req.params.id }, {
-                title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, groupBuyQty, totalQty, isActive, maxGroupBuys  
+                title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget  
             })
 
             res.json({ msg: "Product updated.. " })

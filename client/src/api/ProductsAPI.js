@@ -19,7 +19,7 @@ function ProductsAPI() {
             const res = await axios.get(`/api/products?limit=${page*9}&${category}&${brand}&${sort}&${productType}&title[regex]=${search}`)
             setProducts(res.data.products)
             setResult(res.data.result)
-            // console.info(res)
+            // console.info(res.data.products)
         }
         getProducts()
     },[callback, category, brand, productType, sort, search, page])

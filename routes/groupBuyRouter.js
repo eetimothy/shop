@@ -11,13 +11,13 @@ router.route('/groupbuys')
 router.route('/add_user_group_buy')
     .patch(auth, groupBuyCtrl.addUserToGroupBuy)
 
-// router.route('/groupbuys_product')
-//     .get(auth, groupBuyCtrl.getAllGroupBuysOfProduct)
+router.route('/groupbuys_product')
+    .get(auth, groupBuyCtrl.getProductGroupBuys)
 
 router.route('/groupbuys_user')
     .get(auth, groupBuyCtrl.getAllGroupBuysOfUser)
 
-router.route('/groupbuy_user_product')
-    .get(auth, groupBuyCtrl.getProductGroupBuyOfUser)
+router.route('/groupbuys_user_joined')
+    .get(auth, groupBuyCtrl.getUserJoinedGroupBuys)
 
 module.exports = router

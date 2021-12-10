@@ -20,6 +20,7 @@ const initialState = {
     productType: '',
     _id: '',
     groupBuyQty: 0,
+    successTarget: 10,
     totalQty: 0,
     isActive: true,
     maxGroupBuys: 0
@@ -203,6 +204,12 @@ const CreateProduct = () => {
                     <label htmlFor="groupBuyQty">Group Buy Quantity</label>
                     <input type="number" name="groupBuyQty" id="groupBuyQty" required
                         value={product.groupBuyQty} onChange={handChangeInput} />
+                </div>
+
+                <div className="row">
+                    <label htmlFor="successTarget">Set Minimum Group Buy</label>
+                    <input type="number" name="successTarget" id="successTarget" required
+                        value={product.successTarget} onChange={handChangeInput} />
                 </div>
 
                 <div className="row">

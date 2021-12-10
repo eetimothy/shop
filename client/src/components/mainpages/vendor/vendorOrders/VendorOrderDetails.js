@@ -7,7 +7,7 @@ const VendorOrderDetails = () => {
     const state = useContext(GlobalState)
     const [vendorOrders] = state.userAPI.vendorOrders
     const [orderDetails, setOrderDetails] = useState([])
-    // const [user] = state.userAPI.user
+    const [user] = state.userAPI.user
 
     const params = useParams()
 
@@ -19,9 +19,9 @@ const VendorOrderDetails = () => {
         }
     }, [params.id, vendorOrders])
 
-    // console.info(orderDetails)
     // console.log(user._id)
-
+    // console.log(vendorOrders)
+    // console.log(orderDetails)
 
 
     if (orderDetails.length === 0) return null;
@@ -58,35 +58,24 @@ const VendorOrderDetails = () => {
                         <th>Quantity</th>
                         <th>Unit Price</th>
                         <th>Total Paid</th>
-                        <th>Vendor/ Seller</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {
-                        orderDetails.cart.map(item => (
+                        orderDetails.cart.map(item => {
+                            if(item.vendorId === user._id)
+                            return (
                             <tr key={item._id}>
                                 <td><img src={item.images.url} alt="" /></td>
                                 <td>{item.title}</td>
                                 <td>{item.quantity}</td>
                                 <td>${item.groupBuyPrice}</td>
                                 <td>$ {item.groupBuyPrice * item.quantity}</td>
-                                <td>{item.user}</td>
-
                             </tr>
-                        ))
-                    }
-                    {
-                        orderDetails.groupBuyCart.map(item => (
-                            <tr key={item._id}>
-                                <td><img src={item.images.url} alt="" /></td>
-                                <td>{item.title}</td>
-                                <td>{item.quantity}</td>
-                                <td>${item.groupBuyPrice}</td>
-                                <td>$ {item.groupBuyPrice * item.quantity}</td>
-                                <td>{item.user}</td>
-
-                            </tr>
-                        ))
+                            )
+                            else return ''
+                        })
                     }
                 </tbody>
             </table>

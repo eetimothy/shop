@@ -20,6 +20,7 @@ const initialState = {
     productType: '',
     _id: '',
     groupBuyQty: 0,
+    successTarget: 10,
     totalQty: 0,
     isActive: true,
     maxGroupBuys: 0
@@ -210,6 +211,12 @@ const SuperAdminCreateProduct = () => {
                     <label htmlFor="groupBuyQty">Group Buy Quantity</label>
                     <input type="number" name="groupBuyQty" id="groupBuyQty" min="0" required
                         value={product.groupBuyQty} onChange={handChangeInput} />
+                </div>
+
+                <div className="row">
+                    <label htmlFor="successTarget">Set Minimum Group Buy Target</label>
+                    <input type="number" name="successTarget" id="successTarget" min="10" required
+                        value={product.successTarget} onChange={handChangeInput} />
                 </div>
 
                 <div className="row">

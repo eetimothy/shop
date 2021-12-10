@@ -15,6 +15,7 @@ const Products = () => {
     const [callback, setCallback] = state.productsAPI.callback
     const [loading, setLoading] = useState(false)
     const [isCheck, setIsCheck] = useState(false)
+    const [allGroupBuys] = state.groupBuysAPI.allGroupBuys
 
     const handleCheck = (id) => {
         //console.info(id)
@@ -23,7 +24,7 @@ const Products = () => {
         })
         setProducts([...products])
     }
-// console.log(products)
+
     const deleteProduct = async (id, public_id) => {
         //console.info({id, public_id})
         try {
@@ -58,6 +59,13 @@ const Products = () => {
         })
     }
 
+    // console.log(products)
+    // console.log(allGroupBuys)
+    const gb = allGroupBuys.map(gb => {
+        return gb
+    })
+    
+
     if(loading) return <div><Loading/></div>
 
     return ( 
@@ -75,8 +83,10 @@ const Products = () => {
         <div className="products">
             {
                 products.map(product => {
-                    return <ProductItem key={product._id} product={product} 
+                    if(product.isActive === true)
+                    return <ProductItem key={product._id} product={product} gb={gb}
                     isSuperAdmin={isSuperAdmin} isAdmin={isAdmin} deleteProduct={deleteProduct} handleCheck={handleCheck} />
+                    else return ''
                 })
             }
         </div>
