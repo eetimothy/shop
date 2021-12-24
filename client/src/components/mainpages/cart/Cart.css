@@ -1,6 +1,6 @@
 .cart{
     position: relative;
-    border: 1px solid #ccc;
+    box-shadow: 0 0 8px #ddd; 
     transform: scaleY(0.98);
 }
 .amount span{
@@ -14,10 +14,8 @@
 }
 .delete{
     position: absolute;
-    top: 0;
+    top: 5px;
     right: 5px;
-    color: #000;
-    font-weight: 900;
     cursor: pointer;
 }
 .total{
@@ -30,3 +28,31 @@
 .total h3{
     color: crimson;
 }
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div.details.cart > div > div.amount > button:nth-child(1){
+    background-color: #ffffff;
+    border-color: #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div.details.cart > div > div.amount > button:nth-child(1):hover{
+    background-color: #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div.details.cart > div > div.amount > button:nth-child(3){
+    background-color: #ffffff;
+    border-color: #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div.details.cart > div > div.amount > button:nth-child(3):hover{
+    background-color: #e0e0e0;
+}
+
+button.MuiButtonBase-root.MuiFab-root.MuiFab-circular.MuiFab-sizeSmall.css-8c9wxy-MuiButtonBase-root-MuiFab-root{
+    background-color: #ffffff;
+    border-color: #e0e0e0;
+}
+
+button.MuiButtonBase-root.MuiFab-root.MuiFab-circular.MuiFab-sizeSmall.css-8c9wxy-MuiButtonBase-root-MuiFab-root:hover{
+    background-color: #e0e0e0;
+}
+

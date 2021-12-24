@@ -1,20 +1,31 @@
-.load-page{
+/* .load-page{
     background: #fff;
     overflow: hidden;
+    position: fixed;
 }
 .loader{
-    width: 300px;
-    height: 300px;
+    width: 1000px;
+    height: 700px;
     margin: auto;
+    position: fixed;
 }
 .loader div{
-    width: calc(100% - 15px);
-    height: calc(100% - 15px);
-    border-top: 2px solid black;
-    border-radius: 50%;
-    animation: rotate 10s linear infinite alternate-reverse;
+    width: calc(100% - 65px);
+    height: calc(100% - 115px);
+    position: fixed;
+    
+   
 }
 @keyframes rotate{
     50%{transform: rotate(80deg);}
     100%{transform: rotate(360deg);}
+} */
+.MuiCircularProgress-colorPrimary {
+    color: '#263238' !important;
+}
+
+.MuiCircularProgress-root { 
+    left: 50%; 
+    position: absolute; 
+    top: 40vh; 
 }

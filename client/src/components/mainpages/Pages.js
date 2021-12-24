@@ -16,7 +16,7 @@ import { GlobalState } from '../../GlobalState'
 import UserProfiles from '../mainpages/userProfiles/userProfiles'
 import VendorBrands from '../mainpages/vendor/vendorBrands/vendorBrands'
 import VendorProducts from '../mainpages/vendor/vendorProducts/vendorProducts';
-// import DashboardLanding from './Landing/DashboardLanding';
+import Landing from '../mainpages/landing/Landing';
 import ActivationEmail from './auth/ActivationEmail';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
@@ -33,6 +33,9 @@ import AllCarts from './cart/AllCarts';
 import UserGroupBuys from './groupBuy/UserGroupBuys'
 import ProductGroupBuys from './groupBuy/ProductGroupBuys';
 import VendorGroupBuys from '../mainpages/vendor/vendorGroupBuys/VendorGroupBuys';
+import AllGroupBuys from './groupBuy/AllGroupBuys'
+import RegisterVendor from './auth/RegisterVendor';
+// import SettingsDialog from '../mainpages/userProfiles/settingsDialog'
 
 function Pages() {
 
@@ -45,13 +48,14 @@ function Pages() {
     return (
         <Switch>
 
+            
 
-
-            <Route path="/" exact component={Products} />
+            <Route path="/" exact component={Landing} />
             <Route path="/detail/:id" exact component={ProductDetails} />
 
             <Route path="/account/login" exact component={ isLoggedIn ? NotFound : Login } />
             <Route path="/account/register" exact component={ isLoggedIn ? NotFound : Register } />
+            <Route path="/account/register_vendor" exact component={ isLoggedIn ? NotFound : RegisterVendor } />
             <Route path="/account/forgot_password" exact component={ isLoggedIn ? NotFound : ForgotPassword } />
             <Route path="/user/account/reset_password/:token" exact component={ isLoggedIn ? NotFound : ResetPassword } />
 
@@ -77,6 +81,7 @@ function Pages() {
 
             {/* <Route path="/groupbuys_user_joined/:uid" exact component={ isAdmin ? NotFound : JoinedGroupBuys } /> */}
 
+            <Route path="/groupbuys" exact component={AllGroupBuys} />
             <Route path="/groupbuy_details/:group_buy_id/:product_id" exact component={GroupBuyDetails} />
 
             <Route path="/groupbuys_product" exact component={ProductGroupBuys} />

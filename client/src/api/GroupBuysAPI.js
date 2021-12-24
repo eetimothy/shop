@@ -10,18 +10,20 @@ function GroupBuysAPI() {
     const [search, setSearch] = useState('')
     const [results, setResults] = useState(0)
     const [sort, setSort] = useState('')
+    const [category, setCategory] = useState('')
+    const [brand, setBrand] = useState('')
+    const [productType, setProductType] = useState('')
     
- 
 
     useEffect(() => {
        const getAllGroupBuys = async () => {
-           const res = await axios.get(`/api/groupbuys?`)
+           const res = await axios.get(`/api/groupbuys?${category}&${brand}&${sort}&${productType}&title[regex]=${search}`)
           //  console.log(res.data.groupBuys)
            setAllGroupBuys(res.data.groupBuys)
            setResult(res.data.result)
        }
        getAllGroupBuys()
-    }, [gbCallback, sort, search, page])
+    }, [gbCallback, sort, search, page, category, brand, productType])
 
 
     
@@ -44,7 +46,10 @@ function GroupBuysAPI() {
         page: [page, setPage],
         results: [results, setResults],
         search: [search, setSearch],
-        sort: [sort, setSort]
+        sort: [sort, setSort],
+        category: [category, setCategory],
+        brand: [brand, setBrand],
+        productType: [productType, setProductType]
     }
 
 }

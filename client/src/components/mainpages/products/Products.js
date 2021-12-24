@@ -5,6 +5,7 @@ import Loading from '../utils/loading/Loading'
 import axios from 'axios'
 import Filters from './Filters'
 import LoadMore from './LoadMore'
+// import BottomNav from '../../footer/BottomNav'
 
 const Products = () => {
     const state = useContext(GlobalState)
@@ -80,7 +81,8 @@ const Products = () => {
             </div>
         }
         
-        <div className="products">
+        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'center', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>
             {
                 products.map(product => {
                     if(product.isActive === true)
@@ -89,9 +91,13 @@ const Products = () => {
                     else return ''
                 })
             }
+            </div>
         </div>
+        
         <LoadMore />
         {products.length === 0 && <Loading />}
+
+        {/* <BottomNav/> */}
         </>
      );
 }

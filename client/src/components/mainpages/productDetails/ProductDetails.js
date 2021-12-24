@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { GlobalState } from '../../../GlobalState'
 import { Link } from 'react-router-dom'
-import ProductItem from '../utils/productItem/ProductItem'
+// import ProductItem from '../utils/productItem/ProductItem'
 // import axios from 'axios'
 import ProductGroupBuys from '../groupBuy/ProductGroupBuys'
 
@@ -56,9 +56,20 @@ const ProductDetails = () => {
                     <span>$ {productDetails.groupBuyPrice}</span>
                     <h6>Description</h6>
                     <p>{productDetails.description}</p>
+
+                    <h6>Group Buy Description</h6>
+                    
+                    <p>{productDetails.content}</p>
+                    <p>Instructions: Checkout to start a group buy</p>
+
+                    <h6>Vendor Details</h6>
+                    <p>Company: {productDetails.vendorCompany}</p>
+                    <p>Email: {productDetails.vendorEmail}</p>
+                    <p>Contact: {productDetails.vendorMobile}</p>
+
                     <p>Sold: {productDetails.sold}</p>
                     {/* <Link to="/allcarts" className="cart" onClick={() => addCart(productDetails)}>Buy now: $800</Link> */}
-                    { !isAdmin && <Link to="/allcarts" className="cart" onClick={() => addCart(productDetails)}>Create Group Buy</Link> }
+                    { !isAdmin && <Link style={{ backgroundColor: '#F05E23' }} to="/allcarts" className="cart" onClick={() => addCart(productDetails)}>Buy</Link> }
 
 
                 </div>
@@ -79,7 +90,7 @@ const ProductDetails = () => {
                         
 
                         </div>
-            <div>
+            {/* <div>
                 <h2>Related Products</h2>
                 <div className="products">
                     {
@@ -92,7 +103,7 @@ const ProductDetails = () => {
                     
                 </div>
 
-            </div>
+            </div> */}
         </>
     );
 }

@@ -1,3 +1,5 @@
+
+
 /* .login-page{
     max-width: 500px;
     border: 2px solid rgb(3, 165, 206);
@@ -37,14 +39,14 @@
     text-transform: uppercase;
 } */
 
-.login_page{
+/* .login_page{
     max-width: 500px;
     margin: auto;
     color: #444;
     padding: 0 15px;
 }
 .login_page h2{
-    text-transform: uppercase;
+    
     font-size: 2rem;
     margin: 20px 0;
     letter-spacing: 1.5px;
@@ -72,7 +74,6 @@
     padding: 10px 0;
     color: white;
     background: black;
-    text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-right: 10px;
 }
@@ -82,12 +83,12 @@
 .login_page a{
     color: #111;
     font-weight: 600;
-}
+} */
 
 /* ------- forgot password -------- */
 .forgot_password h2{
     color: #555;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     text-align: center;
     font-size: 2rem;
     margin: 50px 0;

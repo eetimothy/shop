@@ -10,7 +10,7 @@
     max-width: 300px;
     width: 100%;
     margin: 20px;
-    height: 340px;
+    height: 200px;
     object-fit: cover;
     display: block;
 }
@@ -24,9 +24,9 @@
     justify-content: space-between;
     align-items: center;
 }
-.box-detail h2{
+.box-detail h6{
     text-transform: uppercase;
-    color: grey;
+    color: black;
     letter-spacing: 1px;
     font-weight: 2rem;
 }

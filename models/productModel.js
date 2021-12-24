@@ -40,7 +40,6 @@ const productSchema = new mongoose.Schema({
     },
     brand: {
         type: String,
-        required: true
     },
     category: {
         type: String,
@@ -74,6 +73,18 @@ const productSchema = new mongoose.Schema({
     vendorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    vendorCompany: {
+        type: String,
+        required: true
+    },
+    vendorEmail: {
+        type: String,
+        required: true,
+    },
+    vendorMobile: {
+        type: String,
+        required: true,
     },
     currentGroupBuys: {
         type: Number,

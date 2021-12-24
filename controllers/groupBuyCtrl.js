@@ -1,6 +1,7 @@
 const GroupBuys = require('../models/groupBuyModel')
 const Users = require('../models/userModel')
 const Products = require('../models/productModel')
+const cron = require('node-cron')
 
 class APIfeatures {
     constructor(query, queryString) {
@@ -39,7 +40,7 @@ class APIfeatures {
     }
     paginating(){
         const page = this.queryString.page * 1 || 1
-        const limit = this.queryString.limit * 1 || 9  // page number, list 3 products
+        const limit = this.queryString.limit * 1 || 1000  // page number, list 3 products, also affects the ability to view group buys
         const skip = (page - 1) * limit;
         this.query = this.query.skip(skip).limit(limit)
         return this;
@@ -129,7 +130,7 @@ const groupBuyCtrl = {
           
             const productGroupBuys = await features.query
 
-            console.log(productGroupBuys)
+            // console.log(productGroupBuys)
 
             res.json({
                 status: 'success',
@@ -143,10 +144,17 @@ const groupBuyCtrl = {
     createGroupBuy: async (req, res) => {
         try {
             const { 
-                product, startedBy, users, title, description, product_id,
-                content, brand, productType, category, groupBuyPrice, vendorId, images, 
+                product, startUser, startedBy, users, title, description, product_id,
+                content, brand, productType, category, groupBuyPrice, vendorId, 
+                images, vendorCompany, vendorEmail, vendorMobile,
                 isActive, groupBuyQty, buyers, success, successTarget
             } = req.body
+
+            // let nowDate = new Date()
+            let currDate = new Date(),
+                laterDate = currDate.setHours(currDate.getHours() + 24)
+
+            // const endDate = laterDate.toISOString()
 
             // console.log(req.body)
             // const { email, _id } = startedBy
@@ -155,25 +163,40 @@ const groupBuyCtrl = {
             
            
                 const newGroupBuy = new GroupBuys ({
-                    users, startedBy, product, title, description, product_id,
+                    users, startUser, startedBy, product, title, description, product_id,
                     content, brand, productType, category, groupBuyPrice, vendorId, images,
-                    isActive, groupBuyQty, buyers, success, successTarget
+                    isActive, groupBuyQty, buyers, success, successTarget, endDate: laterDate,
+                    vendorCompany, vendorEmail, vendorMobile
                 })
 
                 await newGroupBuy.save()
                 res.json({ msg: "New group buy created..."})  
+                // console.log(newGroupBuy._id)
+               
         }
         catch (err) {
             res.status(500).json({ msg: err.message })
         }
     },
+    // expireGroupBuy: async (req, res) => {
+    //     try {
+    //         GroupBuys.findOneAndUpdate({ _id: newGroupBuy }, {
+    //             $set: { isActive: false }
+    //         })
+    //     }
+    //     catch (err) {
+    //         res.status(500).json({ msg: err.message })
+    //     }
+    // },
     addUserToGroupBuy: async (req, res) => {
         try {
-            const user = await Users.findById(req.user.id)
+
+            const { _id, quantity, email, mobile, address, username, isActive, success, userid } = req.body
+            const user = await Users.findById(req.body.userid)
             if(!user) return res.status(400).json({ msg: "user does not exist.. "})
             // console.log(user)
 
-            const { _id, quantity, isActive, success } = req.body
+            
             // console.log(req.body.quantity)
             // console.log(req.user.id)
             const groupBuy = GroupBuys.findById(req.body._id)
@@ -203,7 +226,7 @@ const groupBuyCtrl = {
             }
 
             await GroupBuys.findOneAndUpdate({ _id: req.body._id }, { 
-                $push: { users: [{ id: req.user.id, quantity: req.body.quantity }] }
+                $push: { users: [{ id: req.body.userid, quantity: req.body.quantity, email: req.body.email, mobile: req.body.mobile, address: req.body.address, username: req.body.username }] }
                 })
                 return res.json({ msg: "user added to groupbuy" })
             }
@@ -214,6 +237,7 @@ const groupBuyCtrl = {
     }
 
 }
+
 
 
 module.exports = groupBuyCtrl

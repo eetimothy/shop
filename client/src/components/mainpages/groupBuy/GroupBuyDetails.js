@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon } from 'react-share'
 // import GroupBuyItem from "./GroupBuyItem";
 // import ProductDetails from "../productDetails/ProductDetails";
+import '../productDetails/ProductDetails.css'
 
 
 const GroupBuyDetails = () => {
@@ -42,11 +43,43 @@ const GroupBuyDetails = () => {
 
     // console.log(groupBuyDetails)
 
-    const shareUrl = `http://group-buy.io/groupbuy_details/${params.group_buy_id}/${params.product_id}`
+    const shareUrl = `/groupbuy_details/${params.group_buy_id}/${params.product_id}`
+
+
+    // let localDate = new Date(groupBuyDetails.createdAt),
+    //     currDate = new Date(groupBuyDetails.createdAt)
+    // currDate.setHours(localDate.getHours() + 24)
+
+    // let endDate = currDate.toLocaleString()
+
+    // console.log(currDate)
+    // console.log(groupBuyDetails.createdAt)
+    // const startDate = groupBuyDetails.createdAt
+    const endDate = groupBuyDetails.endDate
+    const dateNow = new Date()
+
+    let unitmapping = {
+        "days": 24 * 60 * 60 * 1000,
+        "hours": 60 * 60 * 1000,
+        "minutes": 60 * 1000,
+        "seconds": 1000
+    };
+
+    function floor(value) {
+        return Math.floor(value)
+    }
+
+    function getHumanizedDiff(diff) {
+        return floor(diff / unitmapping.days) + " days " +
+            floor((diff % unitmapping.days) / unitmapping.hours) + " hours " +
+            floor((diff % unitmapping.hours) / unitmapping.minutes) + " minutes " +
+            floor((diff % unitmapping.minutes) / unitmapping.seconds) + " seconds " 
+    }
+
+    // console.log(getHumanizedDiff(new Date(endDate) - new Date(dateNow)).toLocaleString());
+    const timeLeft = getHumanizedDiff(new Date(endDate) - new Date(dateNow)).toLocaleString()
 
     if (groupBuyDetails.length === 0) return null;
-
-
     return (
         <>
             <div className="details">
@@ -58,11 +91,25 @@ const GroupBuyDetails = () => {
                         {/* <h6>#id: {groupBuyDetails.product}</h6> */}
                     </div>
                     <span>$ {groupBuyDetails.groupBuyPrice}</span>
+
                     <h6>Product Description</h6>
                     <p>{groupBuyDetails.description}</p>
+
                     <h6>Group Buy Description</h6>
                     <p>{groupBuyDetails.content}</p>
-                    <p>{(groupBuyDetails.createdAt)} {new Date(groupBuyDetails.createdAt)}</p>
+                    
+
+                    {/* <p>Group Buy Start: {new Date(groupBuyDetails.createdAt).toLocaleString()}</p> */}
+                    {/* <p>Group Buy End: {endDate}</p> */}
+                    <p>Group Buy End: {new Date(groupBuyDetails.endDate).toLocaleString()}</p>
+                    <p style={{ color: 'crimson', fontSize: '20px' }}>Time Left: {timeLeft}</p>
+
+                    <h6>Group Buy Provider</h6>
+                    <p>Company: {groupBuyDetails.vendorCompany}</p>
+                    <p>Contact: {groupBuyDetails.vendorMobile}</p>
+                    <p>Email: {groupBuyDetails.vendorEmail}</p>
+                    
+                    <h6>Share:</h6>
                     {
                         groupBuyDetails.isActive &&
                         <p>
@@ -82,12 +129,13 @@ const GroupBuyDetails = () => {
                         groupBuyDetails.isActive === false && 'Group Buy Has Ended!'
                     }
                     {
-                        groupBuyDetails.startedBy !== user._id && !isAdmin && groupBuyDetails.isActive === true && <Link to="/allcarts" className="cart" onClick={() => addGroupBuyCart(productDetails, groupBuyDetails)}>Join GB: $1,000</Link>
+                        groupBuyDetails.startedBy !== user._id && !isAdmin && groupBuyDetails.isActive === true && <Link to="/allcarts" className="cart" onClick={() => addGroupBuyCart(productDetails, groupBuyDetails)}>Join</Link>
                     }
+                    <p>
                     {
-                        groupBuyDetails.success === true ? 'Group Buy is On!' : 'Group Buy still needs more people'
+                        groupBuyDetails.success === true ? 'Group Buy is On!' : `Group Buy still needs ${groupBuyDetails.successTarget} more buys.. `
                     }
-
+                    </p>
 
                 </div>
             </div>

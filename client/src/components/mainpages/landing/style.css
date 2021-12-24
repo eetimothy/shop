@@ -1,0 +1,74 @@
+
+
+@media (max-width: 500px){
+    .carousel_section_header h5{
+        font-size: 15px;
+    }
+
+}
+
+@media (min-width: 500px){
+    .last_btn {
+    padding-right: 120px;
+}
+.carousel_section_header h5{
+    padding-left: 25px;
+}
+
+
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div > div.carousel_section_header > div > div.last_btn > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div > div.carousel_section_header > div > div.last_btn > button:hover{
+    background-color: #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div > div.carousel_section_header > div > div:nth-child(1) > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div > div.carousel_section_header > div > div:nth-child(1) > button:hover{
+    background-color: #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div > div.carousel_section_header > div > div:nth-child(2) > div > a > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(2) > div > div.carousel_section_header > div > div:nth-child(2) > div > a > button:hover{
+    background-color: #e0e0e0;
+}
+
+
+#root > div.App > div:nth-child(1) > div:nth-child(3) > div > div.carousel_section_header > div > div.last_btn > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(3) > div > div.carousel_section_header > div > div.last_btn > button:hover{
+    background-color: #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(3) > div > div.carousel_section_header > div > div:nth-child(2) > div > a > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(3) > div > div.carousel_section_header > div > div:nth-child(2) > div > a > button:hover{
+    background-color: #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(3) > div > div.carousel_section_header > div > div:nth-child(1) > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div:nth-child(1) > div:nth-child(3) > div > div.carousel_section_header > div > div:nth-child(1) > button:hover{
+    background-color: #e0e0e0;
+}

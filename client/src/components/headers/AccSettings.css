@@ -1,0 +1,29 @@
+.moret_in a{
+    display: flex;
+    align-items: center;
+    padding: 7px 7px;
+}
+
+.moret_in > a > .MuiSvgIcon-root{
+    margin-right: 5px;
+    color: darkgray;
+}
+
+.moret_in > a > p{
+    margin-right: 5px;
+    color: darkgray;
+}
+
+.moret > hr{
+    margin-left: -10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 108.5%;
+    height: 0.5px;
+    background-color: rgb(233, 233, 233);
+    border: none;
+}
+.moret_in a:hover{
+    background-color: rgb(245,243,243);
+    cursor: pointer;
+}

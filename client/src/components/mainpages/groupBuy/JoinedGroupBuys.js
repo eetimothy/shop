@@ -14,7 +14,7 @@ const JoinedGroupBuys = ({ uid }) => {
     const [userJoinedGroupBuys, setUserJoinedGroupBuys] = useState([])
     const [result, setResult] = useState([])
 
-  
+
     useEffect(() => {
         const getUserJoinedGroupBuys = async () => {
             const res = await axios.get(`/api/groupbuys_user_joined?id=${uid}`, {
@@ -26,23 +26,25 @@ const JoinedGroupBuys = ({ uid }) => {
         }
         getUserJoinedGroupBuys()
     }, [uid, token])
-    
+
 
     if (loading) return <div><Loading /></div>
-       
+
     return (
         <>
-       { result !== 0 && <h2>Joined Group Buys</h2> }
-        <div className="products">
-            
-            {
+        <div style={{ paddingLeft: '50px', color: 'darkgrey', paddingTop: '10px' }}>{result !== 0 && <h2>Joined Group Buys</h2>}</div>
+        <div style={{ display: 'flex' }}>
+       
+            <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'space-between', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>
+                {
                     userJoinedGroupBuys.map(groupBuy => {
-                        if(groupBuy.startedBy !== uid)
-                        return <GroupBuyItem key={groupBuy._id} groupBuy={groupBuy} />
+                        if (groupBuy.startedBy !== uid)
+                            return <GroupBuyItem key={groupBuy._id} groupBuy={groupBuy} />
                         else return ''
                     })
-                    
+
                 }
+            </div>
         </div>
         </>
     )

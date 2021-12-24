@@ -1,47 +1,85 @@
 //group buy card display
 // import GroupBuyBtnRender from './GroupBuyBtnRender'
 import { Link } from 'react-router-dom'
+import { grey } from '@mui/material/colors';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 // import BtnRender from '../utils/productItem/BtnRender'
-import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon } from 'react-share'
+// import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon } from 'react-share'
+import './GroupBuyItem.css'
 
 const GroupBuyItem = ({ groupBuy, product }) => {
     // console.log(`http://group-buy.io/groupbuy_details/${groupBuy._id}/${groupBuy.product}`)
-    
-    const shareUrl = `http://group-buy.io/groupbuy_details/${groupBuy._id}/${groupBuy.product}`
+    // const shareUrl = `/groupbuy_details/${groupBuy._id}/${groupBuy.product}`
+    // console.log(groupBuy.endDate)
+    const endDate = groupBuy.endDate
+    const dateNow = new Date()
 
-    return (
-        <div className="product_card">
-             <Link to={`/groupBuy_details/${groupBuy._id}/${groupBuy.product}`} product={product} >
-            <img src={groupBuy.images.url} alt="" />
-            </Link>
+    let unitmapping = {
+        "days": 24 * 60 * 60 * 1000,
+        "hours": 60 * 60 * 1000,
+        "minutes": 60 * 1000,
+        "seconds": 1000
+    };
 
-            <div className="product_box">
-            <Link to={`/groupBuy_details/${groupBuy._id}/${groupBuy.product}`} product={product} >
-                <h2>{groupBuy.title}</h2>
-                
-                <span>${groupBuy.groupBuyPrice}</span>
-                <p>{groupBuy.content}</p>
-                <p>{groupBuy.success}</p>
-                <p>{groupBuy.buyers}</p>
-                <p>{groupBuy.isActive}</p>
-                <p>{groupBuy.groupBuyQty}</p>
-                </Link>
-                        <span>
-                            <WhatsappShareButton url={shareUrl}>
-                                <WhatsappIcon size={40} round={true}/>
-                            </WhatsappShareButton>
+    function floor(value) {
+        return Math.floor(value)
+    }
 
-                            <FacebookShareButton url={shareUrl}>
-                                <FacebookIcon size={40} round={true} />
-                            </FacebookShareButton>
-                            {/* <GroupBuyBtnRender groupBuy={groupBuy} /> */}
-                        </span>
-                    
-            </div>
+    function getHumanizedDiff(diff) {
+        return floor((diff % unitmapping.days) / unitmapping.hours) + " h " +
+            floor((diff % unitmapping.hours) / unitmapping.minutes) + " min "
+    }
+
+    // console.log(getHumanizedDiff(new Date(endDate) - new Date(dateNow)).toLocaleString());
+    const timeLeft = getHumanizedDiff(new Date(endDate) - new Date(dateNow)).toLocaleString()
+
+    return (        
         
-            
+                    
+        <div className="groupbuy_card">
+
+
+            <div className="groupbuycard_timer">
+            <p>Time Left: {timeLeft}</p> 
+            </div>
+                <div className="groupbuycard_image">
+                <Link to={`/groupbuy_details/${groupBuy._id}/${groupBuy.product}`} product={product} >  <img src={groupBuy.images.url} alt="" /></Link>
+                </div>
+                <div className="groupbuycard_content">
+
+               
+                <div className="groupbuycard_details">
+                <Link to={`/groupBuy_details/${groupBuy._id}/${groupBuy.product}`} product={product} ><p className="gb_title">{groupBuy.title}</p></Link>
+                    <p>${groupBuy.groupBuyPrice}</p>
+                    
+                </div>
+                <div className="groupbuycard_favorite">
+                <span className="span1"><FavoriteBorderOutlinedIcon  sx={{ color: grey[500] }} fontSize="18px" /></span>
+                <span className="span2">{groupBuy.buyers}/ {groupBuy.successTarget + groupBuy.buyers} joined</span>
+                </div>
+                <div className="groupbuycard_desc">
+                   <p>{groupBuy.content}</p> 
+                <p>Started By: {groupBuy.startUser}</p>
+                   
+                </div>
+                
+                </div>
+
+           
         </div>
     )
 }
 
 export default GroupBuyItem
+
+
+//                 <span>
+        //                     <WhatsappShareButton url={shareUrl}>
+        //                         <WhatsappIcon size={30} round={true}/>
+        //                     </WhatsappShareButton>
+
+        //                     <FacebookShareButton url={shareUrl}>
+        //                         <FacebookIcon size={30} round={true} />
+        //                     </FacebookShareButton>
+        //                     {/* <GroupBuyBtnRender groupBuy={groupBuy} /> */}
+        //                 </span>

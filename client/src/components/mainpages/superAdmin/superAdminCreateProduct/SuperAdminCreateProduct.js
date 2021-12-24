@@ -9,6 +9,9 @@ import { useHistory, useParams } from 'react-router-dom'
 
 const initialState = {
     vendorId: '',
+    vendorEmail: '',
+    vendorCompany: '',
+    vendorMobile: '',
     product_id: '',
     title: '',
     groupBuyPrice: 0,
@@ -32,7 +35,7 @@ const SuperAdminCreateProduct = () => {
     
     const [product, setProduct] = useState(initialState)
     const [categories] = state.categoriesAPI.categories
-    const [brands] = state.brandsAPI.brands
+    // const [brands] = state.brandsAPI.brands
     const [productTypes] = state.productTypesAPI.productTypes
     const [images, setImages] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -176,6 +179,23 @@ const SuperAdminCreateProduct = () => {
                         value={vendorId} onChange={e => setVendorId(e.target.value)} disabled={onEdit} />
                 </div>
 
+                <div className="row">
+                    <label htmlFor="vendorCompany">Vendor Company</label>
+                    <input type="text" name="vendorCompany" id="vendorCompany" required
+                        value={product.vendorCompany} onChange={handChangeInput} />
+                </div>
+
+                <div className="row">
+                    <label htmlFor="vendorEmail">Vendor Email</label>
+                    <input type="email" name="vendorEmail" id="vendorEmail" required
+                        value={product.vendorEmail} onChange={handChangeInput} />
+                </div>
+
+                <div className="row">
+                    <label htmlFor="vendorMobile">Vendor Mobile</label>
+                    <input type="mobile" name="vendorMobile" id="vendorMobile" required
+                        value={product.vendorMobile} onChange={handChangeInput} />
+                </div>
 
                 <div className="row">
                     <label htmlFor="title">Title</label>
@@ -220,7 +240,7 @@ const SuperAdminCreateProduct = () => {
                 </div>
 
                 <div className="row">
-                    <label htmlFor="isActive">Product Status</label>
+                    <label htmlFor="isActive">Product Status is Active: </label>
                     <select name="isActive" id="isActive" value={product.isActive} onChange={handChangeInput}>
                         <option value="true" type="boolean">true</option>
                         <option value="false" type="boolean">false</option>
@@ -253,9 +273,10 @@ const SuperAdminCreateProduct = () => {
                     </select>
                 </div>
 
-                <div className="row">
+                {/* <div className="row">
                     <label htmlFor="brands">Brands</label>
                     <select name="brand" id="brand" value={product.brand} onChange={handChangeInput}>
+                        <option value=""></option>
                         <option value="">Please select a brand</option>
                         {
                             brands.map(brand => (
@@ -265,7 +286,7 @@ const SuperAdminCreateProduct = () => {
                             ))
                         }
                     </select>
-                </div>
+                </div> */}
                 
 
                 <div className="row">

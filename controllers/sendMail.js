@@ -3,7 +3,6 @@ const { google } = require('googleapis')
 const { OAuth2 } = google.auth;
 const OAUTH_PLAYGROUND = 'http://developers.google.com/oauthplayground'
 
-
 const {
     MAILING_SERVICE_CLIENT_ID,
     MAILING_SERVICE_CLIENT_SECRET,

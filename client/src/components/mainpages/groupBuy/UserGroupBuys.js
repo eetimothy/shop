@@ -10,12 +10,12 @@ const UserGroupBuys = () => {
 
     return ( 
         
-        <div>
-        
+        <>
             <UserCreatedGroupBuys uid={uid}/>
             <JoinedGroupBuys uid={uid}/>
-        </div>
-   
+           
+       
+            </>
      );
 }
  

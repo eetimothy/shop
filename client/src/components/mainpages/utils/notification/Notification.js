@@ -1,13 +1,13 @@
 import './Notification.css'
 
 export const showErrMsg = (msg) => {
-    return <div className="errMsg">
+    return <div>
         {msg}
     </div>
 }
 
 export const showSuccessMsg = (msg) => {
-    return <div className="successMsg">
+    return <div>
         {msg}
     </div>
 }

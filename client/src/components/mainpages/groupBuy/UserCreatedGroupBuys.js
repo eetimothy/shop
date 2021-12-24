@@ -23,7 +23,7 @@ const UserCreatedGroupBuys = ({ uid }) => {
             const res = await axios.get(`/api/groupbuys?startedBy=${uid}`, {
                 headers: { Authorization: token }
             })
-            
+            console.log(res.data.groupBuys)
             setUserGroupBuys(res.data.groupBuys)
             setResult(res.data.result)
            
@@ -36,8 +36,13 @@ const UserCreatedGroupBuys = ({ uid }) => {
 
     return (
         <>
+        <div style={{ paddingLeft: '50px', color: 'darkgrey', paddingTop: '30px'  }}>
             { result !== 0 && <h2>Created Group Buys</h2>}
-            <div className="products">
+            </div>
+        <div style={{ display: 'flex' }}>
+             
+
+            <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'space-between', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>
                 {
                     userGroupBuys.map(groupBuy => {
                         return <GroupBuyItem key={groupBuy._id} groupBuy={groupBuy} />
@@ -45,6 +50,7 @@ const UserCreatedGroupBuys = ({ uid }) => {
                     })
                     
                 }
+                </div>
             </div>
 
         </>

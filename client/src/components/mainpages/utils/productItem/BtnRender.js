@@ -7,7 +7,7 @@ const BtnRender = ({ product, deleteProduct }) => {
     const state = useContext(GlobalState)
     const [isSuperAdmin] = state.userAPI.isSuperAdmin
     const [isAdmin] = state.userAPI.isAdmin
-    const addCart = state.userAPI.addCart
+    // const addCart = state.userAPI.addCart
 
     
 
@@ -30,8 +30,8 @@ const BtnRender = ({ product, deleteProduct }) => {
                     </>
                     :
                     <>
-                        <Link id="btn_buy" to="#!" onClick={() => addCart(product)}>+ Create Group Buy</Link>
-                        <Link id="btn_view" to={`/detail/${product._id}`}>Join Group Buy</Link>
+                        {/* <Link id="btn_buy" to="#!" onClick={() => addCart(product)}>+ Create Group Buy</Link>
+                        <Link id="btn_view" to={`/detail/${product._id}`}>Join Group Buy</Link> */}
                     </>
             }
         </div>

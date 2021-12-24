@@ -10,9 +10,9 @@ const { CLIENT_URL } = process.env
 const userCtrl = {
     register: async (req, res) => {
         try {
-            const { company, address, mobile, account_type, username, email, password } = req.body;
+            const { address, mobile, username, email, password, role, company, account_type } = req.body;
             
-            if(!username || !email || !password || !company || !address || !mobile || !account_type)
+            if(!username || !email || !password || !address || !mobile)
                 return res.status(400).json({ msg: "Please fill in all fields." })
 
             if(!validateEmail(email))
@@ -27,7 +27,7 @@ const userCtrl = {
             const passwordHash = await bcrypt.hash(password, 12)
             
             const newUser = {
-                company, address, mobile, account_type, username, email, password: passwordHash
+                address, mobile, username, email, role, account_type, company, password: passwordHash
             }
             
             const activation_token = createActivationToken(newUser)
@@ -42,37 +42,6 @@ const userCtrl = {
         catch (err) {
             return res.status(500).json({ msg: err.message })
         }
-        // try {
-        //     const { company, address, mobile, account_type, username, email, password } = req.body
-        //     const user = await Users.findOne({ email })
-        //     if (user) return res.status(400).json({ msg: 'email already exists.' })
-
-        //     if (password.length < 8)
-        //         return res.status(400).json({ msg: "password length at least 8 characters" })
-
-        //     //password encryption
-        //     const passwordHash = await bcrypt.hash(password, 10)
-        //     const newUser = new Users({
-        //         company, address, mobile, account_type, username, email, password: passwordHash
-        //     })
-
-        //     await newUser.save()
-
-        //     //create json web token to authenticate
-        //     const accesstoken = createAccessToken({ id: newUser._id })
-        //     const refreshtoken = createRefreshToken({ id: newUser._id })
-
-
-        //     res.cookie('refreshtoken', refreshtoken, {
-        //         httpOnly: true,
-        //         path: '/user/refresh_token',
-        //         maxAge: 7 * 24 * 60 * 1000 //7days
-        //     })
-        //     res.json({ accesstoken })
-
-        // } catch (err) {
-        //     return res.status(500).json({ msg: err.message })
-        // }
     },
     activateEmail: async (req, res) => {
         try {
@@ -206,9 +175,9 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { username } = req.body;
+            const { username, email, mobile, address, company } = req.body;
             await Users.findOneAndUpdate({ _id: req.user.id }, {
-                username
+                username, email, mobile, address, company
             })
 
             res.json({ msg: "Update Success.. " })

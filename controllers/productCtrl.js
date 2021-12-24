@@ -70,7 +70,7 @@ const productCtrl = {
     },
     createProduct: async (req, res) => {
         try {
-            const { product_id, title, groupBuyPrice, buyNowPrice, description, content, images, brand, category, productType, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget } = req.body;
+            const { product_id, title, groupBuyPrice, buyNowPrice, description, content, images, brand, category, productType, vendorId, vendorCompany, vendorEmail, vendorMobile, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget } = req.body;
             if(!images) return res.status(400).json({ msg: 'Please add an image.. ' })
 
             const product = await Products.findOne({ product_id })
@@ -78,7 +78,7 @@ const productCtrl = {
             return res.status(400).json({ msg: 'This product already exists.. ' })
 
             const newProduct = new Products({
-                product_id, title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, vendorId, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget
+                product_id, title: title.toLowerCase(), groupBuyPrice, buyNowPrice, description, content, images, brand, productType, category, vendorId, vendorCompany, vendorEmail, vendorMobile, groupBuyQty, totalQty, isActive, maxGroupBuys, successTarget
             })
             await newProduct.save()
             res.json({ msg: "New product created.. " })

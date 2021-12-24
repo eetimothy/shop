@@ -8,7 +8,6 @@ const groupBuySchema = new mongoose.Schema({
     },
     product_id: {
         type: String,
-        unique: true,
         trim: true,
         required: true
     },
@@ -19,6 +18,10 @@ const groupBuySchema = new mongoose.Schema({
     startedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    startUser: {
+        type: String,
+        required: true
     },
     title: {
         type: String,
@@ -47,8 +50,7 @@ const groupBuySchema = new mongoose.Schema({
         required: true
     },
     brand: {
-        type: String,
-        required: true
+        type: String
     },
     category: {
         type: String,
@@ -57,6 +59,18 @@ const groupBuySchema = new mongoose.Schema({
     vendorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
+    },
+    vendorCompany: {
+        type: String,
+        required: true
+    },
+    vendorMobile: {
+        type: String,
+        required: true,
+    },
+    vendorEmail: {
+        type: String,
+        required: true,
     },
     isActive: {
         type: Boolean,
@@ -77,9 +91,18 @@ const groupBuySchema = new mongoose.Schema({
     successTarget: {
         type: mongoose.Schema.Types.Number,
         ref: "Product"
-    }
+    },
+    endDate: {
+        type: Date
+    },
+    // started: {
+    //     type: Date,
+    //     expires: 20
+    // }
 }, {
-    timestamps: true
+    timestamps: true,
 })
+
+
 
 module.exports = mongoose.model('GroupBuys', groupBuySchema)

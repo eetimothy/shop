@@ -33,7 +33,7 @@ const CreateProduct = () => {
     
     const [product, setProduct] = useState(initialState)
     const [categories] = state.categoriesAPI.categories
-    const [brands] = state.brandsAPI.brands
+    // const [brands] = state.brandsAPI.brands
     const [productTypes] = state.productTypesAPI.productTypes
     const [images, setImages] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -48,6 +48,7 @@ const CreateProduct = () => {
     const [onEdit, setOnEdit] = useState(false)
     const [callback, setCallback] = state.productsAPI.callback
     
+    console.log(user.email, user.company, user.mobile)
 
     useEffect(() => {
 
@@ -132,7 +133,7 @@ const CreateProduct = () => {
                     headers: { Authorization: token }
                 })
             } else {
-                await axios.post('/api/products', { ...product, images, user: user._id}, {
+                await axios.post('/api/products', { ...product, images, user: user._id, vendorEmail: user.email, vendorMobile: user.mobile, vendorCompany: user.company}, {
                     headers: { Authorization: token }
                 })
             }
@@ -238,7 +239,7 @@ const CreateProduct = () => {
                     </select>
                 </div>
 
-                <div className="row">
+                {/* <div className="row">
                     <label htmlFor="brands">Brands</label>
                     <select name="brand" id="brand" value={product.brand} onChange={handChangeInput}>
                         <option value="">Please select a brand</option>
@@ -250,7 +251,7 @@ const CreateProduct = () => {
                             ))
                         }
                     </select>
-                </div>
+                </div> */}
 
                 <div className="row">
                     <label htmlFor="productTypes">Product Type</label>

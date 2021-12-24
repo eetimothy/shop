@@ -1,0 +1,197 @@
+.groupbuy_card{
+    padding: 10px 10px;
+    transition: box-shadow .2s;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 0 8px #ddd; 
+    margin-bottom: 15px;
+    margin-left: 8px;
+    /* border-radius: 10%; */
+}
+.groupbuy_card:hover{
+    /* border-radius: 15%; */
+    box-shadow: 0 0 30px #ddd; 
+}
+
+.groupbuy_card > .groupbuycard_image > a > img{
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+}
+
+.groupbuycard_timer {
+    float: right;
+    color: crimson;
+    padding-right: 5px;
+}
+
+.groupbuycard_timer > p{
+    font-size: 12px;
+}
+
+
+.groupbuycard_details > p {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.groupbuycard_details > a > .gb_title {
+    font-weight: 600;
+    font-size: 10px;
+    color: #263238;
+    text-transform: uppercase;
+    padding-top: 6px;
+}
+
+.groupbuycard_favorite > .span2{
+    color: gray;
+    padding-left: 30px;
+    font-size: 10px;
+}
+
+.groupbuycard_content{
+    position: relative;
+    transition: 0.5s;
+}
+
+.groupbuycard_content > .groupbuycard_desc{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    opacity: 0;
+}
+
+.groupbuycard_content > .groupbuycard_desc > p{
+    font-size: 8px;
+}
+
+.groupbuy_card:hover .groupbuycard_content{
+    transition: 0.5s;
+    transform: translateY(-40%);
+}
+
+.groupbuy_card:hover .groupbuycard_content > .groupbuycard_desc{
+    opacity: 1;
+}
+
+.gb_filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.filter_1{
+    display: flex;
+    width: 200px;
+}
+
+.filter_1 span{
+    margin-left: 5px;
+    width: 100px;
+}
+
+
+.filter_search{
+    display: flex;
+    margin-left: 5px;
+    width: 500px;
+}
+
+
+@media (max-width: 500px){
+    .groupbuy_card{
+        width: 120px;
+        height: 220px;
+    }
+    .groupbuycard_favorite > .span2{
+        font-size: 10px;
+        padding-left: 5px;
+    }
+    .groupbuy_card:hover .groupbuycard_content{
+        transition: 0.5s;
+        transform: translateY(-30%);
+    }
+    
+    .groupbuycard_timer {
+        float: right;
+        color: crimson;
+        padding-right: 1px;
+        font-size: 5px;
+    }
+    .groupbuy_card > .groupbuycard_image > a > img{
+        width: 100%;
+        height: 90px;
+        object-fit: contain;
+    }
+    .groupbuycard_timer > p{
+        font-size: 8px;
+    }
+    .gb_filter{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    
+}
+
+@media (max-width: 500px){
+    .filter_search{
+        width: 300px;
+    }
+    .filter_1{
+        width: 305px;
+    }
+    .filter_1 > span {
+        width: 150px;
+    }
+    .carousel_section_header h5{
+        font-size: 15px;
+    }
+}
+
+.carousel_section_header{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-left: 100px;
+}
+
+.carousel_nav{
+    padding-left: 100px;
+}
+
+@media (max-width: 768px) {
+    .carousel_section_header{
+        flex-direction: column;
+        padding-left: 20px;
+    }
+    .slider_nav{
+        justify-content: center;
+    }
+    .carousel_nav{
+        padding-left: 10px;
+    }
+}
+
+#root > div.App > div.products > div > div.carousel_section_header > div > div.last_btn > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div.products > div > div.carousel_section_header > div > div.last_btn > button:hover{
+    background-color: #e0e0e0;
+}
+
+#root > div.App > div.products > div > div.carousel_section_header > div > div:nth-child(1) > button{
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+}
+
+#root > div.App > div.products > div > div.carousel_section_header > div > div:nth-child(1) > button:hover{
+    border: 1px solid #e0e0e0;
+}

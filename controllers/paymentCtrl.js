@@ -76,7 +76,7 @@ const paymentCtrl = {
             })
 
             
-            console.log(newPayment)
+            // console.log(newPayment)
             await newPayment.save()
             res.json({ msg: "Payment Success!" })
         }

@@ -91,7 +91,7 @@ const UserAPI = (token) => {
         if(!isLoggedIn) return alert("Please login to continue.")
 
         const check = groupBuyCart.every(item => {
-            return item._id !== product._id
+            return item._id !== groupBuy._id
         })
 
         if(check){

@@ -1,6 +1,11 @@
 import { useContext } from 'react'
 import { GlobalState } from '../../../GlobalState'
-
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import '../groupBuy/GroupBuyItem.css'
 
 const Filters = () => {
     const state = useContext(GlobalState)
@@ -28,20 +33,62 @@ const Filters = () => {
     }
 
     return (
-        <div className="filter_menu">
-            <div className="row sort">
-                <span></span>
-                <select name="category" value={category} onChange={handleCategory}>
-                    <option value=''>Categories</option>
-                    {
-                        categories.map(category => (
-                            <option value={"category=" + category._id} key={category._id}>
-                                {category.name}
-                            </option>
-                        ))
-                    }
-                </select>
+        <div className="gb_filter">
+
+            <div className='filter_1'>
+                <span>
+                    <FormControl fullWidth>
+                        <InputLabel id="category">All Categories</InputLabel>
+                        <Select
+                            labelId="All Categories"
+                            id="category"
+                            name="category"
+                            value={category}
+                            label="All Categories"
+                            onChange={handleCategory}
+                        >
+                            <MenuItem value=''>All Categories</MenuItem>
+                            {
+                                categories.map(category => (
+                                    <MenuItem value={"category=" + category._id} key={category._id}>
+                                        {category.name}
+                                    </MenuItem>
+                                ))
+                            }
+                        </Select>
+                    </FormControl>
+                </span>
+
+
+                <span>
+                    <FormControl fullWidth>
+                        <InputLabel id="type">Product Types</InputLabel>
+                        <Select
+                            labelId="All Types"
+                            id="category"
+                            value={productType}
+                            label="All Product Types"
+                            name="productType"
+                            onChange={handleProductType}
+                        >
+                            <MenuItem value=''>All Products</MenuItem>
+                            {
+                                productTypes.map(productType => (
+                                    <MenuItem value={"productType=" + productType._id} key={productType._id}>
+                                        {productType.name}
+                                    </MenuItem>
+                                ))
+                            }
+                        </Select>
+                    </FormControl>
+                </span>
             </div>
+
+
+
+
+
+
             {/* <div className="row sort">
                 <span>   </span>
                 <select name="brand" value={brand} onChange={handleBrand}>
@@ -55,7 +102,9 @@ const Filters = () => {
                     }
                 </select>
             </div> */}
-            <div className="row sort">
+
+
+            {/* <div className="row sort">
                 <span>   </span>
                 <select name="productType" value={productType} onChange={handleProductType}>
                     <option value=''>Product</option>
@@ -67,10 +116,13 @@ const Filters = () => {
                         ))
                     }
                 </select>
-            </div>
-            <input type="text" value={search} placeholder="Search"
-                onChange={e => setSearch(e.target.value.toLowerCase())} />
+            </div> */}
+            <div className='filter_search'>
 
+                <TextField fullWidth type="text" value={search} label="Search" id="Search"
+                    onChange={e => setSearch(e.target.value.toLowerCase())} />
+
+            </div>
             {/* <div className="row sort">
                 <span>Sort By: </span>
                 <select value={sort} onChange={e => setSort(e.target.value)}>
