@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { GlobalState } from '../../../GlobalState'
+import './Products.css'
 
 const LoadMore = () => {
  const state = useContext(GlobalState)

@@ -82,7 +82,7 @@ const Products = () => {
         }
         
         <div style={{ display: 'flex' }}>
-        <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'center', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>
+        <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'center', flexWrap: 'wrap', padding: '20px', alignContent: 'center', gap: '15px' }}>
             {
                 products.map(product => {
                     if(product.isActive === true)

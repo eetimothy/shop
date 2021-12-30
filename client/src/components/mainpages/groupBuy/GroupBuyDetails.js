@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GlobalState } from "../../../GlobalState";
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom'
 import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon } from 'react-share'
 // import GroupBuyItem from "./GroupBuyItem";
@@ -45,7 +46,7 @@ const GroupBuyDetails = () => {
 
     const shareUrl = `/groupbuy_details/${params.group_buy_id}/${params.product_id}`
 
-
+    // const crypto = `https://commerce.coinbase.com/v1/checkout.js?version=201807`
     // let localDate = new Date(groupBuyDetails.createdAt),
     //     currDate = new Date(groupBuyDetails.createdAt)
     // currDate.setHours(localDate.getHours() + 24)
@@ -108,6 +109,15 @@ const GroupBuyDetails = () => {
                     <p>Company: {groupBuyDetails.vendorCompany}</p>
                     <p>Contact: {groupBuyDetails.vendorMobile}</p>
                     <p>Email: {groupBuyDetails.vendorEmail}</p>
+                    {/* <div>
+  <Link class="buy-with-crypto"
+     to="https://commerce.coinbase.com/checkout/9fb4d7d7-16fc-4010-a9af-cb3ad3d275e8">
+    <Button src={crypto}>
+    Crypto
+    </Button> 
+  </Link>
+  
+</div> */}
                     
                     <h6>Share:</h6>
                     {
@@ -118,7 +128,7 @@ const GroupBuyDetails = () => {
                                     <WhatsappIcon size={40} round={true} />
                                 </WhatsappShareButton>
 
-                                <FacebookShareButton url={shareUrl}>
+                                <FacebookShareButton url={shareUrl} style={{ paddingLeft: '10px' }}>
                                     <FacebookIcon size={40} round={true} />
                                 </FacebookShareButton>
                             </span>
@@ -129,11 +139,14 @@ const GroupBuyDetails = () => {
                         groupBuyDetails.isActive === false && 'Group Buy Has Ended!'
                     }
                     {
-                        groupBuyDetails.startedBy !== user._id && !isAdmin && groupBuyDetails.isActive === true && <Link to="/allcarts" className="cart" onClick={() => addGroupBuyCart(productDetails, groupBuyDetails)}>Join</Link>
+                        groupBuyDetails.startedBy !== user._id && !isAdmin && groupBuyDetails.isActive === true && 
+                        <Link to="/allcarts" onClick={() => addGroupBuyCart(productDetails, groupBuyDetails)}>
+                            <Button variant="contained" style={{ backgroundColor: '#F05E23', marginTop: "10px", marginBottom: "10px" }}>Join</Button>
+                            </Link>
                     }
                     <p>
                     {
-                        groupBuyDetails.success === true ? 'Group Buy is On!' : `Group Buy still needs ${groupBuyDetails.successTarget} more buys.. `
+                        groupBuyDetails.success === true ? 'Group Buy is On!' : `*${groupBuyDetails.successTarget} more purchases required to activate Group Buy.. `
                     }
                     </p>
 

@@ -51,10 +51,10 @@ export default function StickyFooter() {
         <div className="menu-footer" style={{ paddingLeft: '120px', display: 'flex', flex: '1', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'left' }}>
 
           <h5>Company</h5>
-          <p>How it works</p>
+          <Link to="/company"><p>About</p></Link>
+          <Link to="/company"><p>Contact</p></Link>
+          <Link to="/groupbuy/how_it_works"><p>How it works</p></Link>
           <p>Sell with us</p>
-          <p>Contact</p>
-          <p></p>
         </div>
 
         <div className="menu-footer" style={{ paddingLeft: '80px', display: 'flex', flex: '1', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'top' }}>

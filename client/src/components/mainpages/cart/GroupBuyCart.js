@@ -131,7 +131,7 @@ const GroupBuyCart = ({ groupBuy }) => {
                 groupBuyCart.map(product => (
                     <div className="details cart" key={product.groupBuy._id}>
 
-                        <img src={product.images.url} alt="" className="img_container" />
+                        <img src={product.images.url} alt="" className="img_container" style={{ height: "200px" }}/>
 
                         <div className="box-detail">
 
@@ -144,8 +144,8 @@ const GroupBuyCart = ({ groupBuy }) => {
                             <h6>Group Buy Description</h6>
                             <p>{product.content}</p>
                             <p>Started By: {product.groupBuy.startUser}</p>
-                            <p>{product.groupBuy.buyers} / {product.groupBuy.buyers + product.groupBuy.successTarget} Joined</p>
-                            <p>*Instructions: Checkout to join the group buy.</p>
+                            <p style={{ fontWeight: "700" }}>{product.groupBuy.buyers} / {product.groupBuy.buyers + product.groupBuy.successTarget} Joined</p>
+                            <p style={{ color: "crimson", fontWeight: "700" }}>*Instructions: Checkout to join the group buy.</p>
 
                             <div className="amount">
                                 {/* <button onClick={() => decrement_joinGbCart(product._id)}> - </button> */}

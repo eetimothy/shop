@@ -37,7 +37,7 @@ const UserCreatedGroupBuys = ({ uid }) => {
     return (
         <>
         <div style={{ paddingLeft: '50px', color: 'darkgrey', paddingTop: '30px'  }}>
-            { result !== 0 && <h2>Created Group Buys</h2>}
+            { result !== 0 && <h2>Group Buys Started</h2>}
             </div>
         <div style={{ display: 'flex' }}>
              

@@ -53,9 +53,6 @@ const Login = () => {
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-
-
-
                 <Box
                     sx={{
                         marginTop: 8,
@@ -90,8 +87,8 @@ const Login = () => {
                             type="email"
                             value={user.email}
                             onChange={onChangeInput}
-                            style={{}}
                         />
+                        
                         <TextField
                             margin="normal"
                             required
@@ -103,7 +100,6 @@ const Login = () => {
                             autoComplete="current-password"
                             value={user.password}
                             onChange={onChangeInput}
-
                         />
 
                         <Button

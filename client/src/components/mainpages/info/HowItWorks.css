@@ -1,0 +1,29 @@
+.howitworks_container{
+   padding-top: 30px;
+   color: gray;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   flex-wrap: wrap;
+   align-items: center;
+}
+
+.howitworks_title{
+    padding-bottom: 50px;
+}
+
+.how_contents{
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.how_contents h5, h4 {
+    align-self: center;
+}
+
+.how_contents p{
+    align-self: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

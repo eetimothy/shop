@@ -43,8 +43,6 @@ const OrderDetails = () => {
                         <td>{orderDetails.address.country_code}</td>
                         <td>{orderDetails.address.postal_code}</td>
                         {/* <td>{orderDetails.cart[0].user}</td> */}
-
-                        
                     </tr>
                 </tbody>
             </table>

@@ -271,7 +271,7 @@ function TopDrawer() {
                                 aria-label="account of current user"
                             >
                                 <Link to='/account/login'>
-                                    <Typography  style={{ border: '1px solid #ddd', marginRight: '8px', borderRadius: '5%', padding: '2px 18px', fontWeight: '700' }}>
+                                    <Typography  style={{ border: '1px solid #ddd', marginRight: '8px', borderRadius: '5%', padding: '2px 12px', fontWeight: '700' }}>
                                     Log In
                                     </Typography>
                                     </Link>
@@ -288,7 +288,7 @@ function TopDrawer() {
                                 
                             >
                                 <Link to='/account/register' style={{ color: '#ddd' }} >
-                                    <Typography style={{ color: '#263238', backgroundColor: '#ffffff', padding: '2px 18px', borderRadius: '5%', fontWeight: '700' }}>
+                                    <Typography style={{ color: '#263238', backgroundColor: '#ffffff', padding: '2px 12px', borderRadius: '5%', fontWeight: '700' }}>
                                         Sign Up
                                         </Typography>
                                     </Link>

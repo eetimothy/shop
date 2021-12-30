@@ -96,13 +96,13 @@
 }
 
 .productcard_timer > p{
-    font-size: 8px;
+    font-size: 5px;
 }
 
 
 .productcard_details > p {
-    padding: 0;
-    margin: 0;
+    padding: 5;
+    margin: 5;
     font-size: 14px;
 }
 

@@ -2,10 +2,12 @@ import { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { GlobalState } from '../../../GlobalState'
 import { Link } from 'react-router-dom'
+import { WhatsappShareButton, WhatsappIcon, FacebookShareButton, FacebookIcon } from 'react-share'
+
 // import ProductItem from '../utils/productItem/ProductItem'
 // import axios from 'axios'
 import ProductGroupBuys from '../groupBuy/ProductGroupBuys'
-
+import Button from '@mui/material/Button';
 
 const ProductDetails = () => {
     const params = useParams()
@@ -18,8 +20,11 @@ const ProductDetails = () => {
     // const [productGroupBuyDetails, setProductGroupBuyDetails] = useState([])
     const addGroupBuyCart = state.userAPI.addGroupBuyCart
     const [isAdmin] = state.userAPI.isAdmin
+    
+    
+    const shareUrl = `/detail/${params.id}`
 
-
+    // console.log(params.id)
     
     useEffect(() => {
 
@@ -56,6 +61,7 @@ const ProductDetails = () => {
                     <span>$ {productDetails.groupBuyPrice}</span>
                     <h6>Description</h6>
                     <p>{productDetails.description}</p>
+                    <p>Sold: {productDetails.sold}</p>
 
                     <h6>Group Buy Description</h6>
                     
@@ -67,9 +73,28 @@ const ProductDetails = () => {
                     <p>Email: {productDetails.vendorEmail}</p>
                     <p>Contact: {productDetails.vendorMobile}</p>
 
-                    <p>Sold: {productDetails.sold}</p>
+                    <h6>Share:</h6>
+
+                    <p>
+                            <span>
+                                <WhatsappShareButton url={shareUrl}>
+                                    <WhatsappIcon size={40} round={true} />
+                                </WhatsappShareButton>
+
+                                <FacebookShareButton url={shareUrl} style={{ paddingLeft: '5px' }}>
+                                    <FacebookIcon size={40} round={true} />
+                                </FacebookShareButton>
+                            </span>
+                        </p>
+
+                    
                     {/* <Link to="/allcarts" className="cart" onClick={() => addCart(productDetails)}>Buy now: $800</Link> */}
-                    { !isAdmin && <Link style={{ backgroundColor: '#F05E23' }} to="/allcarts" className="cart" onClick={() => addCart(productDetails)}>Buy</Link> }
+                        { 
+                            !isAdmin && <Link to="/allcarts" onClick={() => addCart(productDetails)}>
+                        <Button variant="contained" style={{ backgroundColor: '#F05E23', marginTop: "10px", marginBottom: "10px" }}>Buy</Button>
+                        </Link> 
+                        
+                        }
 
 
                 </div>

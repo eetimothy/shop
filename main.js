@@ -24,6 +24,7 @@ app.use('/api', require('./routes/brandRouter'))
 app.use('/api', require('./routes/productTypeRouter'))
 app.use('/api', require('./routes/vendorRouter'))
 app.use('/api', require('./routes/groupBuyRouter'))
+app.use('/api', require('./routes/enquiryRouter'))
 
 //connect to mongodb
 const URI = process.env.MONGODB_URI

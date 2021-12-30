@@ -49,7 +49,9 @@ const GroupBuyItem = ({ groupBuy, product }) => {
 
                
                 <div className="groupbuycard_details">
-                <Link to={`/groupBuy_details/${groupBuy._id}/${groupBuy.product}`} product={product} ><p className="gb_title">{groupBuy.title}</p></Link>
+                <Link to={`/groupBuy_details/${groupBuy._id}/${groupBuy.product}`} product={product} >
+                    <p className="gb_title">{groupBuy.title}</p>
+                    </Link>
                     <p>${groupBuy.groupBuyPrice}</p>
                     
                 </div>

@@ -12,7 +12,7 @@ router.route('/add_user_group_buy')
     .patch(groupBuyCtrl.addUserToGroupBuy)
 
 router.route('/groupbuys_product')
-    .get(auth, groupBuyCtrl.getProductGroupBuys)
+    .get(groupBuyCtrl.getProductGroupBuys)
 
 router.route('/groupbuys_user')
     .get(auth, groupBuyCtrl.getAllGroupBuysOfUser)

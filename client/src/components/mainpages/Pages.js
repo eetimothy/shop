@@ -36,6 +36,8 @@ import VendorGroupBuys from '../mainpages/vendor/vendorGroupBuys/VendorGroupBuys
 import AllGroupBuys from './groupBuy/AllGroupBuys'
 import RegisterVendor from './auth/RegisterVendor';
 // import SettingsDialog from '../mainpages/userProfiles/settingsDialog'
+import Company from '../mainpages/info/Company'
+import HowItWorks from '../mainpages/info/HowItWorks'
 
 function Pages() {
 
@@ -51,6 +53,11 @@ function Pages() {
             
 
             <Route path="/" exact component={Landing} />
+
+            <Route path="/company" exact component={Company} /> 
+            <Route path="/groupbuy/how_it_works" exact component={HowItWorks} /> 
+
+
             <Route path="/detail/:id" exact component={ProductDetails} />
 
             <Route path="/account/login" exact component={ isLoggedIn ? NotFound : Login } />

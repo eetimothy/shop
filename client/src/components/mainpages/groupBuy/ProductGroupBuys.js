@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import { GlobalState } from '../../../GlobalState';
 import axios from 'axios'
 import Loading from '../utils/loading/Loading';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import GroupBuyItem from './GroupBuyItem'
 import Slider from 'react-slick'
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
@@ -19,7 +19,6 @@ const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
     const [loading] = useState(false)
     // const [result, setResult] = useState([])
     const [productGroupBuys, setProductGroupBuys] = useState([])
-    const [isAdmin] = state.userAPI.isAdmin
     const sliderRef = useRef(null)
     
 

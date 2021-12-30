@@ -139,12 +139,12 @@ const Cart = () => {
 
     return (
         <div>
-            <h2>Create Group Buy</h2>
+            <h2>Start Group Buys</h2>
             {
                 cart.map(product => (
                     <div className="details cart" key={product._id}>
 
-                        <img src={product.images.url} alt="" className="img_container" />
+                        <img src={product.images.url} alt="" className="img_container" style={{ height: "200px" }} />
 
                         <div className="box-detail">
 
@@ -155,14 +155,14 @@ const Cart = () => {
                             <h6>Group Buy Description</h6>
 
                             <p>{product.content}</p>
-                            <p>*Instructions: Checkout to start the group buy.</p>
+                            <p style={{ color: "crimson", fontWeight: "700" }}>*Instructions: Checkout to start the group buy.</p>
                             {/* 
                     <h6>Vendor Details</h6>
                     <p>Company: {product.vendorCompany}</p>
                     <p>Email: {product.vendorEmail}</p>
                     <p>Contact: {product.vendorMobile}</p> */}
 
-                            <p>Sold: {product.sold}</p>
+                            {/* <p>Sold: {product.sold}</p> */}
 
                             <div className="amount">
                                 {/* <button onClick={() => decrement(product._id)}> - </button> */}
