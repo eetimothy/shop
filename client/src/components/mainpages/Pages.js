@@ -89,6 +89,8 @@ function Pages() {
             {/* <Route path="/groupbuys_user_joined/:uid" exact component={ isAdmin ? NotFound : JoinedGroupBuys } /> */}
 
             <Route path="/groupbuys" exact component={AllGroupBuys} />
+           
+
             <Route path="/groupbuy_details/:group_buy_id/:product_id" exact component={GroupBuyDetails} />
 
             <Route path="/groupbuys_product" exact component={ProductGroupBuys} />

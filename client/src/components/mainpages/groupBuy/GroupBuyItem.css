@@ -1,4 +1,4 @@
-.groupbuy_card{
+/* .groupbuy_card{
     padding: 10px 10px;
     transition: box-shadow .2s;
     width: 300px;
@@ -6,10 +6,10 @@
     box-shadow: 0 0 4px #ddd; 
     margin-bottom: 15px;
     margin-left: 8px;
-    /* border-radius: 10%; */
+  
 }
 .groupbuy_card:hover{
-    /* border-radius: 15%; */
+   
     box-shadow: 0 0 30px #ddd; 
 }
 
@@ -200,4 +200,4 @@
 
 #root > div.App > div.products > div > div.carousel_section_header > div > div:nth-child(1) > button:hover{
     border: 1px solid #e0e0e0;
-}
+} */

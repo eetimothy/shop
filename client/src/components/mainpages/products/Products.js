@@ -6,6 +6,7 @@ import axios from 'axios'
 import Filters from './Filters'
 import LoadMore from './LoadMore'
 // import BottomNav from '../../footer/BottomNav'
+import '../utils/productItem/ProductItem.css'
 
 const Products = () => {
     const state = useContext(GlobalState)
@@ -72,16 +73,9 @@ const Products = () => {
     return ( 
         <>
         <Filters />
-        {
-            isSuperAdmin && 
-            <div className="delete-all">
-                <span>Select All</span>
-                <input type="checkbox" checked={isCheck} onChange={checkAll} />
-                <button onClick={deleteAll}>Delete Selected</button>
-            </div>
-        }
         
-        <div style={{ display: 'flex' }}>
+        
+        {/* <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'center', flexWrap: 'wrap', padding: '20px', alignContent: 'center', gap: '15px' }}>
             {
                 products.map(product => {
@@ -92,7 +86,31 @@ const Products = () => {
                 })
             }
             </div>
-        </div>
+        </div> */}
+         <div className='cards'>
+         {
+            isSuperAdmin && 
+            <div className="delete-all">
+                <span>Select All</span>
+                <input type="checkbox" checked={isCheck} onChange={checkAll} />
+                <button onClick={deleteAll}>Delete Selected</button>
+            </div>
+        }
+                        <div className='cards__container'>
+                            <div className='cards__wrapper'>
+                                <ul className='cards__items'>
+                                    {
+                                        products.map(product => {
+                                            if (product.isActive === true)
+                                                return <ProductItem key={product._id} product={product} gb={gb} 
+                                                isSuperAdmin={isSuperAdmin} isAdmin={isAdmin} deleteProduct={deleteProduct} handleCheck={handleCheck} />
+                                            else return ''
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
         
         <LoadMore />
         {products.length === 0 && <Loading />}

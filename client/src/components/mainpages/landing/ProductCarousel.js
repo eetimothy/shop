@@ -40,7 +40,7 @@ const ProductCarousel = ({ products }) => {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 1,
                     slidesToScroll: 1
                 }
             }
@@ -91,7 +91,7 @@ const ProductCarousel = ({ products }) => {
                     </div>
                 </div>
             </div>
-            <div style={{ margin: '30px', marginLeft: '10px', marginTop: '60px' }}>
+            <div style={{ margin: '30px', marginLeft: '10px', marginTop: '30px', marginBottom: '30px' }}>
                 <Slider ref={sliderRef} {...settings}>
                     {
                         products.map(product => {

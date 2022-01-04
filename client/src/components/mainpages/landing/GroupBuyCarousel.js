@@ -9,6 +9,7 @@ import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import { Link } from 'react-router-dom'
 import './style.css'
 import Fab from '@mui/material/Fab';
+import Hidden from '@mui/material/Hidden'
 
 
 const GroupBuyCarousel = ({ allGroupBuys }) => {
@@ -42,7 +43,7 @@ const GroupBuyCarousel = ({ allGroupBuys }) => {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 1,
                     slidesToScroll: 1
                 }
             }
@@ -56,6 +57,8 @@ const GroupBuyCarousel = ({ allGroupBuys }) => {
                 <Typography variant="h5" style={{ fontWeight: '700' }}>
                     <p>Recent Group Buys</p>
                 </Typography>
+
+                
 
                 <div style={{ display: 'flex'}}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10, borderRadius: '1px', cursor: 'pointer' }}  >
@@ -95,7 +98,7 @@ const GroupBuyCarousel = ({ allGroupBuys }) => {
                     </div>
                 </div>
             </div>
-            <div style={{ margin: '30px', marginLeft: '10px', marginTop: '60px' }}>
+            <div style={{ margin: '30px', marginLeft: '10px', marginTop: '30px', marginBottom: '50px' }}>
                 <Slider ref={sliderRef} {...settings}>
 
                     {
