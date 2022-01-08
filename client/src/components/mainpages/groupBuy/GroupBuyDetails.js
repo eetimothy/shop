@@ -44,7 +44,7 @@ const GroupBuyDetails = () => {
 
     // console.log(groupBuyDetails)
 
-    const shareUrl = `/groupbuy_details/${params.group_buy_id}/${params.product_id}`
+    const shareUrl = `www.group-buy.io/groupbuy_details/${params.group_buy_id}/${params.product_id}`
 
     // const crypto = `https://commerce.coinbase.com/v1/checkout.js?version=201807`
     // let localDate = new Date(groupBuyDetails.createdAt),
