@@ -32,7 +32,7 @@ const userCtrl = {
             
             const activation_token = createActivationToken(newUser)
 
-            const url = `${CLIENT_URL}/user/account/activate/${activation_token}`
+            const url = `www.group-buy.io/user/account/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
             // console.log({activation_token})
