@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { GlobalState } from '../../../../GlobalState'
 import { Link } from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const VendorOrderDetails = () => {
     const state = useContext(GlobalState)
@@ -29,7 +30,7 @@ const VendorOrderDetails = () => {
     return (
         <div className="order-history">
 
-            <h3> <Link to={`/vendor_orders`}>back</Link></h3>
+            <h3> <Link to={`/vendor_orders`} style={{ color: "#000" }}><ArrowBackIcon style={{ color: "#000" }} /> Back</Link></h3>
             <table>
                 <thead>
                     <tr>

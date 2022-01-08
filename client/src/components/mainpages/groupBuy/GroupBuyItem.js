@@ -61,7 +61,7 @@ const GroupBuyItem = ({ groupBuy, product }) => {
         //     </div>
         // </div>
         <>
-        <li className='cards__item'>
+        <li className='cards__item' style={{ maxWidth: "350px", minWidth: "200px" }}>
           <Link className='cards__item__link' to={`/groupbuy_details/${groupBuy._id}/${groupBuy.product}`}>
             <figure className='cards__item__pic-wrap' data-category={timeLeft}>
               <img
@@ -73,6 +73,8 @@ const GroupBuyItem = ({ groupBuy, product }) => {
             <div className='cards__item__info'>
               <h5 className='cards__item__text'>{groupBuy.title}</h5>
               <p>Group Buy Price: ${groupBuy.groupBuyPrice}</p>
+              <span>Started: {groupBuy.startUser}</span>
+              <span className="span2">{groupBuy.buyers}/ {groupBuy.successTarget + groupBuy.buyers} Bought</span>
             </div>
           </Link>
         </li>

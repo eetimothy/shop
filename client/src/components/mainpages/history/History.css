@@ -12,20 +12,43 @@
     width: 100%;
 }
 .history-page table,th,tr,td{
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     border-collapse: collapse;
 }
 th, td{
     text-align: center;
     padding: 10px;
     text-transform: capitalize;
+    font-size: 8px;
 }
 table a{
     color: rgb(3, 165, 206);
 }
 
 .order-history img{
-    width: 70px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
 }
+
+.invoice{
+   
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 6px 10px #ddd;
+    padding: 10px;
+    
+}
+
+.invoice_list_item > p{
+    font-size: 10px;
+}
+
+.invoice_list_btn{
+    background-color: #192c30;
+    border-radius: 15px;
+    padding-top: 2px;
+}
+

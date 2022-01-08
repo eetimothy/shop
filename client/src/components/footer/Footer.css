@@ -1,10 +1,12 @@
 .footer-wrapper > .menu-footer > h5{
     font-size: 18px;
     font-weight: 700;
+    color: #000;
 }
 
 .footer-wrapper > .menu-footer > a > p{
     font-size: 15px;
+    color:#000;
 }
 
 .MuiBox-root.css-54x2ta{

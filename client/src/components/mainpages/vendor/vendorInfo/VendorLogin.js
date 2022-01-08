@@ -4,16 +4,17 @@ import axios from 'axios'
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import Link from '@mui/material/Link';
+import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import Logo from '../../../headers/images/glogo_nobg.png'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Logo from '../../headers/images/glogo_nobg.png'
-import { showErrMsg, showSuccessMsg } from '../../mainpages/utils/notification/Notification.js'
-import './Login.css'
+import { showErrMsg, showSuccessMsg } from '../../../mainpages/utils/notification/Notification.js'
+import '../../auth/Login.css'
+
+
 
 const theme = createTheme();
 
@@ -24,7 +25,8 @@ const initialState = {
     success: ''
 }
 
-const Login = () => {
+
+const VendorLogin = () => {
     const [user, setUser] = useState(initialState)
     const { email, password, err, success } = user
 
@@ -48,6 +50,7 @@ const Login = () => {
                 setUser({ ...user, err: err.response.data.msg, success: '' })
         }
     }
+
 
     return (
         <ThemeProvider theme={theme}>
@@ -118,7 +121,7 @@ const Login = () => {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link to="/account/register" variant="body2" style={{color: "#000"}}>
+                                <Link to="/account/vendor/registration" variant="body2" style={{color: "#000"}}>
                                     Don't have an account? Sign Up
                                 </Link>
                             </Grid>
@@ -132,4 +135,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default VendorLogin;

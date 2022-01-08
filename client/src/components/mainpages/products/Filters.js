@@ -34,7 +34,6 @@ const Filters = () => {
 
     return (
         <div className="gb_filter">
-
             <div className='filter_1'>
                 <span>
                     <FormControl fullWidth>
@@ -58,7 +57,6 @@ const Filters = () => {
                         </Select>
                     </FormControl>
                 </span>
-
 
                 <span>
                     <FormControl fullWidth>
@@ -118,10 +116,8 @@ const Filters = () => {
                 </select>
             </div> */}
             <div className='filter_search'>
-
                 <TextField fullWidth type="text" value={search} label="Search" id="Search"
                     onChange={e => setSearch(e.target.value.toLowerCase())} />
-
             </div>
             {/* <div className="row sort">
                 <span>Sort By: </span>

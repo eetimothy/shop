@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useContext } from 'react'
+import { GlobalState } from '../../GlobalState'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,13 +12,14 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import IconButton from '@mui/material/IconButton';
 import Divider from '@mui/material/Divider';
 import './Footer.css'
+import TelegramIcon from '@mui/icons-material/Telegram';
 import { Link } from 'react-router-dom'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
-      <Link color="inherit" to="https://group-buy.io/">
+      <Link color="inherit" to="https://group-buy.io/" style={{ color: "#000" }}>
         Group-buy.io
       </Link>{' '}
       {new Date().getFullYear()}
@@ -28,6 +31,12 @@ function Copyright() {
 
 
 export default function StickyFooter() {
+  const state = useContext(GlobalState)
+  const [user] = state.userAPI.user
+  const [isAdmin] = state.userAPI.isAdmin
+  // const [isLoggedIn] = state.userAPI.isLoggedIn
+
+
   return (
     <Box
       sx={{
@@ -45,7 +54,7 @@ export default function StickyFooter() {
       <CssBaseline />
       <div className="footer-wrapper" style={{ display: 'flex' }}>
         <div className="footer-logo" style={{ display: 'flex', flex: '1' }}>
-         <Link to="/"><img src={Logo} alt="" width="250px" /></Link> 
+          <Link to="/"><img src={Logo} alt="" width="250px" /></Link>
         </div>
 
         <div className="menu-footer" style={{ paddingLeft: '120px', display: 'flex', flex: '1', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'left' }}>
@@ -54,17 +63,33 @@ export default function StickyFooter() {
           <Link to="/company"><p>About</p></Link>
           <Link to="/company"><p>Contact</p></Link>
           <Link to="/groupbuy/how_it_works"><p>How it works</p></Link>
-          <p>Sell with us</p>
+          <Link to="/account/vendor/registration"><p>Sell with us</p></Link>
         </div>
 
-        <div className="menu-footer" style={{ paddingLeft: '80px', display: 'flex', flex: '1', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'top' }}>
-          <h5>Vendor Area</h5>
-          <Link to="/account/login"><p>Vendor log in</p></Link>
-          <Link to="/account/register_vendor"><p>Vendor Sign up</p></Link>
-          <p></p>
-          <p></p>
-          <p></p>
-        </div>
+        {
+          !isAdmin ? 
+            <div className="menu-footer" style={{ paddingLeft: '80px', display: 'flex', flex: '1', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'top' }}>
+                <h5>Vendor Area</h5>
+                <Link to="/account/vendor/login"><p>Vendor log in</p></Link>
+                <Link to="/account/vendor/registration"><p>Vendor Sign up</p></Link>
+                <p></p>
+                <p></p>
+                <p></p>
+              </div>
+              : isAdmin ? 
+              <div className="menu-footer" style={{ paddingLeft: '80px', display: 'flex', flex: '1', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'top' }}>
+              <h5>Vendor Area</h5>
+              <Link to={`/vendorproducts/${user._id}`}><p>My Products</p></Link>
+              <Link to={`/vendor_groupbuys/${user._id}`}><p>My Group Buys</p></Link>
+              <Link to="/add_product"><p>Add Products</p></Link>
+              <p></p>
+              <p></p>
+            </div>
+            : 
+            ''      
+        }
+
+
 
         <div className="menu-footer" style={{ paddingLeft: '100px', display: 'flex', flex: '1', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'left' }}>
           <h5>Others</h5>
@@ -115,6 +140,15 @@ export default function StickyFooter() {
               aria-label="whatsapp"
             >
               <WhatsAppIcon style={{ color: '#263238' }} />
+            </IconButton>
+          </div>
+          <div style={{ paddingLeft: '20px' }}>
+            <IconButton
+              size="small"
+              edge="end"
+              aria-label="whatsapp"
+            >
+              <TelegramIcon style={{ color: '#263238' }} />
             </IconButton>
           </div>
         </div>

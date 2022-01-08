@@ -1,5 +1,5 @@
 .cards {
-    padding: 1rem;
+    padding: 1em;
     background: #fff;
   }
 
@@ -30,6 +30,7 @@
     flex: 1;
     margin: 0 1rem;
     border-radius: 10px;
+    
   }
 
   ul.cards__items {
@@ -39,6 +40,7 @@
     justify-content: space-around;
     row-gap: 30px;
     column-gap: 30px;
+    
 }
   
   .cards__item__link {
@@ -71,10 +73,10 @@
     bottom: 0;
     margin-left: 10px;
     padding: 6px 8px;
-    max-width: calc((100%) - 60px);
-    font-size: 8px;
+    max-width: calc((100%) - 10px);
+    font-size: 10px;
     font-weight: 700;
-    color: #fff;
+    color: #ffffff;
     background-color: crimson;
     box-sizing: border-box;
   }
@@ -115,14 +117,20 @@
     color: crimson;
   }
 
+  .cards__item__info > span{
+    padding-right: 15px;
+    font-size: 10px;
+    color: darkgray;
+  }
 
   .gb_filter{
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding-top: 30px;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
     flex-wrap: wrap;
+    row-gap: 10px;
 }
 
 .filter_1{

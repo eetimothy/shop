@@ -40,8 +40,6 @@ const UserCreatedGroupBuys = ({ uid }) => {
             { result !== 0 && <h2>Group Buys Started</h2>}
             </div>
         <div style={{ display: 'flex' }}>
-             
-
             <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'space-between', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>
                 {
                     userGroupBuys.map(groupBuy => {

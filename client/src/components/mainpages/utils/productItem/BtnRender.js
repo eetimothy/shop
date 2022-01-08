@@ -8,6 +8,7 @@ const BtnRender = ({ product, deleteProduct }) => {
     const [isSuperAdmin] = state.userAPI.isSuperAdmin
     const [isAdmin] = state.userAPI.isAdmin
     // const addCart = state.userAPI.addCart
+    const [user] = state.userAPI.user
 
     
 
@@ -17,13 +18,14 @@ const BtnRender = ({ product, deleteProduct }) => {
                 isSuperAdmin ?
                 // isSuperAdmin || isAdmin ?
                     <>
-                        <Link id="btn_buy" to="#!" 
-                        onClick={() => deleteProduct(product._id, product.images.public_id)}>Delete</Link>
-                        <Link id="btn_view" to={`/edit_product/${product._id}`}>Edit</Link>
+                       <p> <Link id="btn_buy" to="#!" 
+                        onClick={() => deleteProduct(product._id, product.images.public_id)} style={{ color: "crimson" }}>Delete</Link></p>
+                       <p>  <Link id="btn_view" to={`/edit_product/${product._id}`} style={{ color: "#000" }}>Edit</Link></p>
                     </>
                     : 
-                    isAdmin  ?
+                    isAdmin && (user._id === product.vendorId) ?
                     <>
+                    <p>  <Link id="btn_view" to={`/edit_product/${product._id}`} style={{ color: "#000" }}>Edit</Link></p>
                         {/* <Link id="btn_buy" to="#!" 
                         onClick={() => deleteProduct(product._id, product.images.public_id)}>Delete</Link>
                         <Link id="btn_view" to={`/edit_product/${product._id}`}>Edit</Link> */}

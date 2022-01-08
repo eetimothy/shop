@@ -9,7 +9,6 @@ import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import { Link } from 'react-router-dom'
 import './style.css'
 import Fab from '@mui/material/Fab';
-import Hidden from '@mui/material/Hidden'
 
 
 const GroupBuyCarousel = ({ allGroupBuys }) => {

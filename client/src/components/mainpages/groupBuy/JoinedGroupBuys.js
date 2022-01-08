@@ -32,7 +32,7 @@ const JoinedGroupBuys = ({ uid }) => {
 
     return (
         <>
-        <div style={{ paddingLeft: '50px', color: 'darkgrey', paddingTop: '10px' }}>{result !== 0 && <h2>Joined Group Buys</h2>}</div>
+        <div style={{ paddingLeft: '50px', color: 'darkgrey', marginTop: '30px' }}>{result !== 0 && <h2>Joined Group Buys</h2>}</div>
         <div style={{ display: 'flex' }}>
        
             <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'space-between', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>

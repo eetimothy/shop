@@ -2,6 +2,8 @@ import { useContext, useEffect } from 'react'
 import { GlobalState } from '../../../GlobalState'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import Button from '@mui/material/Button';
+import './History.css'
 
 const OrderHistory = () => {
     const state = useContext(GlobalState)
@@ -22,7 +24,7 @@ const OrderHistory = () => {
                 } else {
                     const res = await axios.get('/user/orderhistory', {
                         headers: { Authorization: token }
-                        
+
                     })
                     //console.log(res)
                     setHistory(res.data)
@@ -34,19 +36,19 @@ const OrderHistory = () => {
 
     // console.log(history)
 
-  
-   
+
+
     return (
         <div className="history-page">
             <h2>Order History</h2>
 
             <h4>{history.length} Past Invoices</h4>
 
-            <div>
+            {/* <div>
                 <table>
                     <thead>
                         <tr>
-                            <th>Payment ID</th>
+                            <th>Invoice ID</th>
                             <th>Date</th>
                             <th></th>
                         </tr>
@@ -68,6 +70,31 @@ const OrderHistory = () => {
 
                     </tbody>
                 </table>
+            </div> */}
+            <div className="invoice_list">
+                {
+                    history.map(items => {
+                        return <div className="invoice" key={items.paymentID}>
+
+                            <div className="invoice_list_item_wrap">
+                                <div className="invoice_list_item">
+                                    <h6>{items.paymentID}</h6>
+                                </div>
+
+                                <div className="invoice_list_item">
+                                   <p>Date: {new Date(items.createdAt).toLocaleDateString()}</p> 
+                                </div>
+                            </div>
+
+                            <div className='invoice_list_btn'>
+                                <Button>
+                                    <Link to={`/history/${items._id}`} style={{ fontSize: '15px', textTransform: "none", color: "#ffffff", fontWeight: "700" }}>View</Link>
+                                    </Button>                           
+                            </div>
+
+                        </div>
+                    })
+                }
             </div>
         </div>
     );

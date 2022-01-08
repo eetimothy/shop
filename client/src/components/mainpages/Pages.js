@@ -38,6 +38,8 @@ import RegisterVendor from './auth/RegisterVendor';
 // import SettingsDialog from '../mainpages/userProfiles/settingsDialog'
 import Company from '../mainpages/info/Company'
 import HowItWorks from '../mainpages/info/HowItWorks'
+import VendorLogin from './vendor/vendorInfo/VendorLogin';
+import VendorRegister from './vendor/vendorInfo/VendorRegister';
 
 function Pages() {
 
@@ -71,7 +73,7 @@ function Pages() {
             <Route path="/manage_users" exact component={ isSuperAdmin ? ManageUsers : NotFound } />
             <Route path="/edit_users/:id" exact component={ isSuperAdmin ? EditUser : NotFound } />
 
-            <Route path="/products" exact component={ isAdmin ? NotFound : Products } />
+            <Route path="/products" exact component={ Products } />
 
             <Route path="/category" exact component={ isSuperAdmin ? Categories : NotFound } />
             <Route path="/brand" exact component={ isSuperAdmin ? Brands : NotFound } />
@@ -95,13 +97,16 @@ function Pages() {
 
             <Route path="/groupbuys_product" exact component={ProductGroupBuys} />
 
-            <Route path="/create_product" exact component={ isAdmin ? CreateProduct : NotFound } />
+            <Route path="/add_product" exact component={ isAdmin ? CreateProduct : NotFound } />
             <Route path="/edit_product/:id" exact component={ isAdmin || isSuperAdmin ? CreateProduct : NotFound } />
 
             <Route path="/superadmin_create_product" exact component={ isSuperAdmin ? SuperAdminCreateProduct : NotFound } />
 
             <Route path="/history" exact component={ isLoggedIn ? OrderHistory : NotFound } />
             <Route path="/history/:id" exact component={ isLoggedIn ? OrderDetails : NotFound } />
+
+            <Route path="/account/vendor/login" exact component={ VendorLogin }/>
+            <Route path="/account/vendor/registration" exact component={ VendorRegister }/>
 
             <Route path="/vendor_orders" exact component={ isLoggedIn ? VendorOrders : NotFound } />
             <Route path="/vendor_orders/:id" exact component={ isLoggedIn ? VendorOrderDetails : NotFound } />

@@ -33,6 +33,7 @@ import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import glogo from './images/glogo.png'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 // import Divider from '@mui/material/Divider';
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
@@ -195,6 +196,15 @@ function TopDrawer() {
                                     sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
                                 >
                                     <Link to={`/vendor_groupbuys/${user._id}`}>My Group Buys</Link>
+                                </Button>
+                            }
+                            {
+                                isAdmin &&
+                                <Button
+                                    // onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
+                                >
+                                    <Link to={`/add_product`}>Add Product</Link>
                                 </Button>
                             }
                             {
@@ -401,7 +411,6 @@ function TopDrawer() {
                            <FavoriteBorderOutlinedIcon/> Explore Products
                             <ListItemText />
                         </ListItem>
-
                     }
                     {!isSuperAdmin &&
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/groupbuy/how_it_works`}>
@@ -429,6 +438,15 @@ function TopDrawer() {
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon> */}  <InventoryOutlinedIcon/> My Products
+                            <ListItemText />
+                        </ListItem>
+                    }
+                    {
+                        isAdmin &&
+                        <ListItem button component={Link} onClick={handleDrawerClose} to={`/add_product`}>
+                            {/* <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon> */}  <AddCircleOutlineOutlinedIcon/> Add Products
                             <ListItemText />
                         </ListItem>
                     }

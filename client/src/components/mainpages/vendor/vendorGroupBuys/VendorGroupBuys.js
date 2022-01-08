@@ -29,9 +29,11 @@ const VendorGroupBuys = () => {
     if (loading) return <div><Loading /></div>
     return (
         <>
-            <h2>My Group Buys</h2>
-            <div className="products">
-
+        <div style={{ paddingLeft: '50px', color: 'darkgrey', paddingTop: '30px'  }}>
+            <h2>Current Group Buys</h2>
+            </div>
+        <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'space-between', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>
                 {
                     vendorGroupBuys.map(groupBuy => {
                         if (groupBuy.startedBy !== uid)
@@ -41,7 +43,9 @@ const VendorGroupBuys = () => {
                     })
 
                 }
+              </div>
             </div>
+
         </>
     )
 }

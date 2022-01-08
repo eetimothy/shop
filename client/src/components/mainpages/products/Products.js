@@ -90,10 +90,14 @@ const Products = () => {
          <div className='cards'>
          {
             isSuperAdmin && 
-            <div className="delete-all">
-                <span>Select All</span>
+            <div className='deleteall'>
+                <div className="deleteall_item1">
+                <span style={{ paddingRight: "5px" }}>Select All</span>
                 <input type="checkbox" checked={isCheck} onChange={checkAll} />
-                <button onClick={deleteAll}>Delete Selected</button>
+                </div>
+                <div className="deleteall_item1">
+                <button onClick={deleteAll} style={{ border: "1px solid #000", padding: "3px 10px 3px 10px" }}>Delete Selected</button>
+                </div>
             </div>
         }
                         <div className='cards__container'>

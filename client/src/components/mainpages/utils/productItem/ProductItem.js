@@ -6,18 +6,16 @@ import './ProductItem.css'
 
 const ProductItem = ({ product, isSuperAdmin, deleteProduct, handleCheck, gb }) => {
     // console.log(product)
-    const gbPrice = `Group Buy Price: $${product.groupBuyPrice}`
+    const gbPrice = `Group Buy: $${product.groupBuyPrice}`
 
     return (
         <>
-            {/* <div className="product_card"> */}
 
-            {/* <div className="productcard_timer">
-                <p>{
+            {/* <p>{
                     isSuperAdmin && <input type="checkbox" checked={product.checked}
                         onChange={() => handleCheck(product._id)} />
-                }</p>
-            </div> */}
+                }</p> */}
+
             {/* {
                 isAdmin && <input type="checkbox" checked={product.checked} 
                 onChange={() => handleCheck(product._id)}/>
@@ -30,33 +28,19 @@ const ProductItem = ({ product, isSuperAdmin, deleteProduct, handleCheck, gb }) 
 
             </div> */}
 
-            {/* <div className="productcard_content"> */}
 
 
 
-            {/* <div className="productcard_details">
-           
-            <Link to={`/detail/${product._id}`} product={product}> 
-            <p className="gb_title" title={product.title}>{product.title}</p>
-            </Link>
-                <p style={{ fontSize: '10px'}}>Buy Now: ${product.buyNowPrice}</p>
-                <p style={{ fontSize: '10px'}}>Group Buy Price: ${product.groupBuyPrice}</p>
-                </div>
 
-                <div className="productcard_favorite">
-                <span className="span1"><FavoriteBorderOutlinedIcon  sx={{ color: grey[500] }} fontSize="18px" /></span>
-                <span className="span2">Sold: {product.sold}</span>
-                </div>
-                <div className="productcard_desc">
-                   <p>{product.content}</p> 
-                </div> */}
-            <li className='cards__item'>
-            <p>{
+            <li className='cards__item' style={{ maxWidth: "300px", minWidth: "200px" }}>
+            <BtnRender product={product} deleteProduct={deleteProduct} />
+                {
                     isSuperAdmin && <input type="checkbox" checked={product.checked}
                         onChange={() => handleCheck(product._id)} />
-                }</p>
+                }
                 <Link className='cards__item__link' to={`/detail/${product._id}`}>
                     <figure className='cards__item__pic-wrap' data-category={gbPrice}>
+
                         <img
                             className='cards__item__img'
                             alt=''
@@ -69,8 +53,9 @@ const ProductItem = ({ product, isSuperAdmin, deleteProduct, handleCheck, gb }) 
                     </div>
                 </Link>
             </li>
+            
+                
 
-            <BtnRender product={product} deleteProduct={deleteProduct} />
 
 
 
