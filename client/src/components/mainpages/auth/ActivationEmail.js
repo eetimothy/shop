@@ -32,7 +32,7 @@ function ActivationEmail () {
 
     return (
         <>
-        <div className="activate_page" style={{ display: "flex", justifyContent: "center", paddingTop: "30px", paddingBottom: "30px" }}>
+        <div className="activate_page" style={{ display: "flex", justifyContent: "center", paddingTop: "30px" }}>
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
             </div>
