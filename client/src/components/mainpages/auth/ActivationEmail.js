@@ -2,7 +2,7 @@ import { useState, useEffect  } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { showErrMsg, showSuccessMsg } from '../../mainpages/utils/notification/Notification'
-
+import Login from './Login'
 
 function ActivationEmail () {
     const { activation_token } = useParams()
@@ -31,10 +31,14 @@ function ActivationEmail () {
     },[activation_token])
 
     return (
-        <div className="activate_page">
+        <>
+        <div className="activate_page" style={{ display: "flex", justifyContent: "center", paddingTop: "30px", paddingBottom: "30px" }}>
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
-        </div>
+            </div>
+            <Login/>
+            </>
+        
     )
 }
 
