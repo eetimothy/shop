@@ -32,7 +32,7 @@ const userCtrl = {
             
             const activation_token = createActivationToken(newUser)
 
-            const url = `${CLIENT_URL}/user/account/activate/${activation_token}`
+            const url = `www.group-buy.io/user/account/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
             // console.log({activation_token})
@@ -125,7 +125,7 @@ const userCtrl = {
             if (!user) return res.status(500).json({ msg: "This email does not exist... " })
 
             const access_token = createAccessToken({ id: user._id })
-            const url = `${CLIENT_URL}/user/account/reset_password/${access_token}`
+            const url = `www.group-buy.io/user/account/reset_password/${access_token}`
 
             sendEmail(email, url, "Reset Password")
             res.json({ msg: "Password reset link sent to your registered email... " })
