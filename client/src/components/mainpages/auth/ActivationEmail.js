@@ -8,6 +8,8 @@ function ActivationEmail () {
     const { activation_token } = useParams()
     const [err, setErr] = useState('')
     const [success, setSuccess] = useState('')
+
+   
     // console.log(useParams())
 
     useEffect(() => {
@@ -16,9 +18,9 @@ function ActivationEmail () {
                 try {
                     const res = await axios.post('/user/account/activate', {activation_token})
                     setSuccess(res.data.msg)
-
+                    
                     localStorage.setItem('firstLogin', true)
-                    // window.location.href = "/";
+                    // window.location.href = "/account/login";
 
                 } catch (err) {
                     err.response.data.msg && setErr(err.response.data.msg)

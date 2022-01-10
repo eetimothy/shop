@@ -22,7 +22,7 @@ const ProductDetails = () => {
     const [isAdmin] = state.userAPI.isAdmin
     
     
-    const shareUrl = `/detail/${params.id}`
+    const shareUrl = `www.group-buy.io/detail/${params.id}`
 
     // console.log(params.id)
     
@@ -90,7 +90,7 @@ const ProductDetails = () => {
                     
                     {/* <Link to="/allcarts" className="cart" onClick={() => addCart(productDetails)}>Buy now: $800</Link> */}
                         { 
-                            !isAdmin && <Link to="/allcarts" onClick={() => addCart(productDetails)}>
+                            !isAdmin && <Link to="#!" onClick={() => addCart(productDetails)}>
                         <Button variant="contained" style={{ backgroundColor: '#F05E23', marginTop: "10px", marginBottom: "10px" }}>Buy</Button>
                         </Link> 
                         

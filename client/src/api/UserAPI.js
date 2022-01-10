@@ -69,7 +69,7 @@ const UserAPI = (token) => {
 
 
     const addCart = async (product) => {
-        if(!isLoggedIn) return alert("Please login to continue.")
+        if(!isLoggedIn) return alert("Please login or sign up to continue.")
 
         const check = cart.every(item => {
             return item._id !== product._id
@@ -88,10 +88,11 @@ const UserAPI = (token) => {
     }
 
     const addGroupBuyCart = async (product, groupBuy) => {
-        if(!isLoggedIn) return alert("Please login to continue.")
+        if(!isLoggedIn) return alert("Please login or sign up to continue.")
 
         const check = groupBuyCart.every(item => {
-            return item._id !== groupBuy._id
+            return console.info(item._id !== groupBuy._id)
+            
         })
 
         if(check){

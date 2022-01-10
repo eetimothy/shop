@@ -140,7 +140,7 @@ const GroupBuyDetails = () => {
                     }
                     {
                         groupBuyDetails.startedBy !== user._id && !isAdmin && groupBuyDetails.isActive === true && 
-                        <Link to="/allcarts" onClick={() => addGroupBuyCart(productDetails, groupBuyDetails)}>
+                        <Link to="#!" onClick={() => addGroupBuyCart(productDetails, groupBuyDetails)}>
                             <Button variant="contained" style={{ backgroundColor: '#F05E23', marginTop: "10px", marginBottom: "10px" }}>Join</Button>
                             </Link>
                     }

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { showErrMsg, showSuccessMsg } from '../../../mainpages/utils/notification/Notification'
-import { isEmpty, isEmail, isLength, isMatch } from '../../utils/form_validation/RegisterValidation'
+import { isEmpty, isEmail, isLength, isMatch, isMobile } from '../../utils/form_validation/RegisterValidation'
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -19,7 +19,7 @@ const initialState = {
     // company: '',
     address: '',
     account_type: 'User',
-    mobile: '',
+    mobile: '+65',
     username: '',
     email: '',
     password: '',
@@ -60,6 +60,10 @@ const VendorRegister = () => {
 
         if (!isMatch(password, confirm_password))
             return setUser({ ...user, err: "Passwords do not match.", success: '' })
+
+        if (!isMobile(mobile))
+        return setUser({ ...user, err: "Please enter a valid mobile number. ", success: '' })
+
 
         try {
             const res = await axios.post('/user/account/register', {

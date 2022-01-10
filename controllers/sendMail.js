@@ -45,12 +45,8 @@ const sendEmail = (to, url, txt) => {
         <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
         <h2 style="text-align: center; color: #192c30;">Welcome to Group Up!</h2>
         <p>Congratulations! You're almost set to start using Group Up.
-            Please click on the button below to validate your email address.
+            Please click on the link below to validate your email address.
         </p>
-        
-        <a href=${url} style="background: #F05E23; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">${txt}</a>
-    
-        <p>If the button doesn't work for any reason, you can also click on the link below:</p>
     
         <div>${url}</div>
         </div>
@@ -62,5 +58,10 @@ const sendEmail = (to, url, txt) => {
         return info
     })
 }
+
+
+{/* <a href=${url} style="background: #F05E23; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">${txt}</a>
+    
+<p>If the button doesn't work for any reason, you can also click on the link below:</p> */}
 
 module.exports = sendEmail

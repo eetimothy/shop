@@ -18,3 +18,8 @@ export const isMatch = (password, confirm_password) => {
     if(password === confirm_password) return true
     return false
 }
+
+export const isMobile = mobile => {
+    const re = /\+65(6|8|9)\d{7}/g
+    return re.test(mobile)
+}

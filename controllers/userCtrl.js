@@ -32,7 +32,7 @@ const userCtrl = {
             
             const activation_token = createActivationToken(newUser)
 
-            const url = `www.group-buy.io/user/account/activate/${activation_token}`
+            const url = `${CLIENT_URL}/user/account/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
             // console.log({activation_token})
@@ -58,8 +58,8 @@ const userCtrl = {
                 company, address, mobile, account_type, username, email, password
             })
             await newUser.save()
-
-            res.json({ msg: "Account has been activated and email has been verified!" })
+       
+            res.json({ msg: "Account has been activated! Please proceed to Log in" })
         }
         catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -85,7 +85,7 @@ const userCtrl = {
                  path: '/user/refresh_token',
                  maxAge: 7 * 24 * 60 * 1000 //7days
              })
-             res.json({ accesstoken })
+             res.json({ email, accesstoken })
 
         }
         catch (err) {
