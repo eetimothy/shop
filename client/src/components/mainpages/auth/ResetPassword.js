@@ -44,6 +44,7 @@ const ResetPassword = () => {
                 headers: { Authorization: token }
             })
             return setData({ ...data, err: '', success: res.data.msg })
+            
 
         } catch (err) {
             err.response.data.msg && setData({ ...data, err: err.response.data.msg, success: '' })

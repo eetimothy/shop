@@ -47,8 +47,8 @@ const sendEmail = (to, url, txt) => {
         <p>Congratulations! You're almost set to start using Group Up.
             Please click on the link below to validate your email address.
         </p>
-    
-        <div>${url}</div>
+
+        <p>${url}</p>
         </div>
     `
     }

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const sendMail = require('./sendMail')
 const sendEmail = require('./sendMail')
 
-// const { CLIENT_URL } = process.env
+const { CLIENT_URL } = process.env
 
 const userCtrl = {
     register: async (req, res) => {
@@ -31,9 +31,12 @@ const userCtrl = {
             }
             
             const activation_token = createActivationToken(newUser)
+            
 
-            const url = `www.group-buy.io/user/account/activate/${activation_token}`
-            sendMail(email, url, "Verify your email address")
+            const url = (`${CLIENT_URL}/user/account/activate/${activation_token}`).toString()
+            
+
+            sendMail(email, url, "Please verify email address.")
 
             // console.log({activation_token})
 
@@ -125,7 +128,7 @@ const userCtrl = {
             if (!user) return res.status(500).json({ msg: "This email does not exist... " })
 
             const access_token = createAccessToken({ id: user._id })
-            const url = `www.group-buy.io/user/account/reset_password/${access_token}`
+            const url = (`${CLIENT_URL}/user/account/reset_password/${access_token}`).toString()
 
             sendEmail(email, url, "Reset Password")
             res.json({ msg: "Password reset link sent to your registered email... " })
