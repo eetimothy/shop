@@ -18,6 +18,7 @@ import Logo from '../../headers/images/glogo_nobg.png'
 const initialState = {
     // company: '',
     address: '',
+    role: 0,
     account_type: 'user',
     mobile: '+65',
     username: '',
@@ -33,7 +34,7 @@ const theme = createTheme();
 const Register = () => {
     const [user, setUser] = useState(initialState)
 
-    const { username, email, password, confirm_password, mobile, address, account_type, err, success } = user
+    const { username, email, password, confirm_password, mobile, address, account_type, role, err, success } = user
 
     // const accountTypes = [
     //     { value: 'distributor', label: 'Distributor' },
@@ -65,7 +66,7 @@ const Register = () => {
 
         try {
             const res = await axios.post('/user/account/register', {
-                username, email, password, mobile, address, account_type
+                username, email, password, mobile, address, account_type, role
             })
 
             setUser({ ...user, err: '', success: res.data.msg })

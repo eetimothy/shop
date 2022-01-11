@@ -57,13 +57,13 @@ const userCtrl = {
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
             // console.info(user)
-            const { company, address, mobile, account_type, username, email, password } = user
+            const { company, address, mobile, account_type, username, email, password, role } = user
             
             const check = await Users.findOne({ email })
             if(check) return res.status(400).json({ msg: "Email already exixsts.." })
 
             const newUser = new Users({
-                company, address, mobile, account_type, username, email, password
+                company, address, mobile, account_type, username, email, password, role
             })
             await newUser.save()
        
