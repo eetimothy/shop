@@ -1,9 +1,9 @@
 import { GlobalState } from '../../../GlobalState'
 import { useContext, useState } from 'react'
-// import { Link } from 'react-router-dom'
 import { isLength, isMatch } from '../utils/form_validation/RegisterValidation'
 import { showErrMsg, showSuccessMsg } from '../utils/notification/Notification'
 import axios from 'axios'
+import Loading from '../utils/loading/Loading'
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,7 +12,12 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import DeleteForeverIcon from '@mui/icons-material/Delete';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 // import { useParams } from 'react-router-dom'
+import './userProfiles.css'
+
+const theme = createTheme();
 
 const initialState = {
     username: '',
@@ -33,16 +38,59 @@ const UserProfiles = () => {
     const [isAdmin] = state.userAPI.isAdmin
     // const [isSuperAdmin] = state.userAPI.isSuperAdmin
     // const [allUsers] = state.userAPI.allUsers
-    const [loading] = useState(false)
-    // const [callback, setCallback] = useState(false)
-
+    const [loading, setLoading] = useState(false)
+    const [logo, setLogo] = useState(false)
+    // const [images, setImages] = useState(false)
     const [data, setData] = useState(initialState)
+    // const [publicId, setPublicId] = useState(false)
     const { username, email, mobile, address, company, password, confirm_password, err, success } = data
-
+    // const params = useParams()
     // console.log(allUsers)
     // console.log(token[0])
     // const { id } = useParams()
-    // console.log(user)
+
+    console.log(user.logo)
+
+    // useEffect(() => {
+    //     if (user.logo) {
+    //         if (params.id === user._id) {
+    //             setLogo(user.logo.url)
+    //         }
+    //     }
+    // }, [user, params.id, user.logo])
+
+    const changeLogo = async (e) => {
+        e.preventDefault()
+        try {
+            const file = e.target.files[0]
+
+            if (!file) return setData({ ...data, err: "No files were uploaded.", success: '' })
+
+            if (file.size > 1024 * 1024)
+                return setData({ ...data, err: "Size too large.", success: '' })
+
+            if (file.type !== 'image/jpeg' && file.type !== 'image/png')
+                return setData({ ...data, err: "File format is incorrect.", success: '' })
+
+            let formData = new FormData()
+            formData.append('file', file)
+
+            setLoading(true)
+
+            const res = await axios.post('/api/upload_logo', formData, {
+                headers: {
+                    'content-type': 'multipart/form-data',
+                    Authorization: token
+                }
+            })
+            setLoading(false)
+            setLogo(res.data.url)
+        }
+        catch (err) {
+            setData({ ...data, err: err.response.data.msg, success: '' })
+        }
+    }
+
 
     const handleChangeInput = (e) => {
         const { name, value } = e.target
@@ -57,11 +105,13 @@ const UserProfiles = () => {
                 email: email ? email : user.email,
                 address: address ? address : user.address,
                 company: company ? company : user.company,
+                logo: logo ? logo : user.logo
             }, {
                 headers: { Authorization: token[0] }
             })
             setData({ ...data, err: '', success: "User details updated successfully.." })
-        } catch (err) {
+        }
+        catch (err) {
             setData({ ...data, err: err.response.data.msg, success: '' })
         }
     }
@@ -85,15 +135,30 @@ const UserProfiles = () => {
     }
 
     const handleUpdate = () => {
-        if (username) updateInfo()
-        if (email) updateInfo()
+        // if (logo) updateInfo()
+        // if (email) updateInfo()
+        if (logo) updateInfo()
         if (mobile) updateInfo()
         if (address) updateInfo()
         if (company) updateInfo()
         if (password) updatePassword()
+
     }
 
-    const theme = createTheme();
+    // const handleDestroy = async () => {
+    //     try {
+    //         if (!isAdmin) return alert("Admin access only..")
+    //         setLoading(true)
+    //         await axios.post('/api/destroy', { public_id: publicId }, {
+    //             headers: { Authorization: token }
+    //         })
+    //         setLoading(false)
+    //         setLogo(false)
+    //     }
+    //     catch (err) {
+    //         alert(err.response.data.msg)
+    //     }
+    // }
 
     return (
         <ThemeProvider theme={theme}>
@@ -114,8 +179,17 @@ const UserProfiles = () => {
                     <Typography component="h6" variant="h6" style={{ color: 'crimson' }}>
                         {err && showErrMsg(err)}
                         {success && showSuccessMsg(success)}
-                        {loading && <h3>Loading.....</h3>}
+                        {loading && <Loading/>}
                     </Typography>
+
+                    <div className="avatar">
+                        <img src={logo ? logo : user.logo} alt="" />
+                        <span>
+                            <PhotoCameraIcon style={{ color: "#000" }} />
+                            <p>Change</p>
+                            <input type="file" name="file" id="file_upload" style={{ fontColor: "#000" }} onChange={changeLogo} />
+                        </span>
+                    </div>
 
                     <Box component="form" noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -128,6 +202,7 @@ const UserProfiles = () => {
                                     autoComplete="username"
                                     defaultValue={user.username}
                                     onChange={handleChangeInput}
+                                    disabled
                                 />
                             </Grid>
 
@@ -141,6 +216,7 @@ const UserProfiles = () => {
                                         autoComplete="company"
                                         defaultValue={user.company}
                                         onChange={handleChangeInput}
+                                        disabled
                                     />
                                 </Grid>
                                     : ''
@@ -157,6 +233,7 @@ const UserProfiles = () => {
                                     autoComplete="email"
                                     defaultValue={user.email}
                                     onChange={handleChangeInput}
+                                    disabled
                                 />
                             </Grid>
                             <Grid item xs={12}>

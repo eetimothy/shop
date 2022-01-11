@@ -88,7 +88,7 @@ const Cart = () => {
                     brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
                     groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
                     users: [{ id: user._id, username: user.username, email: user.email, mobile: user.mobile, address: user.address, quantity: item.quantity }], startUser: user.username, startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity,
-                    buyers: item.quantity, successTarget: item.successTarget - item.quantity, vendorCompany: item.vendorCompany, vendorMobile: item.vendorMobile, vendorEmail: item.vendorEmail,
+                    buyers: item.quantity, successTarget: item.successTarget - item.quantity, vendorUsername: item.vendorUsername, vendorCompany: item.vendorCompany, vendorMobile: item.vendorMobile, vendorEmail: item.vendorEmail,
                     isActive: false, success: true
                 }, {
                     headers: { Authorization: token }
@@ -99,7 +99,7 @@ const Cart = () => {
                     brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
                     groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
                     users: [{ id: user._id, username: user.username, email: user.email, mobile: user.mobile, address: user.address, quantity: item.quantity }], startUser: user.username, startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity,
-                    buyers: item.quantity, successTarget: item.successTarget - item.quantity, vendorCompany: item.vendorCompany, vendorMobile: item.vendorMobile, vendorEmail: item.vendorEmail,
+                    buyers: item.quantity, successTarget: item.successTarget - item.quantity, vendorUsername: item.vendorUsername, vendorCompany: item.vendorCompany, vendorMobile: item.vendorMobile, vendorEmail: item.vendorEmail,
                     isActive: true, success: true
                 }, {
                     headers: { Authorization: token }
@@ -110,7 +110,7 @@ const Cart = () => {
                     brand: item.brand, productType: item.productType, category: item.category, product_id: item.product_id,
                     groupBuyPrice: item.groupBuyPrice, vendorId: item.vendorId, images: item.images,
                     users: [{ id: user._id, username: user.username, email: user.email, mobile: user.mobile, address: user.address, quantity: item.quantity }], startUser: user.username, startedBy: user._id, groupBuyQty: item.groupBuyQty - item.quantity,
-                    buyers: item.quantity, successTarget: item.successTarget - item.quantity, vendorCompany: item.vendorCompany, vendorMobile: item.vendorMobile, vendorEmail: item.vendorEmail,
+                    buyers: item.quantity, successTarget: item.successTarget - item.quantity, vendorUsername: item.vendorUsername, vendorCompany: item.vendorCompany, vendorMobile: item.vendorMobile, vendorEmail: item.vendorEmail,
                     isActive: true, success: false
                 }, {
                     headers: { Authorization: token }

@@ -23,7 +23,7 @@ const UserCreatedGroupBuys = ({ uid }) => {
             const res = await axios.get(`/api/groupbuys?startedBy=${uid}`, {
                 headers: { Authorization: token }
             })
-            console.log(res.data.groupBuys)
+            // console.log(res.data.groupBuys)
             setUserGroupBuys(res.data.groupBuys)
             setResult(res.data.result)
            

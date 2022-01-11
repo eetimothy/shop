@@ -64,6 +64,10 @@ const groupBuySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    vendorUsername: {
+        type: String,
+        required: true,
+    },
     vendorMobile: {
         type: String,
         required: true,

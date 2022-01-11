@@ -18,7 +18,7 @@ import Logo from '../../headers/images/glogo_nobg.png'
 const initialState = {
     // company: '',
     address: '',
-    account_type: 'User',
+    account_type: 'user',
     mobile: '+65',
     username: '',
     email: '',

@@ -12,30 +12,24 @@
    
     box-shadow: 0 0 30px #ddd; 
 }
-
 .groupbuy_card > .groupbuycard_image > a > img{
     width: 100%;
     height: 180px;
     object-fit: contain;
 }
-
 .groupbuycard_timer {
     float: right;
     color: crimson;
     padding-right: 5px;
 }
-
 .groupbuycard_timer > p{
     font-size: 12px;
 }
-
-
 .groupbuycard_details > p {
     padding: 5;
     margin: 5;
     font-size: 14px;
 }
-
 .groupbuycard_details > a > .gb_title {
     font-weight: 600;
     font-size: 10px;
@@ -43,18 +37,15 @@
     text-transform: uppercase;
     padding-top: 6px;
 }
-
 .groupbuycard_favorite > .span2{
     color: gray;
     padding-left: 30px;
     font-size: 10px;
 }
-
 .groupbuycard_content{
     position: relative;
     transition: 0.5s;
 }
-
 .groupbuycard_content > .groupbuycard_desc{
     display: flex;
     flex-direction: column;
@@ -62,20 +53,16 @@
     position: absolute;
     opacity: 0;
 }
-
 .groupbuycard_content > .groupbuycard_desc > p{
     font-size: 8px;
 }
-
 .groupbuy_card:hover .groupbuycard_content{
     transition: 0.5s;
     transform: translateY(-40%);
 }
-
 .groupbuy_card:hover .groupbuycard_content > .groupbuycard_desc{
     opacity: 1;
 }
-
 .gb_filter{
     display: flex;
     flex-direction: row;
@@ -83,25 +70,19 @@
     padding-top: 30px;
     padding-bottom: 20px;
 }
-
 .filter_1{
     display: flex;
     width: 200px;
 }
-
 .filter_1 span{
     margin-left: 5px;
     width: 100px;
 }
-
-
 .filter_search{
     display: flex;
     margin-left: 5px;
     width: 500px;
 }
-
-
 @media (max-width: 500px){
     .groupbuy_card{
         width: 120px;
@@ -136,7 +117,6 @@
     }
     
 }
-
 @media (max-width: 500px){
     .filter_search{
         width: 300px;
@@ -151,7 +131,6 @@
         font-size: 15px;
     }
 }
-
 .carousel_section_header{
     display: flex;
     flex-direction: row;
@@ -160,11 +139,9 @@
     flex-wrap: wrap;
     padding-left: 100px;
 }
-
 .carousel_nav{
     padding-left: 100px;
 }
-
 @media (max-width: 768px) {
     .carousel_section_header{
         flex-direction: column;
@@ -177,27 +154,43 @@
         padding-left: 10px;
     }
 }
-
 @media (min-width: 500px){
     .groupbuycard_details > a > .gb_title {
         font-size: 12px;
     }
 }
-
 #root > div.App > div.products > div > div.carousel_section_header > div > div.last_btn > button{
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
 }
-
 #root > div.App > div.products > div > div.carousel_section_header > div > div.last_btn > button:hover{
     background-color: #e0e0e0;
 }
-
 #root > div.App > div.products > div > div.carousel_section_header > div > div:nth-child(1) > button{
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
 }
-
 #root > div.App > div.products > div > div.carousel_section_header > div > div:nth-child(1) > button:hover{
     border: 1px solid #e0e0e0;
 } */
+
+.carousel_nav {
+    width: 800px;
+}
+
+.product_groupbuy_carousel{
+    margin-left: 900px;
+}
+
+@media (min-width: 500px){
+    .carousel_nav {
+        width: 400px;
+    }
+}
+
+@media (max-width: 500px) {
+    .product_groupbuy_carousel{
+        margin-left: 420px;
+    }
+   
+}

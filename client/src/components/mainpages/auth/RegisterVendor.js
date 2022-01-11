@@ -20,7 +20,7 @@ const initialState = {
     address: '',
     account_type: 'vendor',
     role: 1,
-    mobile: '',
+    mobile: '+65',
     username: '',
     email: '',
     password: '',

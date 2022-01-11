@@ -13,6 +13,8 @@ const UserAPI = (token) => {
     const [allUsers, setAllUsers] = useState([])
     const [vendorOrders, setVendorOrders] = useState([])
     const [allgroupBuys, setAllGroupBuys] = useState([])
+    const [vendors, setVendors] = useState([])
+    const [callback, setCallback] = useState(false)
 
     useEffect(() => {
         if(token) {
@@ -32,6 +34,7 @@ const UserAPI = (token) => {
                     // console.log(res.data.cart)
                     // console.log(res.data.groupBuyCart)
                     setUser(res.data)
+                   
                 }
                 catch (err) {
                     alert(err.response.data.msg)
@@ -39,7 +42,7 @@ const UserAPI = (token) => {
             }
             getUser() 
         }  
-    },[token])
+    },[token, callback])
 
     useEffect(() => {
         if(isSuperAdmin) {
@@ -67,6 +70,13 @@ const UserAPI = (token) => {
         }
     }, [token])
 
+    useEffect(() => {
+        const getShops = async () => {
+            const res = await axios.get('/api/shops')
+            setVendors(res.data.shops)
+        }
+        getShops()
+    }, [])
 
     const addCart = async (product) => {
         if(!isLoggedIn) return alert("Please login or sign up to continue.")
@@ -122,7 +132,9 @@ const UserAPI = (token) => {
         vendorOrders: [vendorOrders, setVendorOrders],
         allGroupBuys: [allgroupBuys, setAllGroupBuys],
         addGroupBuyCart: addGroupBuyCart,
-        groupBuyCart: [groupBuyCart, setGroupBuyCart]
+        groupBuyCart: [groupBuyCart, setGroupBuyCart],
+        vendors: [vendors, setVendors],
+        callback: [callback, setCallback]
     }
 }
  

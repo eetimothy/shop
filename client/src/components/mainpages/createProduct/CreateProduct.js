@@ -148,7 +148,7 @@ const CreateProduct = () => {
                     headers: { Authorization: token }
                 })
             } else {
-                await axios.post('/api/products', { ...product, images, vendorId: user._id, user: user._id, vendorEmail: user.email, vendorMobile: user.mobile, vendorCompany: user.company }, {
+                await axios.post('/api/products', { ...product, images, vendorId: user._id, user: user._id, vendorEmail: user.email, vendorMobile: user.mobile, vendorUsername: user.username, vendorCompany: user.company }, {
                     headers: { Authorization: token }
                 })
             }

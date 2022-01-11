@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    logo: {
+        type: String,
+        default: "https://res.cloudinary.com/dqvsmpqar/image/upload/v1641891015/test/xrzyguw8owcaxpuccjcr.jpg"
+    },
     email: {
         type: String,
         required: true,
@@ -18,7 +22,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: Number,
-        default: 0
+        defaut: 0
     },
     cart: {
         type: Array,

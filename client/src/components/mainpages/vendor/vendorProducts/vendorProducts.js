@@ -9,6 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import './vendorProducts.css'
 
 const VendorProducts = () => {
     const state = useContext(GlobalState)
@@ -34,12 +35,12 @@ const VendorProducts = () => {
     // const [page, setPage] = useState(1)
     // const [result, setResult] = useState(0)
 
-    const { uid } = useParams()
+    const { username } = useParams()
 
 
     useEffect(() => {
         const getVendorProducts = async () => {
-            const res = await axios.get(`/api/vendorproducts?vendorId=${uid}&limit=${page * 9}&${category}&${productType}&title[regex]=${search}`, {
+            const res = await axios.get(`/api/vendorproducts?vendorUsername=${username}&limit=${page * 9}&${category}&${productType}&title[regex]=${search}`, {
                 // params: { user: uid },
                 headers: { Authorization: token }
             })
@@ -57,7 +58,7 @@ const VendorProducts = () => {
         // }
         // getVendorBrands()
         getVendorProducts()
-    }, [callback, productType, category, search, page, loading, token, uid])
+    }, [callback, productType, category, search, page, loading, token, username])
 
     const handleCheck = (id) => {
         // console.info(id)

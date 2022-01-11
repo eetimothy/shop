@@ -146,7 +146,7 @@
 
 .filter_search{
     display: flex;
-    margin-left: 5px;
+    margin-left: 15px;
     width: 500px;
 }
 
@@ -172,7 +172,7 @@
     
   }
 
-  @media (max-width: 550px){
+  @media (max-width: 1068px){
     .filter_search{
         width: 300px;
     }
@@ -182,4 +182,16 @@
     .filter_1 > span {
         width: 150px;
     }
+}
+
+@media (min-width: 1068px){
+  .filter_search{
+    width: 300px;
+}
+.filter_1{
+    width: 305px;
+}
+.filter_1 > span {
+    width: 150px;
+}
 }

@@ -83,7 +83,7 @@
 }
 
 /* ----------- Col Right----------- */
-.profile_page .col-right{
+/* .profile_page .col-right{
     padding: 0 10px;
     flex: 1;
     min-width: 300px;
@@ -93,10 +93,10 @@
     text-transform: uppercase;
     color: #333;
     margin: 10px 0;
-} */
+} */ 
 
 /* ------------ Table------------ */
-.customers{
+/* .customers{
     border-collapse: collapse;
     width: 100%;
 }
@@ -136,10 +136,10 @@
     padding: 7px;
     color: white;
     font-size: 10px;
-    margin-left: 7px;
-}
+    margin-left: 7px; */
+
 /* -------------- Edit User ----------------- */
-.edit_user .go_back{
+/* .edit_user .go_back{
     background: white;
     margin: 20px;
     font-size: 1.2rem;
@@ -158,5 +158,58 @@
 }
 .edit_user .col-left #isAdmin + label{
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 5px; */
+
+.avatar{
+    max-width: 400px;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ddd;  
+    width: 100%;
+}
+
+.avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatar span{
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #fff8;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: rgb(255, 140, 45);
+    transition: 0.3s ease-in-out;
+}
+
+.avatar:hover span{
+    bottom: -15%;
+}
+
+#file_upload{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.avatar input{
+    width: 100%;
+    height: 40px;
+    margin: 5px 0;
+    border: none;
+    outline: none;
+    background: #000;
+    padding: 0 5px;
 }

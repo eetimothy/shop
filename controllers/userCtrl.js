@@ -10,7 +10,10 @@ const { CLIENT_URL } = process.env
 const userCtrl = {
     register: async (req, res) => {
         try {
-            const { address, mobile, username, email, password, role, company, account_type } = req.body;
+            const { 
+                address, mobile, username, email, 
+                password, role, company, account_type
+            } = req.body;
             
             if(!username || !email || !password || !address || !mobile)
                 return res.status(400).json({ msg: "Please fill in all fields." })
@@ -26,6 +29,8 @@ const userCtrl = {
 
             const passwordHash = await bcrypt.hash(password, 12)
             
+            
+
             const newUser = {
                 address, mobile, username, email, role, account_type, company, password: passwordHash
             }
@@ -33,7 +38,7 @@ const userCtrl = {
             const activation_token = createActivationToken(newUser)
             
 
-            const url = (`${CLIENT_URL}/user/account/activate/${activation_token}`).toString()
+            const url = (`${CLIENT_URL}/${activation_token}`).toString()
             
 
             sendMail(email, url, "Please verify email address.")
@@ -178,9 +183,10 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { username, email, mobile, address, company } = req.body;
+            const { username, email, mobile, address, company, logo } = req.body;
+            
             await Users.findOneAndUpdate({ _id: req.user.id }, {
-                username, email, mobile, address, company
+                username, email, mobile, address, company, logo
             })
 
             res.json({ msg: "Update Success.. " })

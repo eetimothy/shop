@@ -182,11 +182,21 @@ function TopDrawer() {
                                 </Button>
                             }
                             {
+                                !isAdmin && !isSuperAdmin &&
+
+                                <Button
+                                    
+                                    sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
+                                >
+                                    <Link to='/shops'>Shops</Link>
+                                </Button>
+                            }
+                            {
                                 isAdmin && <Button
                                     // onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
                                 >
-                                    <Link to={`/vendorproducts/${user._id}`}>My Products</Link>
+                                    <Link to={`/vendorproducts/${user.username}`}>My Products</Link>
                                 </Button>
                             }
                             {
@@ -195,7 +205,7 @@ function TopDrawer() {
                                     // onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
                                 >
-                                    <Link to={`/vendor_groupbuys/${user._id}`}>My Group Buys</Link>
+                                    <Link to={`/vendor_groupbuys/${user.username}`}>My Group Buys</Link>
                                 </Button>
                             }
                             {
@@ -286,7 +296,6 @@ function TopDrawer() {
                                     </Typography>
                                     </Link>
                                 </IconButton>
-                            
                         }
                         {
                             !isLoggedIn
@@ -434,7 +443,7 @@ function TopDrawer() {
                     }
                     {
                         isAdmin &&
-                        <ListItem button component={Link} onClick={handleDrawerClose} to={`/vendorproducts/${user._id}`}>
+                        <ListItem button component={Link} onClick={handleDrawerClose} to={`/vendorproducts/${user.username}`}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon> */}  <InventoryOutlinedIcon/> My Products
@@ -452,7 +461,7 @@ function TopDrawer() {
                     }
                     {
                         isAdmin &&
-                        <ListItem button component={Link} onClick={handleDrawerClose} to={`/vendor_groupbuys/${user._id}`}>
+                        <ListItem button component={Link} onClick={handleDrawerClose} to={`/vendor_groupbuys/${user.username}`}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon> */}<FolderSpecialOutlinedIcon/> My Group Buys

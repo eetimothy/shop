@@ -84,7 +84,7 @@ const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
         //     }
         // </div>
 
-        <div>
+        <div className='product_groupbuy_carousel'>
             <div className="carousel_section_header" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography variant="h5" style={{ fontWeight: '700' }}>
                     {/* <p>Available Group Buys for This Product</p> */}
@@ -94,7 +94,7 @@ const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10, borderRadius: '1px', cursor: 'pointer' }}  >
                         {/* <ChevronLeftOutlinedIcon sx={{ color: blueGrey[900], border: '1px solid #263238', borderRadius: '50%' }} onClick={() => sliderRef.current.slickPrev()} />  */}
                         <Fab size="small" color="default" aria-label="add" onClick={() => sliderRef.current.slickPrev()} >
-                            <ChevronLeftOutlinedIcon style={{ color: "#000" }} />
+                            <ChevronLeftOutlinedIcon style={{ color: "#ddd" }} />
                         </Fab>
                     </div>
 
@@ -107,7 +107,7 @@ const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
                     <div className='last_btn' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}  >
                         {/* <ChevronRightOutlinedIcon sx={{ color: blueGrey[900], border: '1px solid #263238', borderRadius: '50%', cursor: 'pointer' }} onClick={() => sliderRef.current.slickNext()} />  */}
                         <Fab size="small" color="default" aria-label="add" onClick={() => sliderRef.current.slickNext()} >
-                            <ChevronRightOutlinedIcon style={{ color: "#000" }} />
+                            <ChevronRightOutlinedIcon style={{ color: "#ddd" }} />
                         </Fab>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
                     {
                         productGroupBuys.map(groupBuy => {
                             if (groupBuy.isActive === true)
-                                return <div key={groupBuy._id} style={{ marginTop: '20px' }}>
+                                return <div className="carousel_nav_item" key={groupBuy._id} style={{ marginTop: '20px' }}>
                                     <GroupBuyItem groupBuy={groupBuy} product={groupBuy.product} />
                                 </div>
                             else return ''

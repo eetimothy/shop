@@ -11,6 +11,39 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
+//Upload company logo for vendors only
+router.post('/upload_logo', (req, res) => {
+    try {
+        if(!req.files || Object.keys(req.files).length ===0)
+        return res.status(400).json({ msg: "No files were uploaded" })
+
+        const file = req.files.file;
+        console.log(file)
+
+        if(file.size > 1024 * 1024) {
+            removeTemp(file.tempFilePath)
+            return res.status(400).json({ msg: "Size too large" })
+        } //1MB
+
+        if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png') {
+            removeTemp(file.tempFilePath)
+            return res.status(400).json({ msg: "File format is incorrect." })
+        }
+
+        cloudinary.v2.uploader.upload(file.tempFilePath, { folder: "test" }, async (err, result) => {
+            if (err)
+                throw err;
+            removeTemp(file.tempFilePath)
+
+            res.json({ public_id: result.public_id, url: result.secure_url })
+
+        })
+    }
+    catch (err) {
+        res.status(500).json({ msg: err.message })
+    }
+})
+
 //Upload Image (only admin)
 router.post('/upload', auth, authAdmin, (req, res) => {
     try {
@@ -39,16 +72,13 @@ router.post('/upload', auth, authAdmin, (req, res) => {
 
         })
 
-
-
-
     } catch (err) {
         return res.status(500).json({ msg: err.message })
     }
 })
 
 //Delete Image (only admin)
-router.post('/destroy', auth, authAdmin, (req, res) => {
+router.post('/destroy', (req, res) => {
     try {
         const { public_id } = req.body;
         if (!public_id) res.status(400).json({ msg: 'No images were selected' })

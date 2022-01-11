@@ -146,7 +146,7 @@ const groupBuyCtrl = {
             const { 
                 product, startUser, startedBy, users, title, description, product_id,
                 content, brand, productType, category, groupBuyPrice, vendorId, 
-                images, vendorCompany, vendorEmail, vendorMobile,
+                images, vendorCompany, vendorEmail, vendorMobile, vendorUsername,
                 isActive, groupBuyQty, buyers, success, successTarget
             } = req.body
 
@@ -166,7 +166,7 @@ const groupBuyCtrl = {
                     users, startUser, startedBy, product, title, description, product_id,
                     content, brand, productType, category, groupBuyPrice, vendorId, images,
                     isActive, groupBuyQty, buyers, success, successTarget, endDate: laterDate,
-                    vendorCompany, vendorEmail, vendorMobile
+                    vendorCompany, vendorEmail, vendorUsername, vendorMobile
                 })
 
                 await newGroupBuy.save()

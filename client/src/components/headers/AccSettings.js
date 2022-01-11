@@ -48,7 +48,7 @@ const AccSettings = () => {
                 </div>
                 :
                 isAdmin ? <div className="moret_in">
-                <Link to={`/vendor_groupbuys/${user._id}`}>
+                <Link to={`/vendor_groupbuys/${user.username}`}>
                     <GroupsIcon/>
                     <p>My Group Buys</p>
                     </Link>

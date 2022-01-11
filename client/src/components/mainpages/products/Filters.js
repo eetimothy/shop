@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import '../groupBuy/GroupBuyItem.css'
+import '../groupBuy/Cards.css'
 
 const Filters = () => {
     const state = useContext(GlobalState)

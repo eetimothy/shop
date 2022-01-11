@@ -1,5 +1,6 @@
 const Brand = require('../models/brandModel')
 const Products = require('../models/productModel')
+const Users = require('../models/userModel')
 
 //Filter, sort and pagination
 class APIfeatures {
@@ -59,22 +60,6 @@ const vendorCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
-    // getVendorProducts: async (req, res) => {
-    //     try {
-    //         // console.log(req.query)
-    //         // console.log(req.query._id)
-    //         // console.log(req.headers)
-    //         // console.log(req.body)
-    //         // console.log(req.params.id)
-    //         const { user } = req.query
-    //         const features = await Products.find({ user })
-    //         res.json(features)
-    //         // console.log(features)
-    //     }
-    //     catch (err) {
-    //         return res.status(500).json({ msg: err.message })
-    //     }
-    // }
     getVendorProducts: async (req, res) => {
         try {
             // const { vendorId } = req.query
@@ -90,6 +75,28 @@ const vendorCtrl = {
             })
         } catch (err) {
             return res.status(500).json({ msg: err.message })
+        }
+    },
+    getShops: async (req, res) => {
+        try {
+            const features = new APIfeatures(Users.find({
+                role: 1
+            })
+            .select('-password').select('-groupBuyCart').select('-cart'), req.query)
+            .filtering().sorting().paginating()
+
+            const shops = await features.query
+
+            
+            
+            res.json({
+                status: 'success',
+                result: shops.length,
+                shops: shops
+            })
+        }
+        catch(err) {
+            res.status(500).json({ msg: err.message })
         }
     }
 }

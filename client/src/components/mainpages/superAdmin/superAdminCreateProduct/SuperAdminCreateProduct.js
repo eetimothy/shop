@@ -26,6 +26,7 @@ const initialState = {
     vendorEmail: '',
     vendorCompany: '',
     vendorMobile: '',
+    vendorUsername: '',
     product_id: '',
     title: '',
     groupBuyPrice: 0,
@@ -67,7 +68,6 @@ const SuperAdminCreateProduct = () => {
 
 
     useEffect(() => {
-
         if (param.id) {
             setOnEdit(true)
             products.forEach(product => {
@@ -254,6 +254,20 @@ const SuperAdminCreateProduct = () => {
                                         onChange={handChangeInput}
                                     />
                                     <p style={{ fontSize: "8px" }}>The Company name of this product's Vendor.</p>
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        id="vendorUsername"
+                                        label="Vendor Username"
+                                        name="vendorUsername"
+                                        autoComplete="vendorUsername"
+                                        value={product.vendorUsername}
+                                        onChange={handChangeInput}
+                                    />
+                                    <p style={{ fontSize: "8px" }}>The Username/ Shop name of this product's Vendor.</p>
                                 </Grid>
 
                                 {/* <div className="row">

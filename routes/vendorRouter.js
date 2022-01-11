@@ -9,5 +9,7 @@ router.route('/vendorbrands')
 router.route('/vendorproducts')
     .get(vendorCtrl.getVendorProducts)
 
+router.route('/shops')
+    .get(vendorCtrl.getShops)
 
 module.exports = router

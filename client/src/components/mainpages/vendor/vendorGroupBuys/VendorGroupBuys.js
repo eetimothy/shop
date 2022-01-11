@@ -13,18 +13,18 @@ const VendorGroupBuys = () => {
     // const [result, setResult] = useState([])
     const [loading] = useState(false)
 
-    const { uid } = useParams()
+    const { username } = useParams()
 
     useEffect(() => {
         const getVendorGroupBuys = async () => {
-            const res = await axios.get(`/api/groupbuys?vendorId=${uid}`, {
+            const res = await axios.get(`/api/groupbuys?vendorUsername=${username}`, {
                 headers: { Authorization: token }
             })
             setVendorGroupBuys(res.data.groupBuys)
             // setResult(res.data.result)
         }
         getVendorGroupBuys()
-    }, [uid, token])
+    }, [username, token])
 
     if (loading) return <div><Loading /></div>
     return (
@@ -36,7 +36,7 @@ const VendorGroupBuys = () => {
             <div style={{ display: 'flex', flexGrow: '1', justifyContent: 'space-between', flexWrap: 'wrap', padding: '40px', alignContent: 'center', gap: '15px' }}>
                 {
                     vendorGroupBuys.map(groupBuy => {
-                        if (groupBuy.startedBy !== uid)
+                        if (groupBuy.startedBy !== username)
                             return <GroupBuyItem key={groupBuy._id} groupBuy={groupBuy} />
                         else return ''
 
