@@ -29,6 +29,7 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import FolderSpecialOutlinedIcon from '@mui/icons-material/FolderSpecialOutlined';
 import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import glogo from './images/glogo.png'
@@ -69,7 +70,7 @@ const AppBar = styled(MuiAppBar, {
     transition: theme.transitions.create(['margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
-        
+
     }),
     ...(open && {
         // height: `${drawerHeight}px)`,
@@ -133,29 +134,29 @@ function TopDrawer() {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar 
-            position="absolute" 
-            open={open} 
-            style={{ background: '#263238', border: 'none', height: '100px', paddingTop: '18px', color: '#ffffff' }}
+            <AppBar
+                position="absolute"
+                open={open}
+                style={{ background: '#263238', border: 'none', height: '100px', paddingTop: '18px', color: '#ffffff' }}
             >
                 <Container maxWidth="xl">
                     <Toolbar>
                         <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
                             <div className="logo">
-                            <Link to='/'><img width={60} src={glogo} alt=''/></Link> 
-                            <Hidden mdDown={true}>
-                            <Link to='/'><span>x group-buy.io</span></Link> 
-                            </Hidden>
+                                <Link to='/'><img width={60} src={glogo} alt='' /></Link>
+                                <Hidden mdDown={true}>
+                                    <Link to='/'><span>x group-buy.io</span></Link>
+                                </Hidden>
                             </div>
-                            
+
                         </Typography>
-                        
+
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} textTransform={'none'}>
                             {
                                 !isSuperAdmin &&
 
                                 <Button
-                                    
+
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
                                     <Link to='/groupbuy/how_it_works'>How It Works</Link>
@@ -165,7 +166,7 @@ function TopDrawer() {
                                 !isAdmin && !isSuperAdmin &&
 
                                 <Button
-                                    
+
                                     sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
                                 >
                                     <Link to='/groupbuys'>Discover Group Buys</Link>
@@ -175,7 +176,7 @@ function TopDrawer() {
                                 !isAdmin && !isSuperAdmin &&
 
                                 <Button
-                                    
+
                                     sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
                                 >
                                     <Link to='/products'>Explore Products</Link>
@@ -185,10 +186,18 @@ function TopDrawer() {
                                 !isAdmin && !isSuperAdmin &&
 
                                 <Button
-                                    
+
                                     sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
                                 >
                                     <Link to='/shops'>Shops</Link>
+                                </Button>
+                            }
+                            {
+                                isAdmin && <Button
+
+                                    sx={{ my: 2, color: 'white', display: 'block', marginLeft: '10px' }}
+                                >
+                                    <Link to={`/shop/${user.username}`}>My Shop</Link>
                                 </Button>
                             }
                             {
@@ -256,46 +265,46 @@ function TopDrawer() {
 
 
                         </Box>
-                        
+
                         {
-                            isLoggedIn  && 
-                          <Tippy
-                            content={<AccSettings/>}
-                            interactive={true}
-                            theme="light"
-                            offset={[15,5]}
-                            trigger="click"
-                            hideOnClick={true}
-                       
-                          >  
-                          <span>
-                          <IconButton
-                                size="large"
-                                edge="end"
-                                aria-label="account of current user"
+                            isLoggedIn &&
+                            <Tippy
+                                content={<AccSettings />}
+                                interactive={true}
+                                theme="light"
+                                offset={[15, 5]}
+                                trigger="click"
+                                hideOnClick={true}
+
                             >
-                                <Typography variant="h6" style={{ fontSize: '12px', color: '#ffffff', marginRight: '5px', fontWeight: '700' }}>{user.username}</Typography>
-                                <AccountCircle /> 
-                                <KeyboardArrowDownIcon/> 
-                            </IconButton>
-                            </span>
+                                <span>
+                                    <IconButton
+                                        size="large"
+                                        edge="end"
+                                        aria-label="account of current user"
+                                    >
+                                        <Typography variant="h6" style={{ fontSize: '12px', color: '#ffffff', marginRight: '5px', fontWeight: '700' }}>{user.username}</Typography>
+                                        <AccountCircle />
+                                        <KeyboardArrowDownIcon />
+                                    </IconButton>
+                                </span>
                             </Tippy>
                         }
                         {
                             !isLoggedIn
                             &&
-                            
+
                             <IconButton
                                 size="small"
                                 edge="end"
                                 aria-label="account of current user"
                             >
                                 <Link to='/account/login'>
-                                    <Typography  style={{ border: '1px solid #ddd', marginRight: '8px', borderRadius: '5%', padding: '2px 12px', fontWeight: '700' }}>
-                                    Log In
+                                    <Typography style={{ border: '1px solid #ddd', marginRight: '8px', borderRadius: '5%', padding: '2px 12px', fontWeight: '700' }}>
+                                        Log In
                                     </Typography>
-                                    </Link>
-                                </IconButton>
+                                </Link>
+                            </IconButton>
                         }
                         {
                             !isLoggedIn
@@ -304,84 +313,84 @@ function TopDrawer() {
                                 size="small"
                                 edge="end"
                                 aria-label="account of current user"
-                                
+
                             >
                                 <Link to='/account/register' style={{ color: '#ddd' }} >
                                     <Typography style={{ color: '#263238', backgroundColor: '#ffffff', padding: '2px 12px', borderRadius: '5%', fontWeight: '700' }}>
                                         Sign Up
-                                        </Typography>
-                                    </Link>
-                                </IconButton>
+                                    </Typography>
+                                </Link>
+                            </IconButton>
                         }
 
-                            <Hidden mdDown={true}>
-                        {
-                            isAdmin ? ''
-                                : isSuperAdmin ? ''
-                                    : 
-                                            cart.length === 0 && groupBuyCart.length === 0 ?
-                                                <IconButton
-                                                    size="small"
-                                                    aria-label="cart"
-                                                    color="inherit"
-                                                    edge="end"
-                                                    
-                                                >
-                                                    <Link to="#"> <ShoppingBagIcon style={{ paddingTop: '8px' }} /></Link>
-                                                </IconButton>
-                                                :
-                                                <IconButton
-                                                    size="small"
-                                                    aria-label="cart"
-                                                    color="inherit"
-                                                    edge="end"
-                                                    
-                                                >
-                                                    <Badge badgeContent={cart.length + groupBuyCart.length} color="error" style={{ marginTop: '8px' }}>
-                                                        <Link to="/allcarts">
-                                                            <ShoppingBagIcon />
-                                                        </Link>
-                                                    </Badge>
-                                                </IconButton>
-                                        
-                        }
-                                </Hidden>
+                        <Hidden mdDown={true}>
+                            {
+                                isAdmin ? ''
+                                    : isSuperAdmin ? ''
+                                        :
+                                        cart.length === 0 && groupBuyCart.length === 0 ?
+                                            <IconButton
+                                                size="small"
+                                                aria-label="cart"
+                                                color="inherit"
+                                                edge="end"
+
+                                            >
+                                                <Link to="#"> <ShoppingBagIcon style={{ paddingTop: '8px' }} /></Link>
+                                            </IconButton>
+                                            :
+                                            <IconButton
+                                                size="small"
+                                                aria-label="cart"
+                                                color="inherit"
+                                                edge="end"
+
+                                            >
+                                                <Badge badgeContent={cart.length + groupBuyCart.length} color="error" style={{ marginTop: '8px' }}>
+                                                    <Link to="/allcarts">
+                                                        <ShoppingBagIcon />
+                                                    </Link>
+                                                </Badge>
+                                            </IconButton>
+
+                            }
+                        </Hidden>
 
 
 
                         <Hidden mdUp={true}>
                             {
                                 open ? <IconButton
-                                color="inherit"
-                                aria-label="close drawer"
-                                edge="end"
-                                onClick={handleDrawerClose}
-                                sx={{ ...(!open && { display: 'none' }) }}
-                            >
-                                <CancelIcon />
-                            </IconButton> : 
-                            !open ? <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            edge="end"
-                            onClick={(handleDrawerOpen)}
-                            sx={{ ...(open && { display: 'none' }) }}
-                        >
-                            <MenuIcon />
-                        </IconButton> : 
-                        <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="end"
-                        onClick={(handleDrawerOpen)}
-                        sx={{ ...(open && { display: 'none' }) }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                                    color="inherit"
+                                    aria-label="close drawer"
+                                    edge="end"
+                                    onClick={handleDrawerClose}
+                                    sx={{ ...(!open && { display: 'none' }) }}
+                                >
+                                    <CancelIcon />
+                                </IconButton> :
+                                    !open ? <IconButton
+                                        color="inherit"
+                                        aria-label="open drawer"
+                                        edge="end"
+                                        onClick={(handleDrawerOpen)}
+                                        sx={{ ...(open && { display: 'none' }) }}
+                                    >
+                                        <MenuIcon />
+                                    </IconButton> :
+                                        <IconButton
+                                            color="inherit"
+                                            aria-label="open drawer"
+                                            edge="end"
+                                            onClick={(handleDrawerOpen)}
+                                            sx={{ ...(open && { display: 'none' }) }}
+                                        >
+                                            <MenuIcon />
+                                        </IconButton>
                             }
-                            
-                           
-                            
+
+
+
                         </Hidden>
                     </Toolbar>
                 </Container>
@@ -400,30 +409,43 @@ function TopDrawer() {
                 variant="temporary"
                 anchor="top"
                 open={open}
-                position="absolute"    
+                position="absolute"
             >
                 <div />
-                <DrawerHeader/>
-                   
+                <DrawerHeader />
+
                 <List>
-                
+
                     {!isAdmin && !isSuperAdmin &&
-                     <div>
-                        <ListItem button component={Link} onClick={handleDrawerClose} to={`/groupbuys`}>
-                           <PeopleOutlineIcon/> Discover Group Buys
-                            <ListItemText />
-                        </ListItem>
+                        <div>
+                            <ListItem button component={Link} onClick={handleDrawerClose} to={`/groupbuys`}>
+                                <PeopleOutlineIcon /> Discover Group Buys
+                                <ListItemText />
+                            </ListItem>
                         </div>
                     }
                     {!isAdmin && !isSuperAdmin &&
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/products`}>
-                           <FavoriteBorderOutlinedIcon/> Explore Products
+                            <FavoriteBorderOutlinedIcon /> Explore Products
                             <ListItemText />
                         </ListItem>
                     }
+
+                    {
+                        isAdmin ? <ListItem button component={Link} onClick={handleDrawerClose} to={`/shop/${user.username}`}>
+                            <StorefrontIcon /> My Shop
+                            <ListItemText />
+                        </ListItem>
+                            :
+                            <ListItem button component={Link} onClick={handleDrawerClose} to={`/shops`}>
+                                <StorefrontIcon /> Shops
+                                <ListItemText />
+                            </ListItem>
+                    }
+
                     {!isSuperAdmin &&
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/groupbuy/how_it_works`}>
-                           <LightbulbOutlinedIcon/> How It Works
+                            <LightbulbOutlinedIcon /> How It Works
                             <ListItemText />
                         </ListItem>
                     }
@@ -431,13 +453,13 @@ function TopDrawer() {
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/groupbuys_user/${user._id}`}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */} <FolderSpecialOutlinedIcon/> My Group Buys
+                  </ListItemIcon> */} <FolderSpecialOutlinedIcon /> My Group Buys
                             <ListItemText />
                         </ListItem>
                     }
                     {!isAdmin && !isSuperAdmin && isLoggedIn &&
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/history`}>
-                            <DescriptionOutlinedIcon/> My Orders
+                            <DescriptionOutlinedIcon /> My Orders
                             <ListItemText />
                         </ListItem>
                     }
@@ -446,7 +468,7 @@ function TopDrawer() {
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/vendorproducts/${user.username}`}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */}  <InventoryOutlinedIcon/> My Products
+                  </ListItemIcon> */}  <InventoryOutlinedIcon /> My Products
                             <ListItemText />
                         </ListItem>
                     }
@@ -455,7 +477,7 @@ function TopDrawer() {
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/add_product`}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */}  <AddCircleOutlineOutlinedIcon/> Add Products
+                  </ListItemIcon> */}  <AddCircleOutlineOutlinedIcon /> Add Products
                             <ListItemText />
                         </ListItem>
                     }
@@ -464,7 +486,7 @@ function TopDrawer() {
                         <ListItem button component={Link} onClick={handleDrawerClose} to={`/vendor_groupbuys/${user.username}`}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */}<FolderSpecialOutlinedIcon/> My Group Buys
+                  </ListItemIcon> */}<FolderSpecialOutlinedIcon /> My Group Buys
                             <ListItemText />
                         </ListItem>
                     }
@@ -506,10 +528,10 @@ function TopDrawer() {
                     }
                     {
                         !isLoggedIn &&
-                    <ListItem button component={Link} onClick={handleDrawerClose} to={"/account/login"}>
+                        <ListItem button component={Link} onClick={handleDrawerClose} to={"/account/login"}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */} <LoginOutlinedIcon/> Login
+                  </ListItemIcon> */} <LoginOutlinedIcon /> Login
                             <ListItemText />
                         </ListItem>
                     }
@@ -518,17 +540,17 @@ function TopDrawer() {
                         <ListItem button component={Link} onClick={handleDrawerClose} to={"/account/login"}>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */} <HowToRegOutlinedIcon/> Sign Up
+                  </ListItemIcon> */} <HowToRegOutlinedIcon /> Sign Up
                             <ListItemText />
                         </ListItem>
                     }
 
                     {
-                        isLoggedIn && 
+                        isLoggedIn &&
                         <ListItem button onClick={logoutUser} component={Link} to='/'>
                             {/* <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon> */} <LogoutIcon/> Log Out
+                  </ListItemIcon> */} <LogoutIcon /> Log Out
                             <ListItemText />
                         </ListItem>
                     }
