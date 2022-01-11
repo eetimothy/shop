@@ -38,7 +38,7 @@ const userCtrl = {
             const activation_token = createActivationToken(newUser)
             
 
-            const url = (`${CLIENT_URL}/${activation_token}`).toString()
+            const url = `${CLIENT_URL}/${activation_token}`
             
 
             sendMail(email, url, "Please verify email address.")
