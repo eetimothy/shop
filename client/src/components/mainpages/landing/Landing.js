@@ -18,31 +18,10 @@ const Landing = () => {
     const state = useContext(GlobalState)
     const [allGroupBuys] = state.groupBuysAPI.allGroupBuys
     const [products] = state.productsAPI.products
-    // const [result, setResult] = useState(0)
-    // const [page, setPage] = useState(1)
-    // const [isMoving, setIsMoving] = useState(false)
-
-    // useEffect(() => {
-    //     const getProducts = async () => {
-    //         const res = await axios.get(`/api/products?limit=${page * 9}`)
-    //         setProducts(res.data.products)
-    //         setResult(res.data.result)
-    //         // console.info(res.data.products)
-    //     }
-    //     getProducts()
-    // }, [page])
-
-
-    // const gb = allGroupBuys.map(gb => {
-    //     return gb
-    // })
-
-
+    
     return (
         <>
            <div>
-                {/* <Container maxWidth="md"> */}
-                    {/* <Hidden mdDown={true}> */}
                     <Box
                         sx={{
                             backgroundImage: `url(${Bg})`,
@@ -64,19 +43,10 @@ const Landing = () => {
                             <Typography variant="h5" align="center" color="inherit" paragraph>
                                 Browse through our products and start group buys instantly, or simply just discover and join one!
                             </Typography>
-                            {/* <Stack
-                                sx={{ pt: 4 }}
-                                direction="row"
-                                spacing={2}
-                                justifyContent="center"
-                            >
-                                <Button size="large" variant="contained"><Link to='/groupbuys'>Group Buys</Link></Button>
-                                <Button size="large" variant="outlined"><Link to='/products'>Products</Link></Button>
-                            </Stack> */}
+                           
                         </Container>
                     </Box>
-                    {/* </Hidden> */}
-                {/* </Container> */}
+                   
                 <CssBaseline />
                 <Container maxWidth="lg" >
 
@@ -92,15 +62,6 @@ const Landing = () => {
     );
 }
 
-// const styles = () => ({
-//     root: {
-//         textAlign: "center"
-//     },
-//     title: {
-//         maxWidth: 400,
-//         margin: "auto",
-//         marginTop: 10
-//     }
-// });
+
 
 export default Landing;

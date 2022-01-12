@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { Typography } from '@material-ui/core';
 import Fab from '@mui/material/Fab';
+import './ProductGroupBuys.css'
 
 const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
     const state = useContext(GlobalState)
@@ -20,14 +21,14 @@ const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
     // const [result, setResult] = useState([])
     const [productGroupBuys, setProductGroupBuys] = useState([])
     const sliderRef = useRef(null)
-    
+
 
     useEffect(() => {
         const getProductGroupBuys = async () => {
             const res = await axios.get(`/api/groupbuys_product?id=${params}`, {
                 headers: { Authorization: token }
             })
-             setProductGroupBuys(res.data.productGroupBuys)
+            setProductGroupBuys(res.data.productGroupBuys)
         }
         getProductGroupBuys()
     }, [token, params])
@@ -68,68 +69,71 @@ const ProductGroupBuys = ({ params, productDetails, addGroupBuyCart }) => {
 
     if (loading) return <div><Loading /></div>
 
-    return ( 
-        // <div>
-        //     { !isAdmin &&
-        //     productGroupBuys.map(groupBuy => {
-        //         return (
-        //             <div key={groupBuy._id}>
-                        
-        //                  {/* <Link to="/allcarts" className="cart" onClick={() => addGroupBuyCart(productDetails, groupBuy)}>Join</Link> */}
-        //                  <GroupBuyItem groupBuy={groupBuy} product={groupBuy.product} />
-
-        //                 </div>  
-        //         )
-        //     })
-        //     }
-        // </div>
-
-        <div className='product_groupbuy_carousel'>
-            <div className="carousel_section_header" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography variant="h5" style={{ fontWeight: '700' }}>
-                    {/* <p>Available Group Buys for This Product</p> */}
-                </Typography>
-
-                <div className="slider_nav" style={{ display: 'flex' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10, borderRadius: '1px', cursor: 'pointer' }}  >
-                        {/* <ChevronLeftOutlinedIcon sx={{ color: blueGrey[900], border: '1px solid #263238', borderRadius: '50%' }} onClick={() => sliderRef.current.slickPrev()} />  */}
-                        <Fab size="small" color="default" aria-label="add" onClick={() => sliderRef.current.slickPrev()} >
-                            <ChevronLeftOutlinedIcon style={{ color: "#ddd" }} />
-                        </Fab>
-                    </div>
-
-
-                    <div style={{ display: 'flex' }}>
-                        
-                    </div>
-
-
-                    <div className='last_btn' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}  >
-                        {/* <ChevronRightOutlinedIcon sx={{ color: blueGrey[900], border: '1px solid #263238', borderRadius: '50%', cursor: 'pointer' }} onClick={() => sliderRef.current.slickNext()} />  */}
-                        <Fab size="small" color="default" aria-label="add" onClick={() => sliderRef.current.slickNext()} >
-                            <ChevronRightOutlinedIcon style={{ color: "#ddd" }} />
-                        </Fab>
-                    </div>
-                </div>
-            </div>
-            <div className='carousel_nav' style={{ margin: '30px', marginLeft: '35px', marginTop: '60px' }}>
-                <Slider ref={sliderRef} {...settings}>
-
-                    {
-                        productGroupBuys.map(groupBuy => {
-                            if (groupBuy.isActive === true)
-                                return <div className="carousel_nav_item" key={groupBuy._id} style={{ marginTop: '20px' }}>
-                                    <GroupBuyItem groupBuy={groupBuy} product={groupBuy.product} />
-                                </div>
+    return (
+           <>
+                   <div className="carousel_header">
+                   <Typography variant="h6" style={{ fontWeight: '700', marginTop: "50px", marginBottom: "30px", fontSize: "20px", marginLeft: "30px" }}>
+                     <p>Group Buys for This Product</p>
+                 </Typography>
+                    </div> 
+                    <div className="p_gd_carousel">
+                        <Slider>
+                        {
+                         productGroupBuys.map(groupBuy => {
+                             if (groupBuy.isActive === true)
+                                 return <div className="carousel_nav_item" key={groupBuy._id} style={{ marginTop: '20px' }}>
+                                     <GroupBuyItem groupBuy={groupBuy} product={groupBuy.product} />
+                                 </div>
                             else return ''
                         })
-                    }
+                     }
+                        </Slider>
+                    </div>
+           </>
+           
+        // <div className='product_groupbuy_carousel'>
+        //     <div className="carousel_section_header" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        //         <Typography variant="h5" style={{ fontWeight: '700' }}>
+        //             {/* <p>Available Group Buys for This Product</p> */}
+        //         </Typography>
+
+        //         <div className="slider_nav" style={{ display: 'flex' }}>
+        //             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 10, borderRadius: '1px', cursor: 'pointer' }}  >
+        //                 {/* <ChevronLeftOutlinedIcon sx={{ color: blueGrey[900], border: '1px solid #263238', borderRadius: '50%' }} onClick={() => sliderRef.current.slickPrev()} />  */}
+        //                 <Fab size="small" color="default" aria-label="add" onClick={() => sliderRef.current.slickPrev()} >
+        //                     <ChevronLeftOutlinedIcon style={{ color: "#ddd" }} />
+        //                 </Fab>
+        //             </div>
 
 
-                </Slider>
-            </div>
-        </div>
-     );
+        //             <div style={{ display: 'flex' }}>
+
+        //             </div>
+
+
+        //             <div className='last_btn' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}  >
+        //                 {/* <ChevronRightOutlinedIcon sx={{ color: blueGrey[900], border: '1px solid #263238', borderRadius: '50%', cursor: 'pointer' }} onClick={() => sliderRef.current.slickNext()} />  */}
+        //                 <Fab size="small" color="default" aria-label="add" onClick={() => sliderRef.current.slickNext()} >
+        //                     <ChevronRightOutlinedIcon style={{ color: "#ddd" }} />
+        //                 </Fab>
+        //             </div>
+        //         </div>
+        //     </div>
+        //     <div className='carousel_nav' style={{ margin: '30px', marginLeft: '35px', marginTop: '60px' }}>
+        //         <Slider ref={sliderRef} {...settings}>
+        //             {
+        //                 productGroupBuys.map(groupBuy => {
+        //                     if (groupBuy.isActive === true)
+        //                         return <div className="carousel_nav_item" key={groupBuy._id} style={{ marginTop: '20px' }}>
+        //                             <GroupBuyItem groupBuy={groupBuy} product={groupBuy.product} />
+        //                         </div>
+        //                     else return ''
+        //                 })
+        //             }
+        //         </Slider>
+        //     </div>
+        // </div>
+    );
 }
- 
+
 export default ProductGroupBuys;
